@@ -22,7 +22,7 @@ body {
     color: var(--light-color);
 }
 
-.color{
+.color {
     background-color: #e2edf9;
     padding: 50px 0px;
     width: 90%;
@@ -31,7 +31,7 @@ body {
     margin-bottom: 20px;
 }
 
-.color2{
+.color2 {
     padding: 50px 0px;
     width: 90%;
     margin: auto;
@@ -280,7 +280,7 @@ footer {
 
 .footer ul {
     list-style: none;
-    color: #4d565d ;
+    color: #4d565d;
 }
 
 .footer ul li {
@@ -290,7 +290,7 @@ footer {
 }
 
 .footer ul h3 {
-    border-top: 1px solid #4d565d ;
+    border-top: 1px solid #4d565d;
     padding: 7px 0px;
 }
 
@@ -312,8 +312,8 @@ footer {
 
 .copyright {
     font-size: 15px;
-    color: #4d565d ;
-    border-top: 1px solid #4d565d ;
+    color: #4d565d;
+    border-top: 1px solid #4d565d;
     margin-top: 30px;
     padding-top: 10px;
     display: flex;
@@ -352,7 +352,7 @@ header {
     color: var(--dark-color);
     padding: 7px 10px;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -366,7 +366,7 @@ header {
     display: none;
     position: absolute;
     background-color: #D1E0E2;
-    min-width: 200px;
+    min-width: 203px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     top: 30px;
@@ -450,7 +450,7 @@ header {
     width: 75%;
 }
 
-.image-content > * {
+.image-content>* {
     flex-grow: 1;
     max-width: calc(33.33% - 50px);
 }
@@ -630,42 +630,29 @@ header {
     align-items: center;
     justify-content: center;
     gap: 80px;
-    /* margin: 50px 0px; */
 }
 
 .images img {
     height: 45px;
     width: auto;
     margin: 30px 0px;
-    /* filter: grayscale(100%); */
-}
-
-.google-container {
-    /* background-image: url(/img/backgroundimage.png); */
-    /* background-size: contain; */
 }
 
 .google {
+    background: rgb(166, 209, 255);
+    background: radial-gradient(circle, rgba(166, 209, 255, 1) 0%, rgba(226, 237, 249, 1) 100%);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    flex-direction: column;
-    /* padding: 100px 0px; */
-    margin: 10px 0px;
+    width: 80%;
 }
 
 .google h1 {
     margin: 10px 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .google p {
-    background-color: ghostwhite;
-    border-radius: 10px;
-    padding: 4px 10px;
-    margin: 10px 0;
     font-size: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .google .getbutton {
@@ -683,7 +670,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #B4CDD0;
+    background-color: #e2edf9;
     /* background: rgb(33, 36, 61);
     background: linear-gradient(0deg, rgba(33, 36, 61, 1) 0%, rgba(92, 99, 159, 1) 100%); */
     color: var(--dark-color);
@@ -701,6 +688,11 @@ header {
 .box img {
     width: auto;
     height: 230px;
+}
+
+.box p{
+    border-top: 1px solid black;
+    padding-top: 10px;
 }
 
 .feature {
@@ -879,16 +871,17 @@ li {
 }
 
 .price-container {
-    height: 140px;
+    background-color: #e2edf9;
+    height: 180px;
     color: var(--dark-color);
     margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 75%;
+    width: 80%;
     padding: 25px 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .expert {
@@ -980,11 +973,11 @@ li {
 
 .logos {
     display: flex;
-    gap: 20px;
+    gap: 40px;
 }
 
 .logos img {
-    height: 30px;
+    height: 35px;
     filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
@@ -1013,12 +1006,13 @@ li {
 }
 
 .testimonial {
-    background-color: #B4CDD0;
+    background-color: #d6e8fb;
+    margin: 10px auto;
     border-radius: 10px;
     padding: 30px;
     display: flex;
     align-items: center;
-    max-width: 75%;
+    max-width: 80%;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 210px;
@@ -1041,11 +1035,12 @@ li {
 
 .testimonial-image {
     flex-shrink: 0;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     overflow: hidden;
 }
 
 .testimonial-image img {
+    border-radius: 10px;
     width: 280px;
     height: 250px;
 }
