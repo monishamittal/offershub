@@ -641,8 +641,8 @@ header {
 }
 
 .google-container {
-    background-image: url(/img/backgroundimage.png);
-    background-size: contain;
+    /* background-image: url(/img/backgroundimage.png); */
+    /* background-size: contain; */
 }
 
 .google {
@@ -650,7 +650,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 100px 0px;
+    /* padding: 100px 0px; */
     margin: 10px 0px;
 }
 
