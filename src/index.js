@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 const Frontend_Route = require('./routes/frontend_route');
-const PORT = process.env.PORT || '7867';
+const PORT = process.env.PORT || '5500';
 
 // View Engine Setup
 app.set('views', path.join(__dirname, '../views'));

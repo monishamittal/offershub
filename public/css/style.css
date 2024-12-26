@@ -1,8 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap'); */
-
-
-@import url('/public/fonts/PPRadioGrotesk-UltralightItalic.');
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Gayathri:wght@100;400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Space+Grotesk:wght@300..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     --dark-color: #0B1821;
@@ -15,16 +13,29 @@
 * {
     margin: 0;
     padding: 0;
-    /* font-family: "Hind", sans-serif; */
-    font-family: "PP Radio Grotesk",Sans-serif;
+    font-family: "Gayathri", serif;
 }
 
 body {
-    /* background: rgb(183, 217, 254);
-    background: var(--background-color); */
-    /* background: rgb(177, 216, 251); */
-    background: linear-gradient(210deg, #ACC6C9 0%, #E6EFF0 35%);
+    /* background: linear-gradient(210deg, #ACC6C9 0%, #E6EFF0 35%); */
+    /* background-color: #e2edf9; */
     color: var(--light-color);
+}
+
+.color{
+    background-color: #e2edf9;
+    padding: 50px 0px;
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.color2{
+    padding: 50px 0px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 a {
@@ -317,13 +328,14 @@ footer {
 
 /* header */
 header {
-    background: rgb(177, 216, 251);
+    /* background: rgb(177, 216, 251); */
     /* background: linear-gradient(210deg, rgba(177, 216, 251, 1) 0%, rgba(204, 230, 252, 1) 100%); */
-    background: linear-gradient(210deg, #b0c9cc 25%, #c2d6d7 88%);
+    /* background: linear-gradient(210deg, #b0c9cc 25%, #c2d6d7 88%); */
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 200px;
+    padding: 10px 200px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -336,7 +348,7 @@ header {
 }
 
 .header-container ul li {
-    background-color: white;
+    /* background-color: #e2edf9; */
     color: var(--dark-color);
     padding: 7px 10px;
     border-radius: 10px;
@@ -412,7 +424,7 @@ header {
     border: none;
     background-color: #92429f;
     color: var(--light-color);
-    padding: 10px 30px;
+    padding: 20px 50px;
     border-radius: 10px;
     font-size: 17px;
     cursor: pointer;
@@ -573,7 +585,7 @@ header {
 }
 
 .home {
-    padding: 70px 0px;
+    /* padding: 70px 0px; */
     color: var(--dark-color);
 }
 
@@ -595,14 +607,14 @@ header {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin: 20px 0px;
+    margin: 20px 0px 0px 0px;
 }
 
 .plainbutton {
     border: 1px solid #92429f;
     background: none;
     color: #92429f;
-    padding: 10px 30px;
+    padding: 20px 50px;
     border-radius: 10px;
     font-size: 17px;
 }
@@ -617,15 +629,15 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-    margin: 50px 0px;
+    gap: 80px;
+    /* margin: 50px 0px; */
 }
 
 .images img {
-    height: 30px;
-    width: 100px;
+    height: 45px;
+    width: auto;
     margin: 30px 0px;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
 }
 
 .google-container {
