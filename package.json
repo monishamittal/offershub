@@ -1,17 +1,18 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.3",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "mongoose": "^8.9.4",
     "nodemon": "^3.1.7",
     "path": "^0.12.7"
   },
   "name": "offershub",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon src/index.js"
+    "start": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
