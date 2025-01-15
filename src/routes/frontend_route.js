@@ -108,4 +108,10 @@ router.get('/datastream', async (req, res) => {
         title: ' Data Stream - Offershub',
     });
 });
+
+router.get('/contactUs', async (req, res) => {
+    res.render('contactUs', {
+        title: 'Contact Us - Offershub',
+    });
+});
 module.exports = router;
