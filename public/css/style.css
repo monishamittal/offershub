@@ -591,7 +591,6 @@ header {
     font-size: 30px;
 }
 
-
 .home {
     color: var(--dark-color);
 }
@@ -601,7 +600,8 @@ header {
 }
 
 .home-contain {
-    width: 75%;
+    width: 85%;
+    gap: 40px;
     margin: auto;
     padding: 110px 0px;
     display: flex;
