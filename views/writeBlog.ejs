@@ -1,17 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>
-        Write a Blog
-    </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>write a blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Helvetica Neue', 'Helvetica', arial, sans-serif;
         }
 
         .header {
@@ -20,6 +22,7 @@
             padding: 10px 20px;
             background-color: #ffffff;
             border-bottom: 1px solid #ddd;
+            width: 100vw;
         }
 
         .header img {
@@ -34,181 +37,560 @@
             color: #333;
         }
 
-        .editor-container {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
+        .fa {
+            color: black;
+            padding: 10px;
         }
 
-        .editor-title {
-            width: 100%;
-            padding: 15px;
-            font-size: 28px;
-            border: none;
-            border-bottom: 2px solid #ddd;
-            outline: none;
-            font-weight: 500;
+        /* WYSIWYG Editor */
+        .wp-webdeasy-comment-editor {
+            width: 80vw;
+            min-height: 80vh;
+            box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+            border-top: 6px solid #4a4a4a;
+            border-radius: 3px;
+            margin: 2rem 0;
         }
 
-        .toolbar {
+        .wp-webdeasy-comment-editor .toolbar {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line {
+            display: flex;
+            border-bottom: 1px solid #e2e2e2;
+            overflow: scroll;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line:last-child {
+            border-bottom: none;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box {
+            display: flex;
+            border-left: 1px solid #e2e2e2;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn {
+            display: block;
             display: flex;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #ddd;
-            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            transition: 0.2s ease all;
         }
 
-        .toolbar button {
-            background: none;
-            border: none;
-            margin: 5px;
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn:hover,
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.active {
+            background-color: #e1e1e1;
             cursor: pointer;
-            font-size: 18px;
-            color: #333;
         }
 
-        .toolbar button i {
-            font-size: 20px;
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.icon img {
+            width: 15px;
+            padding: 9px;
+            box-sizing: content-box;
         }
 
-        .editor-content {
-            width: 100%;
-            height: 500px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: none;
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.icon.smaller img {
+            width: 16px;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu {
+            width: 20px;
+            padding: 0 10px;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            background-image: url(https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            right: 4px;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu {
+            display: none;
+            position: absolute;
+            top: 34px;
+            left: -1px;
+            z-index: 10;
+            background-color: #fff;
+            border: 1px solid #b5b5b5;
+            border-top: none;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu .btn {
+            width: 39px;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu:hover {
+            display: block;
+        }
+
+        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu:hover .submenu {
+            display: block;
+        }
+
+        .wp-webdeasy-comment-editor .content-area {
+            padding: 15px 12px;
+            line-height: 1.5;
+        }
+
+        .wp-webdeasy-comment-editor .content-area .visuell-view {
             outline: none;
+            min-height: 12rem;
+        }
+
+        .wp-webdeasy-comment-editor .content-area .visuell-view p {
+            margin: 12px 0;
+        }
+
+        .wp-webdeasy-comment-editor .content-area .html-view {
+            outline: none;
+            display: none;
+            width: 100%;
+            height: 200px;
+            border: none;
             resize: none;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 400;
         }
 
-        @media (max-width: 768px) {
-            .editor-title {
-                font-size: 24px;
-            }
-
-            .toolbar button {
-                font-size: 16px;
-            }
-
-            .toolbar button i {
-                font-size: 18px;
-            }
+        /* Modal */
+        .modal {
+            z-index: 40;
+            display: none;
         }
 
-        @media (max-width: 480px) {
-            .editor-title {
-                font-size: 20px;
-            }
+        .modal .modal-wrapper {
+            background-color: #fff;
+            padding: 1rem;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20rem;
+            min-height: 10rem;
+            z-index: 41;
+        }
 
-            .toolbar button {
-                font-size: 14px;
-            }
+        .modal .modal-wrapper .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
 
-            .toolbar button i {
-                font-size: 16px;
-            }
+        .modal .modal-wrapper .modal-content {
+            flex-direction: column;
+        }
 
-            .editor-content {
-                height: 400px;
-            }
+        .modal .modal-wrapper .modal-content h3 {
+            margin-top: 0;
+        }
+
+        .modal .modal-wrapper .modal-content input {
+            margin: 1rem 0;
+            padding: 0.5rem;
+        }
+
+        .modal .modal-wrapper .modal-content input[type="text"] {
+            width: calc(100% - 1rem);
+        }
+
+        .modal .modal-wrapper .modal-content .row label {
+            margin-left: 0.5rem;
+        }
+
+        .modal .modal-wrapper .modal-content button {
+            background-color: #d2434f;
+            border: 0;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+        }
+
+        .modal .modal-bg {
+            position: fixed;
+            background-color: rgba(0, 0, 0, .3);
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+        }
+
+        /* Codepen Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            display: flex;
+        }
+
+        footer p {
+            margin: 0.5rem 1rem;
+            font-size: 12px;
+        }
+
+        footer a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #000;
         }
     </style>
 </head>
 
 <body>
     <div class="header">
-        <a href="/blogs"><i class="fas fa-arrow-left back-icon"></i></a>
+        <a href="/blogs"><i class="fa fa-arrow-left"></i></a>
         <img alt="Blogger logo" height="30" src="/img/offershublogo.png" width="130" />
     </div>
-    <div class="editor-container">
-        <input class="editor-title" placeholder="Enter Title Here" type="text" />
+    <div class="wp-webdeasy-comment-editor">
         <div class="toolbar">
-            <button data-prefix="&lt;b&gt;" data-suffix="&lt;/b&gt;" title="Bold">
-                <i class="fas fa-bold">
-                </i>
-            </button>
-            <button data-prefix="&lt;i&gt;" data-suffix="&lt;/i&gt;" title="Italic">
-                <i class="fas fa-italic">
-                </i>
-            </button>
-            <button data-prefix="&lt;u&gt;" data-suffix="&lt;/u&gt;" title="Underline">
-                <i class="fas fa-underline">
-                </i>
-            </button>
-            <button data-prefix="&lt;p&gt;" data-suffix="&lt;/p&gt;" title="Paragraph">
-                <i class="fas fa-paragraph">
-                </i>
-            </button>
-            <button data-prefix="&lt;h1&gt;" data-suffix="&lt;/h1&gt;" title="Heading 1">
-                <i class="fas fa-heading">
-                </i>
-                1
-            </button>
-            <button data-prefix="&lt;h2&gt;" data-suffix="&lt;/h2&gt;" title="Heading 2">
-                <i class="fas fa-heading">
-                </i>
-                2
-            </button>
-            <button data-prefix="&lt;ul&gt;" data-suffix="&lt;/ul&gt;" title="Unordered List">
-                <i class="fas fa-list-ul">
-                </i>
-            </button>
-            <button data-prefix="&lt;ol&gt;" data-suffix="&lt;/ol&gt;" title="Ordered List">
-                <i class="fas fa-list-ol">
-                </i>
-            </button>
-            <button data-prefix="&lt;blockquote&gt;" data-suffix="&lt;/blockquote&gt;" title="Blockquote">
-                <i class="fas fa-quote-right">
-                </i>
-            </button>
-            <button data-prefix="&lt;a href=''&gt;" data-suffix="&lt;/a&gt;" title="Hyperlink">
-                <i class="fas fa-link">
-                </i>
-            </button>
-            <button data-prefix="&lt;img src='' alt=''&gt;" data-suffix="" title="Image">
-                <i class="fas fa-image">
-                </i>
-            </button>
-            <button data-prefix="&lt;code&gt;" data-suffix="&lt;/code&gt;" title="Code">
-                <i class="fas fa-code">
-                </i>
-            </button>
-            <a href="/preview"><button><i class="fa fa-eye" aria-hidden="true"></i> Preview</button></a>
+            <div class="line">
+
+                <div class="box">
+                    <span class="editor-btn icon smaller" data-action="bold" data-tag-name="b" title="Bold">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bold.png" />
+                    </span>
+                    <span class="editor-btn icon smaller" data-action="italic" data-tag-name="i" title="Italic">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/italic.png" />
+                    </span>
+                    <span class="editor-btn icon smaller" data-action="underline" data-tag-name="u" title="Underline">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/underline.png" />
+                    </span>
+                    <span class="editor-btn icon smaller" data-action="strikeThrough" data-tag-name="strike"
+                        title="Strike through">
+                        <img src="https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png" />
+                    </span>
+                </div>
+
+                <div class="box">
+                    <span class="editor-btn icon has-submenu">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+                        <div class="submenu">
+                            <span class="editor-btn icon" data-action="justifyLeft" data-style="textAlign:left"
+                                title="Justify left">
+                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
+                            </span>
+                            <span class="editor-btn icon" data-action="justifyCenter" data-style="textAlign:center"
+                                title="Justify center">
+                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-center.png" />
+                            </span>
+                            <span class="editor-btn icon" data-action="justifyRight" data-style="textAlign:right"
+                                title="Justify right">
+                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-right.png" />
+                            </span>
+                            <span class="editor-btn icon" data-action="formatBlock" data-style="textAlign:justify"
+                                title="Justify block">
+                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-justify.png" />
+                            </span>
+                        </div>
+                    </span>
+                    <span class="editor-btn icon" data-action="insertOrderedList" data-tag-name="ol"
+                        title="Insert ordered list">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/numbered-list.png" />
+                    </span>
+                    <span class="editor-btn icon" data-action="insertUnorderedList" data-tag-name="ul"
+                        title="Insert unordered list">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bulleted-list.png" />
+                    </span>
+                    <span class="editor-btn icon" data-action="outdent" title="Outdent" data-required-tag="li">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/outdent.png" />
+                    </span>
+                    <span class="editor-btn icon" data-action="indent" title="Indent">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/indent.png" />
+                    </span>
+
+                </div>
+                <div class="box">
+                    <span class="editor-btn icon" data-action="insertHorizontalRule" title="Insert horizontal rule">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/horizontal-line.png" />
+                    </span>
+                </div>
+
+            </div>
+            <div class="line">
+
+                <div class="box">
+                    <span class="editor-btn icon smaller" data-action="undo" title="Undo">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/undo--v1.png" />
+                    </span>
+                    <span class="editor-btn icon" data-action="removeFormat" title="Remove format">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/remove-format.png" />
+                    </span>
+                </div>
+
+                <div class="box">
+                    <span class="editor-btn icon smaller" data-action="createLink" title="Insert Link">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-link.png" />
+                    </span>
+                    <span class="editor-btn icon smaller" data-action="unlink" data-tag-name="a" title="Unlink">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/delete-link.png" />
+                    </span>
+                </div>
+
+                <div class="box">
+                    <span class="editor-btn icon" data-action="toggle-view" title="Show HTML-Code">
+                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/source-code.png" />
+                    </span>
+                </div>
+
+            </div>
         </div>
-        <textarea class="editor-content" placeholder="Start writing..."></textarea>
+        <div class="content-area">
+            <div class="visuell-view" contenteditable>
+
+            </div>
+            <textarea class="html-view"></textarea>
+        </div>
     </div>
+
+    <div class="modal">
+        <div class="modal-bg"></div>
+        <div class="modal-wrapper">
+            <div class="close">✖</div>
+            <div class="modal-content" id="modalCreateLink">
+                <h3>Insert Link</h3>
+                <input type="text" id="linkValue" placeholder="Link (example: https://webdeasy.de/)">
+                <div class="row">
+                    <input type="checkbox" id="new-tab">
+                    <label for="new-tab">Open in new Tab?</label>
+                </div>
+                <button class="done">Done</button>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>© 2017-2024 <a href="/" target="_blank">OffersHub (PVT) LTD</a></p>
+    </footer>
     <script>
-        // Add event listeners to toolbar buttons
-        document.querySelectorAll('.toolbar button').forEach(button => {
-            button.addEventListener('click', () => {
-                const prefix = button.getAttribute('data-prefix'); // Get prefix from button
-                const suffix = button.getAttribute('data-suffix'); // Get suffix from button
-                const editorContent = document.querySelector('.editor-content');
+        // define vars
+        const editor = document.getElementsByClassName('wp-webdeasy-comment-editor')[0];
+        const toolbar = editor.getElementsByClassName('toolbar')[0];
+        const buttons = toolbar.querySelectorAll('.editor-btn:not(.has-submenu)');
+        const contentArea = editor.getElementsByClassName('content-area')[0];
+        const visuellView = contentArea.getElementsByClassName('visuell-view')[0];
+        const htmlView = contentArea.getElementsByClassName('html-view')[0];
+        const modal = document.getElementsByClassName('modal')[0];
 
-                // Check if there is selected text
-                if (editorContent.selectionStart !== undefined) {
-                    const startPos = editorContent.selectionStart;
-                    const endPos = editorContent.selectionEnd;
+        // add active tag event
+        document.addEventListener('selectionchange', selectionChange);
 
-                    // Get selected text and wrap it with prefix and suffix
-                    const selectedText = editorContent.value.substring(startPos, endPos);
-                    const textBefore = editorContent.value.substring(0, startPos);
-                    const textAfter = editorContent.value.substring(endPos);
-                    editorContent.value =
-                        textBefore + prefix + selectedText + suffix + textAfter;
+        // add paste event
+        visuellView.addEventListener('paste', pasteEvent);
 
-                    // Restore the selection to include the newly added strings
-                    editorContent.selectionStart = startPos;
-                    editorContent.selectionEnd = startPos + prefix.length + selectedText.length + suffix.length;
+        // add paragraph tag on new line
+        contentArea.addEventListener('keypress', addParagraphTag);
 
-                    // Focus back on the editor content
-                    editorContent.focus();
+        // add toolbar button actions
+        for (let i = 0; i < buttons.length; i++) {
+            let button = buttons[i];
+
+            button.addEventListener('click', function (e) {
+                let action = this.dataset.action;
+
+                switch (action) {
+                    case 'toggle-view':
+                        execCodeAction(this, editor);
+                        break;
+                    case 'createLink':
+                        execLinkAction();
+                        break;
+                    default:
+                        execDefaultAction(action);
                 }
+
             });
-        });
+        }
+
+        /** 
+         * This function toggles between visual and html view
+         */
+        function execCodeAction(button, editor) {
+
+            if (button.classList.contains('active')) { // show visuell view
+                visuellView.innerHTML = htmlView.value;
+                htmlView.style.display = 'none';
+                visuellView.style.display = 'block';
+
+                button.classList.remove('active');
+            } else {  // show html view
+                htmlView.innerText = visuellView.innerHTML;
+                visuellView.style.display = 'none';
+                htmlView.style.display = 'block';
+                button.classList.add('active');
+            }
+        }
+
+        /**
+         * This function adds a link to the current selection
+         */
+        function execLinkAction() {
+            modal.style.display = 'block';
+            let selection = saveSelection();
+
+            let submit = modal.querySelectorAll('button.done')[0];
+            let close = modal.querySelectorAll('.close')[0];
+
+            // done button active => add link
+            submit.addEventListener('click', function (e) {
+                e.preventDefault();
+                let newTabCheckbox = modal.querySelectorAll('#new-tab')[0];
+                let linkInput = modal.querySelectorAll('#linkValue')[0];
+                let linkValue = linkInput.value;
+                let newTab = newTabCheckbox.checked;
+
+                restoreSelection(selection);
+
+                if (window.getSelection().toString()) {
+                    let a = document.createElement('a');
+                    a.href = linkValue;
+                    if (newTab) a.target = '_blank';
+                    window.getSelection().getRangeAt(0).surroundContents(a);
+                }
+
+                modal.style.display = 'none';
+                linkInput.value = '';
+
+                // deregister modal events
+                submit.removeEventListener('click', arguments.callee);
+                close.removeEventListener('click', arguments.callee);
+            });
+
+            // close modal on X click
+            close.addEventListener('click', function (e) {
+                e.preventDefault();
+                let linkInput = modal.querySelectorAll('#linkValue')[0];
+
+                modal.style.display = 'none';
+                linkInput.value = '';
+
+                // deregister modal events
+                submit.removeEventListener('click', arguments.callee);
+                close.removeEventListener('click', arguments.callee);
+            });
+        }
+
+        /**
+         * This function executes all 'normal' actions
+         */
+        function execDefaultAction(action) {
+            document.execCommand(action, false);
+        }
+
+        /**
+         * Saves the current selection
+         */
+        function saveSelection() {
+            if (window.getSelection) {
+                sel = window.getSelection();
+                if (sel.getRangeAt && sel.rangeCount) {
+                    let ranges = [];
+                    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                        ranges.push(sel.getRangeAt(i));
+                    }
+                    return ranges;
+                }
+            } else if (document.selection && document.selection.createRange) {
+                return document.selection.createRange();
+            }
+            return null;
+        }
+
+        /**
+         *  Loads a saved selection
+         */
+        function restoreSelection(savedSel) {
+            if (savedSel) {
+                if (window.getSelection) {
+                    sel = window.getSelection();
+                    sel.removeAllRanges();
+                    for (var i = 0, len = savedSel.length; i < len; ++i) {
+                        sel.addRange(savedSel[i]);
+                    }
+                } else if (document.selection && savedSel.select) {
+                    savedSel.select();
+                }
+            }
+        }
+
+        /**
+         * Sets the current selected format buttons active/inactive
+         */
+        function selectionChange(e) {
+
+            for (let i = 0; i < buttons.length; i++) {
+                let button = buttons[i];
+
+                // don't remove active class on code toggle button
+                if (button.dataset.action === 'toggle-view') continue;
+
+                button.classList.remove('active');
+            }
+
+            if (!childOf(window.getSelection().anchorNode.parentNode, editor)) return false;
+
+            parentTagActive(window.getSelection().anchorNode.parentNode);
+        }
+
+        /**
+         * Checks if the passed child has the passed parent
+         */
+        function childOf(child, parent) {
+            return parent.contains(child);
+        }
+
+        /**
+         * Sets the tag active that is responsible for the current element
+         */
+        function parentTagActive(elem) {
+            if (!elem || !elem.classList || elem.classList.contains('visuell-view')) return false;
+
+            let toolbarButton;
+
+            // active by tag names
+            let tagName = elem.tagName.toLowerCase();
+            toolbarButton = document.querySelectorAll(`.toolbar .editor-btn[data-tag-name="${tagName}"]`)[0];
+            if (toolbarButton) {
+                toolbarButton.classList.add('active');
+            }
+
+            // active by text-align
+            let textAlign = elem.style.textAlign;
+            toolbarButton = document.querySelectorAll(`.toolbar .editor-btn[data-style="textAlign:${textAlign}"]`)[0];
+            if (toolbarButton) {
+                toolbarButton.classList.add('active');
+            }
+
+            return parentTagActive(elem.parentNode);
+        }
+
+        /**
+         * Handles the paste event and removes all HTML tags
+         */
+        function pasteEvent(e) {
+            e.preventDefault();
+
+            let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+            document.execCommand('insertHTML', false, text);
+        }
+
+        /**
+         * This functions adds a paragraph tag when the enter key is pressed
+         */
+        function addParagraphTag(evt) {
+            if (evt.keyCode == '13') {
+
+                // don't add a p tag on list item
+                if (window.getSelection().anchorNode.parentNode.tagName === 'LI') return;
+                document.execCommand('formatBlock', false, 'p');
+            }
+        }
     </script>
 </body>
 
