@@ -336,19 +336,16 @@ footer {
 /* header */
 header {
     border-bottom: 1px solid #294e7633;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
     margin-bottom: 100px;
 }
 
 .header {
-    width: 65%;
+    border-bottom: 1px solid #294e7633;
+    width: 100%;
     margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    z-index: 1000;
+    position: fixed;
+    background-color: white;
     padding: 10px 0;
 }
 
@@ -447,7 +444,7 @@ header {
 }
 
 .image-container {
-    padding: 20px 0px;
+    padding: 100px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -590,7 +587,6 @@ header {
 .heading {
     font-size: 30px;
 }
-
 .home {
     color: var(--dark-color);
 }
@@ -603,7 +599,7 @@ header {
     width: 85%;
     gap: 40px;
     margin: auto;
-    padding: 110px 0px;
+    padding: 70px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
