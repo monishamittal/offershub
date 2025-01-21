@@ -1,0 +1,204 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Product Blog
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin: 0 0 0.8rem;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+            margin: 0 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            padding: 1rem 0;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>
+            Our Software Products
+        </h1>
+        <a href="/write-blog"><button>write a blog</button></a>
+    </header>
+    <div class="container">
+        <div class="grid">
+            <!-- Product 1 -->
+            <div class="card">
+                <img alt="Bulk Action by OffersHub" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/0yzQnJ1dIVZNX3m1AacCdqpE8bEuXtnCoTi74iXCuxg.jpg"
+                    width="300" />
+                <div class="card-content">
+                    <h2 class="card-title">
+                        Simplify Your Workflow: Bulk Action by OffersHub
+                    </h2>
+                    <p class="card-text">
+                        Manage your affiliate campaigns effortlessly with our powerful bulk action
+                        tool. Save time and focus on growing your business.
+                    </p>
+                    <a class="btn" href="https://example.com/bulk-action">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="card">
+                <img alt="In-House vs SaaS" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/q8nqSoghLbQ4jyLqJiTlv7iE69ovHh1l3H1TahDyUG4.jpg"
+                    width="300" />
+                <div class="card-content">
+                    <h2 class="card-title">
+                        In-House vs. SaaS: Make the Smart Choice
+                    </h2>
+                    <p class="card-text">
+                        Discover the pros and cons of managing your affiliate marketing with in-house
+                        solutions versus SaaS platforms.
+                    </p>
+                    <a class="btn" href="https://example.com/in-house-vs-saas">
+                        Read Article
+                    </a>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="card">
+                <img alt="Day Parting" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/3n9R2Ghi1Fd-26o6QtS8_wzwPttGq3JbyO7Gdv_M1wI.jpg"
+                    width="300" />
+                <div class="card-content">
+                    <h2 class="card-title">
+                        Introducing Day Parting: Optimize Campaigns
+                    </h2>
+                    <p class="card-text">
+                        Maximize your ROI with day parting tools that let you target the right audience
+                        at the perfect time.
+                    </p>
+                    <a class="btn" href="https://example.com/day-parting">
+                        Try It Now
+                    </a>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="card">
+                <img alt="Analytics Suite" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/f6l4oV--DQA1TudHF2u7vRVab9gPw5qyxuirQh9CTHY.jpg"
+                    width="300" />
+                <div class="card-content">
+                    <h2 class="card-title">
+                        Unleash Insights with Our Analytics Suite
+                    </h2>
+                    <p class="card-text">
+                        Track and analyze your affiliate performance with precision using our advanced
+                        analytics tools.
+                    </p>
+                    <a class="btn" href="https://example.com/analytics-suite">
+                        Explore
+                    </a>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="card">
+                <img alt="Fraud Detection" height="200"
+                    src="https://storage.googleapis.com/a1aa/image/LZbfsE85tf0KntlOjq69IX9swuq5Ffdw5tMyrMrWKIs.jpg"
+                    width="300" />
+                <div class="card-content">
+                    <h2 class="card-title">
+                        Advanced Fraud Detection Tools
+                    </h2>
+                    <p class="card-text">
+                        Protect your campaigns from fraudulent activities with our cutting-edge
+                        detection software.
+                    </p>
+                    <a class="btn" href="https://example.com/fraud-detection">
+                        Secure Your Business
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>
+            © 2025 Your Company. All rights reserved.
+        </p>
+    </footer>
+</body>
+
+</html>

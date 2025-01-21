@@ -2,116 +2,135 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    res.render('index', {
-        title: 'OffersHub - Performance Marketing &amp; Affiliate Tracking Software',
-    });
+	res.render('index', {
+		title: 'OffersHub - Performance Marketing &amp; Affiliate Tracking Software',
+	});
 });
 
 router.get('/emailMarketers', async (req, res) => {
-    res.render('emailMarketers', {
-        title: 'Email Marketers - Offershub',
-    });
+	res.render('emailMarketers', {
+		title: 'Email Marketers - Offershub',
+	});
 });
 
 router.get('/agencies', async (req, res) => {
-    res.render('agencies', {
-        title: 'Agencies - Offershub',
-    });
+	res.render('agencies', {
+		title: 'Agencies - Offershub',
+	});
 });
 
 router.get('/advertisers', async (req, res) => {
-    res.render('advertisers', {
-        title: 'Advertisers - Offershub',
-    });
+	res.render('advertisers', {
+		title: 'Advertisers - Offershub',
+	});
 });
 
 router.get('/mediaBuyers', async (req, res) => {
-    res.render('mediaBuyers', {
-        title: 'Media Buyers - Offershub',
-    });
+	res.render('mediaBuyers', {
+		title: 'Media Buyers - Offershub',
+	});
 });
 
 router.get('/affiliateNetwork', async (req, res) => {
-    res.render('affiliateNetwork', {
-        title: 'Affiliate Network - Offershub',
-    });
+	res.render('affiliateNetwork', {
+		title: 'Affiliate Network - Offershub',
+	});
 });
 
 router.get('/securityCompliance', async (req, res) => {
-    res.render('securityCompliance', {
-        title: ' Security & Compliance - Offershub',
-    });
+	res.render('securityCompliance', {
+		title: ' Security & Compliance - Offershub',
+	});
 });
 
 router.get('/onPremise', async (req, res) => {
-    res.render('onPremise', {
-        title: ' On Premise - Offershub',
-    });
+	res.render('onPremise', {
+		title: ' On Premise - Offershub',
+	});
 });
 
 router.get('/saasCloud', async (req, res) => {
-    res.render('saasCloud', {
-        title: ' SAAS Cloud - Offershub',
-    });
+	res.render('saasCloud', {
+		title: ' SAAS Cloud - Offershub',
+	});
 });
 
 router.get('/features', async (req, res) => {
-    res.render('features', {
-        title: ' Features - Offershub',
-    });
+	res.render('features', {
+		title: ' Features - Offershub',
+	});
 });
 
 router.get('/apiIntegration', async (req, res) => {
-    res.render('apiIntegration', {
-        title: ' Api Integration - Offershub',
-    });
+	res.render('apiIntegration', {
+		title: ' Api Integration - Offershub',
+	});
 });
 
 router.get('/privacy', async (req, res) => {
-    res.render('privacy', {
-        title: ' Privacy Policy - Offershub',
-    });
+	res.render('privacy', {
+		title: ' Privacy Policy - Offershub',
+	});
 });
 
 router.get('/terms', async (req, res) => {
-    res.render('terms', {
-        title: ' Terms of Service - Offershub',
-    });
+	res.render('terms', {
+		title: ' Terms of Service - Offershub',
+	});
 });
 
 router.get('/overview', async (req, res) => {
-    res.render('overview', {
-        title: ' Overview - Offershub',
-    });
+	res.render('overview', {
+		title: ' Overview - Offershub',
+	});
 });
 
 router.get('/pricing', async (req, res) => {
-    res.render('pricing', {
-        title: ' Pricing - Offershub',
-    });
+	res.render('pricing', {
+		title: ' Pricing - Offershub',
+	});
 });
 
 router.get('/influencertracking', async (req, res) => {
-    res.render('influencertracking', {
-        title: ' Influencer Tracking - Offershub',
-    });
+	res.render('influencertracking', {
+		title: ' Influencer Tracking - Offershub',
+	});
 });
 
 router.get('/ecommercetracking', async (req, res) => {
-    res.render('ecommercetracking', {
-        title: ' E-commerce Tracking - Offershub',
-    });
+	res.render('ecommercetracking', {
+		title: ' E-commerce Tracking - Offershub',
+	});
 });
 
 router.get('/datastream', async (req, res) => {
-    res.render('datastream', {
-        title: ' Data Stream - Offershub',
-    });
+	res.render('datastream', {
+		title: ' Data Stream - Offershub',
+	});
 });
 
 router.get('/contactUs', async (req, res) => {
-    res.render('contactUs', {
-        title: 'Contact Us - Offershub',
-    });
+	res.render('contactUs', {
+		title: 'Contact Us - Offershub',
+	});
 });
+
+router.get('/write-blog', async (req, res) => {
+	res.render('writeBlog', {
+		title: 'write a blog',
+	});
+});
+
+router.get('/blogs', async (req, res) => {
+	res.render('blogs', {
+		title: 'Blogs',
+	});
+});
+
+router.get('/blog/1', async (req, res) => {
+	res.render('viewBlog', {
+		title: 'Blog 1',
+	});
+});
+
 module.exports = router;
