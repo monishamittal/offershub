@@ -7,6 +7,16 @@
   <%- include('partials/chatbot') -%>
   <!-- <%- include('partials/totop') -%> -->
   <!-- <%- include('partials/loader') -%> -->
+
+  <style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+</style>
   <main>
 
     <div class="home-container" style="background-color: #c7edff;width: 90%;margin: auto;border-radius: 50px;">
@@ -26,7 +36,9 @@
       </div>
     </div>
 
-    <div class="image-container">
+    <h2 class="pcontent block">Our Features</h2>
+
+    <div class="image-container" style="color:black;background: none;">
       <div class="feature-container">
         <div class="column">
           <div class="features">
@@ -117,6 +129,7 @@
         </div>
       </div>
     </div>
+    
     <div class="privacy-content feature">
       <div class="left-content">
         <p>Table Of Content</p>
@@ -235,7 +248,7 @@
         </p>
         <button class="button"><span>Try it for free now!</span></button>
       </div>
-      <div class="trial2 block" style="color: black;">
+      <div class="trial2 block">
         <h3>Schedule Demo with Our Experts</h3>
         <p>Book a demo with our experts to explore powerful features and maximize your affiliate growth.</p>
         <button class="button"><span>Book a demo</span></button>
