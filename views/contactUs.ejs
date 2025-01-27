@@ -1,29 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head') -%>
+<%- include('partials/head') -%>
 
 <body>
-    <%- include('partials/header') -%>
-    <%- include('partials/chatbot') -%>
-    <!-- <%- include('partials/totop') -%> -->
-    <!-- <%- include('partials/loader') -%> -->
-     <main>
-        <div class="home-container">
+  <%- include('partials/header') -%>
+  <%- include('partials/chatbot') -%>
+  <!-- <%- include('partials/totop') -%> -->
+  <!-- <%- include('partials/loader') -%> -->
+  <style>
+    .form-wrapper {
+      color: black;
+      width: 65%;
+      margin: auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
 
-            <div class="home-contain">
-              <div style="width: 50%;">
-                <h1 class="block">One Platform, Endless Possibilities</h1>
-                <p>No matter what the use case is, <b>we aim to solve our customers toughest challenges</b> and help them create meaningful digital experiences.</p>
-                <div class="buttons">
-                  <button class="button1" ><span><i class="fa fa-money"></i> Start Earning Now</span></button>
-                  <button class="button1" ><span><i class="fa fa-comment"></i> Connect with Us</span></button>
-                </div>
-              </div>
-              <div class="video-container block">
-                <img src="/img/webloader.png" alt="" height="500" >
-              </div>
-            </div>
-          </div>
-     </main>
+    .form-wrapper label {
+      position: relative;
+    }
+
+    .form-wrapper i {
+      position: absolute;
+      top: 1px;
+      color: red;
+      font-size: 7px;
+    }
+
+    .label-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      padding: 10px;
+    }
+
+    input[type=text],
+    select {
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+    }
+
+  </style>
+  
+  <main>
+    <div class="form-wrapper">
+      <form action="">
+        <div class="label-text">
+          <label for="">First Name<i class="fa fa-asterisk"></i></label>
+          <input type="text">
+        </div>
+        <div class="label-text">
+          <label for="">Last Name<i class="fa fa-asterisk"></i></label>
+          <input type="text">
+        </div>
+        <div class="label-text">
+          <label for="">Company Name<i class="fa fa-asterisk"></i></label>
+          <input type="text">
+        </div>
+        <div class="label-text">
+          <label for="">Website Url</label>
+          <input type="text">
+        </div>
+        <div class="label-text">
+          <label for="">Contact<i class="fa fa-asterisk"></i></label>
+          <input type="text">
+        </div>
+        <div class="label-text">
+          <label for="">Email<i class="fa fa-asterisk"></i></label>
+          <input type="text" placeholder="Business emails only">
+        </div>
+        <div class="label-text">
+          <label for="">Messenger type<i class="fa fa-asterisk"></i></label>
+          <select>
+            <option value="Skype">Skype</option>
+            <option value="Whatsapp">Whatsapp</option>
+            <option value="Telegram">Telegram</option>
+          </select>
+        </div>
+        <div class="label-text">
+          <label for="">Message</label>
+          <textarea name="" id=""></textarea>
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+
+    <h1 class="center" style="color: #004DA5;font-size: 50px;text-align: left;width: 75%;margin: auto;font-weight: 400;">Office Locations</h1>
+
+    <div class="map">
+      <div class="imap block">
+        <img src="/img/map1.jpeg" alt="">
+        <div class="sub-map">
+          <h3>OffersHub HQ</h3>
+          <p>1482/3C-1, Hokanda Rd, Pannipitya, Colombo, 10230, Sri Lanka</p>
+        </div>
+      </div>
+      <div class="imap block">
+        <img src="/img/map1.jpeg" alt="">
+        <div class="sub-map">
+          <h3>OffersHub USA</h3>
+          <p>315 Montgomery Street,San Francisco,California, 94104, USA</p>
+        </div>
+      </div>
+      <div class="imap block">
+        <img src="/img/map1.jpeg" alt="">
+        <div class="sub-map">
+          <h3>OffersHub India</h3>
+          <p>UG-06, MGF Metropolis Mall, Sector 28, MG Road, Gurugram , Haryana, India 122002</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- free trial container -->
+    <div class="trial-container">
+      <div class="trial">
+        <div class="trial1 block">
+          <h3>Start Your Affiliate Network Today</h3>
+          <p>Launch your affiliate network with OffersHub—track, boost conversions, and grow revenue effortlessly.
+          </p>
+          <button class="button"><span>Try it for free now!</span></button>
+        </div>
+        <div class="trial2 block">
+          <h3>Schedule Demo with Our Experts</h3>
+          <p>Book a demo with our experts to explore powerful features and maximize your affiliate growth.</p>
+          <button class="button"><span>Book a demo</span></button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <%- include('partials/footer') -%>
 </body>
+
 </html>

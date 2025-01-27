@@ -1588,6 +1588,35 @@ li {
     font-size: 26px;
 }
 
+.map{
+    color: black;
+    margin: 20px 0px 50px 0px;
+    display: flex;justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.imap{
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.imap img{
+    width: 400px;
+    height: 400px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.sub-map{
+    padding: 20px;
+}
+
+.sub-map h3{
+    text-align: center;
+    color: #0078FF;
+}
+
 @media (max-width:900px) {
     .footer {
         padding: 0px 20px;
