@@ -1,595 +1,310 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>write a blog</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Admin Blog Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
+
         body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Helvetica Neue', 'Helvetica', arial, sans-serif;
+            font-family: "Manrope", serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
         }
 
-        .header {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            border-bottom: 1px solid #ddd;
-            width: 100vw;
-        }
-
-        .header img {
-            width: 130px;
-            height: 30px;
-        }
-
-        .header .back-icon {
-            font-size: 24px;
-            margin-right: 20px;
-            cursor: pointer;
+        h1 {
+            text-align: center;
             color: #333;
         }
 
-        .fa {
-            color: black;
-            padding: 10px;
+        form {
+            /* max-width: 600px; */
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* WYSIWYG Editor */
-        .wp-webdeasy-comment-editor {
-            width: 80vw;
-            min-height: 80vh;
-            box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-            border-top: 6px solid #4a4a4a;
-            border-radius: 3px;
-            margin: 2rem 0;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar {
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line {
-            display: flex;
-            border-bottom: 1px solid #e2e2e2;
-            overflow: scroll;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line:last-child {
-            border-bottom: none;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box {
-            display: flex;
-            border-left: 1px solid #e2e2e2;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn {
+        label {
+            /* font-weight: bold; */
             display: block;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: 0.2s ease all;
+            margin-bottom: 8px;
+            color: #555;
         }
 
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn:hover,
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.active {
-            background-color: #e1e1e1;
-            cursor: pointer;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.icon img {
-            width: 15px;
-            padding: 9px;
-            box-sizing: content-box;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.icon.smaller img {
-            width: 16px;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu {
-            width: 20px;
-            padding: 0 10px;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu::after {
-            content: '';
-            width: 6px;
-            height: 6px;
-            position: absolute;
-            background-image: url(https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            right: 4px;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu {
-            display: none;
-            position: absolute;
-            top: 34px;
-            left: -1px;
-            z-index: 10;
-            background-color: #fff;
-            border: 1px solid #b5b5b5;
-            border-top: none;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu .btn {
-            width: 39px;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu .submenu:hover {
-            display: block;
-        }
-
-        .wp-webdeasy-comment-editor .toolbar .line .box .editor-btn.has-submenu:hover .submenu {
-            display: block;
-        }
-
-        .wp-webdeasy-comment-editor .content-area {
-            padding: 15px 12px;
-            line-height: 1.5;
-        }
-
-        .wp-webdeasy-comment-editor .content-area .visuell-view {
-            outline: none;
-            min-height: 12rem;
-        }
-
-        .wp-webdeasy-comment-editor .content-area .visuell-view p {
-            margin: 12px 0;
-        }
-
-        .wp-webdeasy-comment-editor .content-area .html-view {
-            outline: none;
-            display: none;
+        input,
+        textarea,
+        select {
             width: 100%;
-            height: 200px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
             border: none;
-            resize: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
         }
 
-        /* Modal */
-        .modal {
-            z-index: 40;
-            display: none;
+        button:hover {
+            background-color: #0056b3;
         }
 
-        .modal .modal-wrapper {
+        .blog-preview {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             background-color: #fff;
-            padding: 1rem;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20rem;
-            min-height: 10rem;
-            z-index: 41;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .modal .modal-wrapper .close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            cursor: pointer;
+        .blog-preview img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
-        .modal .modal-wrapper .modal-content {
-            flex-direction: column;
+        .blog-preview h1,
+        .blog-preview h2 {
+            margin-bottom: 10px;
+            color: #333;
         }
 
-        .modal .modal-wrapper .modal-content h3 {
-            margin-top: 0;
+        .blog-preview ul,
+        .blog-preview ol {
+            margin: 15px 0;
+            padding-left: 20px;
         }
 
-        .modal .modal-wrapper .modal-content input {
-            margin: 1rem 0;
-            padding: 0.5rem;
+        .blog-preview ul li,
+        .blog-preview ol li {
+            margin-bottom: 5px;
         }
 
-        .modal .modal-wrapper .modal-content input[type="text"] {
-            width: calc(100% - 1rem);
+        @media (max-width: 768px) {
+
+            form,
+            .blog-preview {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
         }
 
-        .modal .modal-wrapper .modal-content .row label {
-            margin-left: 0.5rem;
-        }
-
-        .modal .modal-wrapper .modal-content button {
-            background-color: #d2434f;
-            border: 0;
-            color: #fff;
-            padding: 0.5rem 1.2rem;
-            cursor: pointer;
-        }
-
-        .modal .modal-bg {
-            position: fixed;
-            background-color: rgba(0, 0, 0, .3);
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-        }
-
-        /* Codepen Footer */
-        footer {
-            position: fixed;
-            bottom: 0;
+        .tag-selector {
+            list-style-type: none;
+            background-color: rgba(0, 0, 0, 0.167);
+            padding: 10px;
             display: flex;
+            flex-direction: row;
+            gap: 10px;
+            width: fit-content;
+            margin-bottom: 10px;
+            justify-content: center;
+            align-items: center;
+            max-width: fit-content;
+            margin-inline: auto;
         }
 
-        footer p {
-            margin: 0.5rem 1rem;
-            font-size: 12px;
+        .tag-selector li {
+            background-color: rgb(230, 230, 230);
+            border: 1px solid black;
+            border-style: dashed;
+            width: fit-content;
+            padding: 5px;
+            cursor: pointer;
         }
 
-        footer a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #000;
+        .tag-selector li:hover {
+            background-color: white;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            padding: 10px;
+
+        }
+
+        .types {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .options span {
+            border: 1px solid black;
+            border-style: dashed;
+            width: fit-content;
+            padding: 3px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <a href="/blogs"><i class="fa fa-arrow-left"></i></a>
-        <img alt="Blogger logo" height="30" src="/img/offershublogo.png" width="130" />
-    </div>
-    <div class="wp-webdeasy-comment-editor">
-        <div class="toolbar">
-            <div class="line">
+    <form id="blog-form" action="/submit-blog" method="POST">
+        <label for="main-title">Title</label>
+        <input type="text" id="main-title" name="main_title" placeholder="Enter a Title" required>
 
-                <div class="box">
-                    <span class="editor-btn icon smaller" data-action="bold" data-tag-name="b" title="Bold">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bold.png" />
-                    </span>
-                    <span class="editor-btn icon smaller" data-action="italic" data-tag-name="i" title="Italic">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/italic.png" />
-                    </span>
-                    <span class="editor-btn icon smaller" data-action="underline" data-tag-name="u" title="Underline">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/underline.png" />
-                    </span>
-                    <span class="editor-btn icon smaller" data-action="strikeThrough" data-tag-name="strike"
-                        title="Strike through">
-                        <img src="https://img.icons8.com/fluency-systems-filled/30/000000/strikethrough.png" />
-                    </span>
-                </div>
+        <label for="header-image">Cover Image</label>
+        <input type="url" id="header-image" name="header_image" placeholder="Upload Cover Image" required>
 
-                <div class="box">
-                    <span class="editor-btn icon has-submenu">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
-                        <div class="submenu">
-                            <span class="editor-btn icon" data-action="justifyLeft" data-style="textAlign:left"
-                                title="Justify left">
-                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-left.png" />
-                            </span>
-                            <span class="editor-btn icon" data-action="justifyCenter" data-style="textAlign:center"
-                                title="Justify center">
-                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-center.png" />
-                            </span>
-                            <span class="editor-btn icon" data-action="justifyRight" data-style="textAlign:right"
-                                title="Justify right">
-                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-right.png" />
-                            </span>
-                            <span class="editor-btn icon" data-action="formatBlock" data-style="textAlign:justify"
-                                title="Justify block">
-                                <img src="https://img.icons8.com/fluency-systems-filled/48/000000/align-justify.png" />
-                            </span>
-                        </div>
-                    </span>
-                    <span class="editor-btn icon" data-action="insertOrderedList" data-tag-name="ol"
-                        title="Insert ordered list">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/numbered-list.png" />
-                    </span>
-                    <span class="editor-btn icon" data-action="insertUnorderedList" data-tag-name="ul"
-                        title="Insert unordered list">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/bulleted-list.png" />
-                    </span>
-                    <span class="editor-btn icon" data-action="outdent" title="Outdent" data-required-tag="li">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/outdent.png" />
-                    </span>
-                    <span class="editor-btn icon" data-action="indent" title="Indent">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/indent.png" />
-                    </span>
+        <label for="small-title">Category</label>
+        <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
 
-                </div>
-                <div class="box">
-                    <span class="editor-btn icon" data-action="insertHorizontalRule" title="Insert horizontal rule">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/horizontal-line.png" />
-                    </span>
-                </div>
-
-            </div>
-            <div class="line">
-
-                <div class="box">
-                    <span class="editor-btn icon smaller" data-action="undo" title="Undo">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/undo--v1.png" />
-                    </span>
-                    <span class="editor-btn icon" data-action="removeFormat" title="Remove format">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/remove-format.png" />
-                    </span>
-                </div>
-
-                <div class="box">
-                    <span class="editor-btn icon smaller" data-action="createLink" title="Insert Link">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/add-link.png" />
-                    </span>
-                    <span class="editor-btn icon smaller" data-action="unlink" data-tag-name="a" title="Unlink">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/delete-link.png" />
-                    </span>
-                </div>
-
-                <div class="box">
-                    <span class="editor-btn icon" data-action="toggle-view" title="Show HTML-Code">
-                        <img src="https://img.icons8.com/fluency-systems-filled/48/000000/source-code.png" />
-                    </span>
-                </div>
-
-            </div>
+        <div class="tag-selector">
+            <li id="paragraph">Paragraph</li>
+            <li id="ordered-list">Ordered-List</li>
+            <li id="unordered-list">Unordered-List</li>
         </div>
-        <div class="content-area">
-            <div class="visuell-view" contenteditable>
 
-            </div>
-            <textarea class="html-view"></textarea>
-        </div>
-    </div>
+        <div id="additional-elements"></div>
 
-    <div class="modal">
-        <div class="modal-bg"></div>
-        <div class="modal-wrapper">
-            <div class="close">✖</div>
-            <div class="modal-content" id="modalCreateLink">
-                <h3>Insert Link</h3>
-                <input type="text" id="linkValue" placeholder="Link (example: https://webdeasy.de/)">
-                <div class="row">
-                    <input type="checkbox" id="new-tab">
-                    <label for="new-tab">Open in new Tab?</label>
-                </div>
-                <button class="done">Done</button>
-            </div>
-        </div>
-    </div>
+        <button type="submit">Submit Blog</button>
+    </form>
 
+    <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
-    <footer>
-        <p>© 2017-2024 <a href="/" target="_blank">OffersHub (PVT) LTD</a></p>
-    </footer>
     <script>
-        // define vars
-        const editor = document.getElementsByClassName('wp-webdeasy-comment-editor')[0];
-        const toolbar = editor.getElementsByClassName('toolbar')[0];
-        const buttons = toolbar.querySelectorAll('.editor-btn:not(.has-submenu)');
-        const contentArea = editor.getElementsByClassName('content-area')[0];
-        const visuellView = contentArea.getElementsByClassName('visuell-view')[0];
-        const htmlView = contentArea.getElementsByClassName('html-view')[0];
-        const modal = document.getElementsByClassName('modal')[0];
+        const additionalElements = document.getElementById('additional-elements');
+        const blogPreview = document.getElementById('blog-preview');
 
-        // add active tag event
-        document.addEventListener('selectionchange', selectionChange);
+        // Generate a new content block dynamically
+        document.getElementById('paragraph').addEventListener('click', () => {
+            const paragraphElement = document.createElement('div');
+            paragraphElement.innerHTML = `
+            <label for="content">Paragraph</label>
+            <textarea name="content" rows="4" placeholder="Add your content here"></textarea>`;
+            additionalElements.appendChild(paragraphElement);
+        });
 
-        // add paste event
-        visuellView.addEventListener('paste', pasteEvent);
+        document.getElementById('ordered-list').addEventListener('click', () => {
+            const orderedListElement = document.createElement('div');
+            orderedListElement.className = "ordered-list";
+            orderedListElement.innerHTML = `
+            <div class="options">
+                <label>Ordered-List</label>
+                <div class="types">
+                    <input type="radio" name="ol_type" value="1" checked><label>1,2,3</label>
+                    <input type="radio" name="ol_type" value="a"><label>a,b,c</label>
+                    <input type="radio" name="ol_type" value="A"><label>A,B,C</label>
+                    <input type="radio" name="ol_type" value="i"><label>i,ii,iii</label>
+                </div>
+                <span onclick="addPoint('ol', this)">+ Add Point</span>
+            </div>
+            <div class="container"></div>`;
+            additionalElements.appendChild(orderedListElement);
+        });
 
-        // add paragraph tag on new line
-        contentArea.addEventListener('keypress', addParagraphTag);
+        document.getElementById('unordered-list').addEventListener('click', () => {
+            const unorderedListElement = document.createElement('div');
+            unorderedListElement.className = "unordered-list";
+            unorderedListElement.innerHTML = `
+            <div class="options">
+                <label>Unordered-List</label>
+                <div class="types">
+                    <input type="radio" name="ul_type" value="circle" checked><label>Circle</label>
+                    <input type="radio" name="ul_type" value="disc"><label>Disc</label>
+                    <input type="radio" name="ul_type" value="square"><label>Square</label>
+                    <input type="radio" name="ul_type" value="none"><label>None</label>
+                </div>
+                <span onclick="addPoint('ul', this)">+ Add Point</span>
+            </div>
+            <div class="container"></div>`;
+            additionalElements.appendChild(unorderedListElement);
+        });
 
-        // add toolbar button actions
-        for (let i = 0; i < buttons.length; i++) {
-            let button = buttons[i];
-
-            button.addEventListener('click', function (e) {
-                let action = this.dataset.action;
-
-                switch (action) {
-                    case 'toggle-view':
-                        execCodeAction(this, editor);
-                        break;
-                    case 'createLink':
-                        execLinkAction();
-                        break;
-                    default:
-                        execDefaultAction(action);
-                }
-
-            });
+        function addPoint(listType, triggerElement) {
+            const container = triggerElement.parentElement.nextElementSibling;
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.placeholder = `Enter ${listType === 'ol' ? 'ordered' : 'unordered'} list item`;
+            container.appendChild(inputField);
         }
 
-        /** 
-         * This function toggles between visual and html view
-         */
-        function execCodeAction(button, editor) {
+        document.getElementById('blog-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-            if (button.classList.contains('active')) { // show visuell view
-                visuellView.innerHTML = htmlView.value;
-                htmlView.style.display = 'none';
-                visuellView.style.display = 'block';
+            const formData = {
+                main_title: document.getElementById('main-title').value,
+                header_image: document.getElementById('header-image').value,
+                small_title: document.getElementById('small-title').value,
+                blocks: []
+            };
 
-                button.classList.remove('active');
-            } else {  // show html view
-                htmlView.innerText = visuellView.innerHTML;
-                visuellView.style.display = 'none';
-                htmlView.style.display = 'block';
-                button.classList.add('active');
-            }
-        }
-
-        /**
-         * This function adds a link to the current selection
-         */
-        function execLinkAction() {
-            modal.style.display = 'block';
-            let selection = saveSelection();
-
-            let submit = modal.querySelectorAll('button.done')[0];
-            let close = modal.querySelectorAll('.close')[0];
-
-            // done button active => add link
-            submit.addEventListener('click', function (e) {
-                e.preventDefault();
-                let newTabCheckbox = modal.querySelectorAll('#new-tab')[0];
-                let linkInput = modal.querySelectorAll('#linkValue')[0];
-                let linkValue = linkInput.value;
-                let newTab = newTabCheckbox.checked;
-
-                restoreSelection(selection);
-
-                if (window.getSelection().toString()) {
-                    let a = document.createElement('a');
-                    a.href = linkValue;
-                    if (newTab) a.target = '_blank';
-                    window.getSelection().getRangeAt(0).surroundContents(a);
+            additionalElements.querySelectorAll('div').forEach((block) => {
+                if (block.classList.contains('ordered-list')) {
+                    const listType = block.querySelector('input[name="ol_type"]:checked').value;
+                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
+                    formData.blocks.push({ type: 'ordered-list', listType, items });
+                } else if (block.classList.contains('unordered-list')) {
+                    const listType = block.querySelector('input[name="ul_type"]:checked').value;
+                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
+                    formData.blocks.push({ type: 'unordered-list', listType, items });
+                } else if (block.querySelector('textarea')) {
+                    const content = block.querySelector('textarea').value;
+                    formData.blocks.push({ type: 'paragraph', content });
                 }
-
-                modal.style.display = 'none';
-                linkInput.value = '';
-
-                // deregister modal events
-                submit.removeEventListener('click', arguments.callee);
-                close.removeEventListener('click', arguments.callee);
             });
 
-            // close modal on X click
-            close.addEventListener('click', function (e) {
-                e.preventDefault();
-                let linkInput = modal.querySelectorAll('#linkValue')[0];
+            generatePreview(formData);
+        });
 
-                modal.style.display = 'none';
-                linkInput.value = '';
 
-                // deregister modal events
-                submit.removeEventListener('click', arguments.callee);
-                close.removeEventListener('click', arguments.callee);
-            });
-        }
+        function generatePreview(formData) {
 
-        /**
-         * This function executes all 'normal' actions
-         */
-        function execDefaultAction(action) {
-            document.execCommand(action, false);
-        }
-
-        /**
-         * Saves the current selection
-         */
-        function saveSelection() {
-            if (window.getSelection) {
-                sel = window.getSelection();
-                if (sel.getRangeAt && sel.rangeCount) {
-                    let ranges = [];
-                    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-                        ranges.push(sel.getRangeAt(i));
-                    }
-                    return ranges;
+            const htmlContent = `<div class="container">
+            <img src="${formData.header_image}" alt="Header Image" class="header-image">
+            <div class="small-title">${formData.small_title}</div>
+            <div class="main-title">${formData.main_title}</div>
+            <div class="content">
+                ${formData.blocks.map(block => {
+                if (block.type === 'paragraph') {
+                    return `<p>${block.content}</p>`;
+                } else if (block.type === 'ordered-list') {
+                    return `<ol type="${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ol>`;
+                } else if (block.type === 'unordered-list') {
+                    return `<ul style="list-style-type: ${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ul>`;
                 }
-            } else if (document.selection && document.selection.createRange) {
-                return document.selection.createRange();
-            }
-            return null;
-        }
+            }).join('')}
+            </div>
+            </div>`
 
-        /**
-         *  Loads a saved selection
-         */
-        function restoreSelection(savedSel) {
-            if (savedSel) {
-                if (window.getSelection) {
-                    sel = window.getSelection();
-                    sel.removeAllRanges();
-                    for (var i = 0, len = savedSel.length; i < len; ++i) {
-                        sel.addRange(savedSel[i]);
-                    }
-                } else if (document.selection && savedSel.select) {
-                    savedSel.select();
-                }
-            }
-        }
+            blogPreview.style.display = 'block';
+            blogPreview.innerHTML = htmlContent;
 
-        /**
-         * Sets the current selected format buttons active/inactive
-         */
-        function selectionChange(e) {
-
-            for (let i = 0; i < buttons.length; i++) {
-                let button = buttons[i];
-
-                // don't remove active class on code toggle button
-                if (button.dataset.action === 'toggle-view') continue;
-
-                button.classList.remove('active');
-            }
-
-            if (!childOf(window.getSelection().anchorNode.parentNode, editor)) return false;
-
-            parentTagActive(window.getSelection().anchorNode.parentNode);
-        }
-
-        /**
-         * Checks if the passed child has the passed parent
-         */
-        function childOf(child, parent) {
-            return parent.contains(child);
-        }
-
-        /**
-         * Sets the tag active that is responsible for the current element
-         */
-        function parentTagActive(elem) {
-            if (!elem || !elem.classList || elem.classList.contains('visuell-view')) return false;
-
-            let toolbarButton;
-
-            // active by tag names
-            let tagName = elem.tagName.toLowerCase();
-            toolbarButton = document.querySelectorAll(`.toolbar .editor-btn[data-tag-name="${tagName}"]`)[0];
-            if (toolbarButton) {
-                toolbarButton.classList.add('active');
-            }
-
-            // active by text-align
-            let textAlign = elem.style.textAlign;
-            toolbarButton = document.querySelectorAll(`.toolbar .editor-btn[data-style="textAlign:${textAlign}"]`)[0];
-            if (toolbarButton) {
-                toolbarButton.classList.add('active');
-            }
-
-            return parentTagActive(elem.parentNode);
-        }
-
-        /**
-         * Handles the paste event and removes all HTML tags
-         */
-        function pasteEvent(e) {
-            e.preventDefault();
-
-            let text = (e.originalEvent || e).clipboardData.getData('text/plain');
-            document.execCommand('insertHTML', false, text);
-        }
-
-        /**
-         * This functions adds a paragraph tag when the enter key is pressed
-         */
-        function addParagraphTag(evt) {
-            if (evt.keyCode == '13') {
-
-                // don't add a p tag on list item
-                if (window.getSelection().anchorNode.parentNode.tagName === 'LI') return;
-                document.execCommand('formatBlock', false, 'p');
-            }
+            fetch('/blog/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: htmlContent,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
         }
     </script>
 </body>

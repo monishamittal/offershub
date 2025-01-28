@@ -115,21 +115,22 @@ router.get('/contactUs', async (req, res) => {
 	});
 });
 
-router.get('/write-blog', async (req, res) => {
+router.get('/write-blog/:blog_id', async (req, res) => {
 	res.render('writeBlog', {
 		title: 'write a blog',
+		blog_id: req.params.blog_id,
 	});
 });
 
 router.get('/blogs', async (req, res) => {
-	res.render('blogs', {
+	res.render('allBlogs', {
 		title: 'Blogs',
 	});
 });
 
-router.get('/blog/1', async (req, res) => {
-	res.render('viewBlog', {
-		title: 'Blog 1',
+router.get('/blog/:blog_id', async (req, res) => {
+	res.render('blog', {
+		title: 'Blog',
 	});
 });
 
