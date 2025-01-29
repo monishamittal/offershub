@@ -7,54 +7,20 @@
   <%- include('partials/chatbot') -%>
   <!-- <%- include('partials/totop') -%> -->
   <!-- <%- include('partials/loader') -%> -->
-  <style>
-    .form-wrapper {
-      color: black;
-      width: 65%;
-      margin: auto;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
 
-    .form-wrapper label {
-      position: relative;
-    }
-
-    .form-wrapper i {
-      position: absolute;
-      top: 1px;
-      color: red;
-      font-size: 7px;
-    }
-
-    .label-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      padding: 10px;
-    }
-
-    input[type=text],
-    select {
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-    }
-
-  </style>
-  
   <main>
     <div class="form-wrapper">
+      <h1 class="center">Talk to our Expert</h1>
       <form action="">
-        <div class="label-text">
-          <label for="">First Name<i class="fa fa-asterisk"></i></label>
-          <input type="text">
-        </div>
-        <div class="label-text">
-          <label for="">Last Name<i class="fa fa-asterisk"></i></label>
-          <input type="text">
+        <div style="display: flex;align-items: center;justify-content: space-between;">
+          <div class="label-text" style="width: 47%;">
+            <label for="">First Name<i class="fa fa-asterisk"></i></label>
+            <input type="text">
+          </div>
+          <div class="label-text"  style="width: 47%;">
+            <label for="">Last Name<i class="fa fa-asterisk"></i></label>
+            <input type="text">
+          </div>
         </div>
         <div class="label-text">
           <label for="">Company Name<i class="fa fa-asterisk"></i></label>
@@ -65,26 +31,28 @@
           <input type="text">
         </div>
         <div class="label-text">
-          <label for="">Contact<i class="fa fa-asterisk"></i></label>
-          <input type="text">
-        </div>
-        <div class="label-text">
           <label for="">Email<i class="fa fa-asterisk"></i></label>
           <input type="text" placeholder="Business emails only">
         </div>
-        <div class="label-text">
-          <label for="">Messenger type<i class="fa fa-asterisk"></i></label>
-          <select>
-            <option value="Skype">Skype</option>
-            <option value="Whatsapp">Whatsapp</option>
-            <option value="Telegram">Telegram</option>
-          </select>
+        <div style="display: flex;align-items: center;justify-content: space-between;">
+          <div class="label-text" style="width: 47%;">
+            <label for="">Contact Number<i class="fa fa-asterisk"></i></label>
+            <input type="text">
+          </div>
+          <div class="label-text" style="width: 47%;">
+            <label for="">Messenger type<i class="fa fa-asterisk"></i></label>
+            <select>
+              <option value="Skype">Skype</option>
+              <option value="Whatsapp">Whatsapp</option>
+              <option value="Telegram">Telegram</option>
+            </select>
+          </div>
         </div>
         <div class="label-text">
           <label for="">Message</label>
           <textarea name="" id=""></textarea>
         </div>
-        <button>Submit</button>
+        <button class="submit">Submit</button>
       </form>
     </div>
 

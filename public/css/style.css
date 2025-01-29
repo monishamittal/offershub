@@ -1,5 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
+
 :root {
     --dark-color: #0B1821;
     --light-color: white;
@@ -449,7 +450,7 @@ header {
     background-color: #E9FAFF;
     width: 70%;
     border-radius: 50px;
-    margin:50px auto;
+    margin: 50px auto;
     padding: 50px;
     display: flex;
     flex-wrap: wrap;
@@ -469,21 +470,21 @@ header {
     box-shadow: 0 4px 10px #0c0c0c21;
 }
 
-.card-cloud h1{
+.card-cloud h1 {
     color: #008aad;
     font-size: 22px;
 }
 
-.card-cloud p{
+.card-cloud p {
     color: #005469;
     margin-top: 7px;
 }
 
-.card-cloud img{
-margin: 4px;
-border: 1px solid  #008aad;
-border-radius: 50%;
-padding: 10px;
+.card-cloud img {
+    margin: 4px;
+    border: 1px solid #008aad;
+    border-radius: 50%;
+    padding: 10px;
 }
 
 .image-content {
@@ -621,6 +622,7 @@ padding: 10px;
 .heading {
     font-size: 30px;
 }
+
 .home {
     color: var(--dark-color);
 }
@@ -634,7 +636,7 @@ padding: 10px;
     gap: 40px;
     margin: auto;
     padding: 70px 0px;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
 }
@@ -710,7 +712,7 @@ padding: 10px;
     padding: 50px 0px;
     color: white;
     font-size: 24px;
-    width: 65%;
+    width: 75%;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -998,7 +1000,7 @@ li {
 .counter-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     margin: 25px 0px;
 }
@@ -1008,7 +1010,7 @@ li {
     box-shadow: 0 4px 10px #0c0c0c21;
     padding: 7px 30px;
     border-radius: 10px;
-    width: 160px;
+    width: 140px;
 }
 
 .counter span {
@@ -1031,6 +1033,7 @@ li {
 }
 
 .testimonial {
+    height: 360px;
     background-color: #e9f4ff;
     margin: 10px auto;
     border-radius: 7px;
@@ -1483,7 +1486,7 @@ li {
 }
 
 .badge {
-    width: 200px;
+    min-width: 150px;
     border: 1px dotted #92b5cf;
     border-radius: 4px;
     display: flex;
@@ -1507,9 +1510,11 @@ li {
 
 .blogs {
     display: flex;
-    justify-content: space-between;
     gap: 40px;
+    width: 80%;
+    margin: auto;
     align-items: center;
+    justify-content: center;
 }
 
 .blog {
@@ -1519,6 +1524,11 @@ li {
     align-items: center;
     margin: 30px 0px;
     box-shadow: 0 4px 10px #0c0c0c21;
+    min-width: 350px;
+}
+
+.blog img {
+    width: 100%;
 }
 
 .blog span {
@@ -1588,33 +1598,106 @@ li {
     font-size: 26px;
 }
 
-.map{
+.map {
     color: black;
     margin: 20px 0px 50px 0px;
-    display: flex;justify-content: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 40px;
 }
 
-.imap{
+.imap {
     width: 400px;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.imap img{
+.imap img {
     width: 400px;
     height: 400px;
     border-radius: 20px 20px 0px 0px;
 }
 
-.sub-map{
+.sub-map {
     padding: 20px;
 }
 
-.sub-map h3{
+.sub-map h3 {
     text-align: center;
     color: #0078FF;
+}
+
+.form-wrapper {
+    color: black;
+    width: 65%;
+    margin: 80px auto;
+}
+
+.form-wrapper label {
+    position: relative;
+    font-weight: bold;
+}
+
+.form-wrapper i {
+    position: absolute;
+    top: 1px;
+    color: red;
+    font-size: 6px;
+}
+
+.label-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 5px;
+}
+
+.form-wrapper input[type=text],
+.form-wrapper select,
+.form-wrapper textarea {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #F6F8FA;
+}
+
+.submit {
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 7px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FAE12E;
+}
+
+.form-wrapper h1 {
+    margin: 40px 0px;
+    color: #004DA5;
+}
+
+.header-div {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+#bar,#closeSidebar {
+    color: #0078FF;
+    display: none;
 }
 
 @media (max-width:900px) {
@@ -1637,5 +1720,223 @@ li {
 @media(max-width:500px) {
     .copyright {
         flex-direction: column;
+    }
+}
+
+@media(max-width:1340px) {
+    .google-container {
+        width: 80%;
+    }
+
+    .up-down-animation {
+        height: 450px;
+    }
+
+    .testimonial {
+        min-width: 250px;
+    }
+}
+
+@media(max-width:1255px) {
+    .card {
+        width: 200px;
+        height: 320px;
+    }
+}
+
+@media(max-width:1230px) {
+    .header-div {
+        width: 90%;
+    }
+}
+
+@media(max-width:1204px) {
+    .trusted-container {
+        width: 85%;
+    }
+
+    .trial {
+        width: 90%;
+    }
+
+    .blog {
+        min-width: 280px;
+    }
+
+    .blogs {
+        gap: 20px;
+    }
+
+    .trial1 h3,
+    .trial2 h3 {
+        font-size: 20px;
+    }
+
+    .badge-container {
+        gap: 20px;
+    }
+}
+
+@media(max-width:1100px) {
+    .images {
+        gap: 40px;
+    }
+
+    .images image {
+        height: 35px;
+    }
+
+    .header-ul {
+        gap: 10px;
+    }
+
+    .google {
+        font-size: 35px;
+    }
+}
+
+@media(max-width:1050px) {
+    .trusted-container {
+        width: 90%;
+    }
+
+    .badge {
+        min-width: 120px;
+        height: 200px;
+    }
+
+    .cards {
+        gap: 15px;
+    }
+}
+
+@media(max-width:995px) {
+    .counter {
+        width: 80px;
+    }
+
+    .card {
+        width: 175px;
+    }
+
+    .header-container ul li {
+        font-size: 14px;
+    }
+
+    .header-ul {
+        gap: 5px;
+    }
+}
+
+@media(max-width:935px) {
+    .testimonial {
+        min-width: 220px;
+    }
+
+    .testimonial-content p {
+        font-size: 15px;
+    }
+
+    .up-down-animation {
+        height: 400px;
+    }
+
+    .google-container {
+        width: 90%;
+    }
+}
+
+@media(max-width:900px) {
+    .header-ul li {
+        display: none;
+    }
+
+    #bar {
+        display: block;
+        font-size: 25px;
+    }
+
+    .images img {
+        height: 30px;
+        margin: 25px 0px;
+    }
+
+    .badge-container {
+        gap: 15px;
+    }
+
+    .badge {
+        min-width: 100px;
+        font-size: 15px;
+    }
+
+    .card {
+        font-size: 14px;
+        width: 160px;
+    }
+
+    .blog {
+        min-width: 230px;
+    }
+
+    .testimonial {
+        min-width: 200px;
+    }
+
+    .testimonial-content p {
+        font-size: 13px;
+    }
+}
+
+@media(max-width:800px) {
+    .card {
+        font-size: 12px;
+        width: 130px;
+    }
+
+    .trusted-container {
+        flex-direction: column;
+    }
+
+    .testimonial-container {
+        gap: 15px;
+    }
+
+    .badge {
+        min-width: 80px;
+    }
+
+    .badge-container img {
+        height: 80px;
+    }
+
+    .google-container {
+        flex-direction: column-reverse;
+    }
+}
+
+@media(max-width:755px) {
+    .testimonial {
+        min-width: 250px;
+        height: auto;
+    }
+
+    .testimonial-container {
+        width: 80%;
+        margin: auto;
+        overflow-x: auto;
+        justify-content: start;
+    }
+    .images img {
+        height: 27px;
+    }
+
+    .card {
+        width: 260px;
+        font-size: 16px;
+    }
+
+    .cards{
+        flex-wrap: wrap;
     }
 }
