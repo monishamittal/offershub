@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Top Stories</title>
+    <title>Product Updates,News and Articles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -22,16 +22,16 @@
         .header {
             text-align: center;
             font-size: 24px;
-            font-weight: 700;
+            /* font-weight: 700; */
             margin-bottom: 40px;
             color: #1A1A1A;
         }
 
         .stories {
             display: flex;
-            justify-content: space-between;
+            /* justify-content: space-between; */
             gap: 20px;
-            flex-direction: column-reverse;
+            /* flex-direction: column-reverse; */
         }
 
         .story {
@@ -40,6 +40,7 @@
             border: 1px solid #E0E0E0;
             border-radius: 8px;
             background-color: #ffffff;
+            max-width: 276px;
         }
 
         .story h3 {
@@ -59,6 +60,20 @@
             font-size: 12px;
             color: #999999;
             margin-bottom: 10px;
+        }
+
+        img {
+            width: 276px;
+            height: 180px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .title {
+            color: black;
+            text-decoration: none;
+            font-size: 20px;
+            letter-spacing: -1px;
         }
 
         @media (max-width: 768px) {
@@ -90,27 +105,8 @@
 
 <body onload="getAllBlogs()">
     <div class="container">
-        <div class="header">Top stories you shouldn't miss!</div>
-        <div class="stories" id="blogs">
-            <!-- <div class="story">
-                <div class="date">Tips & Guides – 04 Feb 2021</div>
-                <h3>7 Reasons to Create a Partner Program for Your SaaS Product</h3>
-                <p>Having created a great SaaS product, you still need to be recognized and known in certain markets.
-                    When it comes to marketing, many startups and...</p>
-            </div>
-            <div class="story">
-                <div class="date">Tips & Guides – 22 Mar 2022</div>
-                <h3>In-house VS SaaS: Choosing your affiliate tracking solution</h3>
-                <p>To build or not to build? This is the common question that enterprises, affiliate networks, and
-                    agencies face when they need a reliable and accurate...</p>
-            </div>
-            <div class="story">
-                <div class="date">Tips & Guides – 26 Dec 2019</div>
-                <h3>Partner Marketing for Beginners: 37 Terms You Should Know</h3>
-                <p>The Partner Marketing industry has its own language that can be confusing for a newcomer in this
-                    business area. It can easily catch you off...</p>
-            </div> -->
-        </div>
+        <div class="header">Product Updates,News and Articles</div>
+        <div class="stories" id="blogs"></div>
     </div>
     <script>
         async function getAllBlogs() {
@@ -121,10 +117,10 @@
             for (let blog of blogs.data) {
                 if (blog.isPublished === true) {
                     document.getElementById('blogs').innerHTML += `<div class="story">
-                <div class="date"><a href="/blog/${blog._id}">${blog._id}</a></div>
-                <h3>7 Reasons to Create a Partner Program for Your SaaS Product</h3>
-                <p>Having created a great SaaS product, you still need to be recognized and known in certain markets.
-                    When it comes to marketing, many startups and...</p>
+                <div class="date">${blog.createdAt}</div>
+                <img src="${blog.cover_image}" alt="blog-${blog._id}">
+                <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
+                <p>${blog.category}</p>
             </div>`
                 }
             }
