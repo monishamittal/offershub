@@ -215,6 +215,10 @@
             .small-title {
                 font-size: 1em;
             }
+
+            .options {
+                flex-direction: column;
+            }
         }
 
         input[type="file"] {
@@ -430,7 +434,7 @@
                 } else if (block.querySelector('textarea')) {
                     const content = block.querySelector('textarea').value;
                     formData.blocks.push({ type: 'paragraph', content });
-                } else if (block.querySelector('input[type="text"]')) {
+                } else if (block.querySelector('input[type="text"]') && block.querySelector('label') && block.querySelector('label').innerText.toLowerCase().includes('heading')) {
                     const content = block.querySelector('input[type="text"]').value;
                     formData.blocks.push({ type: 'heading', content });
                 } else if (block.querySelector('input[type="file"]')) {
