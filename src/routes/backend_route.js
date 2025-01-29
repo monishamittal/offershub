@@ -39,7 +39,7 @@ router.post('/upload', (req, res) => {
 		console.log('File saved:', filePath);
 		res.status(200).json({
 			message: 'File uploaded successfully',
-			filePath: `uploads/${uniqueFileName}`,
+			filePath: `/uploads/${uniqueFileName}`,
 		});
 	});
 });

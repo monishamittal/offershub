@@ -120,6 +120,7 @@
             align-items: center;
             max-width: fit-content;
             margin-inline: auto;
+            flex-wrap: wrap;
         }
 
         .tag-selector li {
@@ -239,8 +240,15 @@
         <label for="main-title">Title</label>
         <input type="text" id="main-title" name="main_title" placeholder="Enter a Title" required>
 
-        <label for="header-image">Cover Image</label>
-        <input type="url" id="header-image" name="header_image" placeholder="Upload Cover Image" required>
+        <input type="file" id="uploadedImage"
+            onchange="uploadimage('uploadedImage', 'uploadedImageName','uploadedImageOriginalName')">
+        <label for="uploadedImage" class="custom-file-label">Cover Image &nbsp;&nbsp;
+            <span class="file-name" id="uploadedImageName"></span>
+            <span id="uploadedImageOriginalName" style="visibility: hidden;"></span>
+        </label>
+
+        <!-- <label for="header-image">Cover Image</label>
+        <input type="url" id="header-image" name="header_image" placeholder="Upload Cover Image" required> -->
 
         <label for="small-title">Category</label>
         <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
@@ -261,15 +269,8 @@
 
     <script>
 
-        async function uploadimage() {
-            const fileInput = document.getElementById('fileUpload');
-            const fileNameDisplay = document.getElementById('fileName');
-            if (fileInput.files.length > 0) {
-                fileNameDisplay.textContent = `Selected file: ${fileInput.files[0].name}`;
-            } else {
-                fileNameDisplay.textContent = '';
-            }
-
+        async function uploadimage(image, name, originalPath) {
+            const fileInput = document.getElementById(image);
             const file = fileInput.files[0];
 
             if (!file) {
@@ -291,8 +292,19 @@
                 }
 
                 const result = await response.json();
-                console.log(result);
                 alert('Image uploaded successfully!');
+                console.log(result);
+
+                const fileNameDisplay = document.getElementById(name);
+                const uploadedPath = document.getElementById(originalPath)
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.innerHTML = `Selected file: <a href="${result.filePath}" target="_blank">${fileInput.files[0].name}</a>`;
+                    uploadedPath.innerHTML = result.filePath
+                } else {
+                    fileNameDisplay.innerHTML = '';
+                }
+
+                return result;
             } catch (error) {
                 console.error('Error uploading file:', error);
                 alert('Failed to upload the file.');
@@ -375,7 +387,7 @@
 
             const formData = {
                 main_title: document.getElementById('main-title').value,
-                header_image: document.getElementById('header-image').value,
+                cover_image: document.getElementById('uploadedImageOriginalName').innerHTML,
                 small_title: document.getElementById('small-title').value,
                 blocks: []
             };
@@ -402,7 +414,7 @@
         function generatePreview(formData) {
 
             const htmlContent = `<div class="container">
-            <img src="${formData.header_image}" alt="Header Image" class="header-image">
+            <img src="${formData.cover_image}" alt="Header Image" class="header-image">
             <div class="small-title">${formData.small_title}</div>
             <div class="main-title">${formData.main_title}</div>
             <div class="content">
