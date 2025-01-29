@@ -296,10 +296,10 @@
                 console.log(result);
 
                 const fileNameDisplay = document.getElementById(name);
-                const prefixText = document.getElementById(preText)
+                const prefixText = document.getElementById(preText);
                 if (fileInput.files.length > 0) {
                     fileNameDisplay.innerHTML = `${result.filePath}`;
-                    prefixText.innerHTML = 'Selected File : '
+                    prefixText.innerHTML = 'Selected File : ';
                 } else {
                     fileNameDisplay.innerHTML = '';
                 }
@@ -314,7 +314,6 @@
         const additionalElements = document.getElementById('additional-elements');
         const blogPreview = document.getElementById('blog-preview');
 
-        // Generate a new content block dynamically
         document.getElementById('heading').addEventListener('click', () => {
             const headingElement = document.createElement('div');
             headingElement.innerHTML = `
@@ -345,10 +344,10 @@
             <div class="options">
                 <label>Ordered-List</label>
                 <div class="types">
-                    <input type="radio" name="ol_type" value="1" checked><label>1,2,3</label>
-                    <input type="radio" name="ol_type" value="a"><label>a,b,c</label>
-                    <input type="radio" name="ol_type" value="A"><label>A,B,C</label>
-                    <input type="radio" name="ol_type" value="i"><label>i,ii,iii</label>
+                    <input type="radio" name="ol_type_${Date.now()}" value="1" checked><label>1,2,3</label>
+                    <input type="radio" name="ol_type_${Date.now()}" value="a"><label>a,b,c</label>
+                    <input type="radio" name="ol_type_${Date.now()}" value="A"><label>A,B,C</label>
+                    <input type="radio" name="ol_type_${Date.now()}" value="i"><label>i,ii,iii</label>
                 </div>
                 <span onclick="addPoint('ol', this)">+ Add Point</span>
             </div>
@@ -363,10 +362,10 @@
             <div class="options">
                 <label>Unordered-List</label>
                 <div class="types">
-                    <input type="radio" name="ul_type" value="circle" checked><label>Circle</label>
-                    <input type="radio" name="ul_type" value="disc"><label>Disc</label>
-                    <input type="radio" name="ul_type" value="square"><label>Square</label>
-                    <input type="radio" name="ul_type" value="none"><label>None</label>
+                    <input type="radio" name="ul_type_${Date.now()}" value="circle" checked><label>Circle</label>
+                    <input type="radio" name="ul_type_${Date.now()}" value="disc"><label>Disc</label>
+                    <input type="radio" name="ul_type_${Date.now()}" value="square"><label>Square</label>
+                    <input type="radio" name="ul_type_${Date.now()}" value="none"><label>None</label>
                 </div>
                 <span onclick="addPoint('ul', this)">+ Add Point</span>
             </div>
@@ -382,6 +381,16 @@
             container.appendChild(inputField);
         }
 
+        function getListType(block, listType) {
+            const radioButton = block.querySelector(`input[name^="${listType}_type"]:checked`);
+            if (radioButton) {
+                return radioButton.value;
+            } else {
+                console.error(`No selected radio button for ${listType}`);
+                return null;
+            }
+        }
+
         document.getElementById('blog-form').addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -394,11 +403,11 @@
 
             additionalElements.querySelectorAll('div').forEach((block) => {
                 if (block.classList.contains('ordered-list')) {
-                    const listType = block.querySelector('input[name="ol_type"]:checked').value;
+                    const listType = getListType(block, 'ol');  // For ordered list
                     const items = [...block.querySelectorAll('.container input')].map(input => input.value);
                     formData.blocks.push({ type: 'ordered-list', listType, items });
                 } else if (block.classList.contains('unordered-list')) {
-                    const listType = block.querySelector('input[name="ul_type"]:checked').value;
+                    const listType = getListType(block, 'ul');  // For unordered list
                     const items = [...block.querySelectorAll('.container input')].map(input => input.value);
                     formData.blocks.push({ type: 'unordered-list', listType, items });
                 } else if (block.querySelector('textarea')) {
@@ -410,9 +419,7 @@
             generatePreview(formData);
         });
 
-
         function generatePreview(formData) {
-
             const htmlContent = `<div class="container">
             <img src="${formData.cover_image}" alt="Header Image" class="header-image">
             <div class="small-title">${formData.small_title}</div>
@@ -448,7 +455,7 @@
         }
     </script>
 
-    <!-- <script>
+    <script>
         document.addEventListener("keydown", function (event) {
             if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
                 event.preventDefault();
@@ -471,7 +478,7 @@
             history.pushState(null, "", location.href);
             alert("Back/Forward navigation is disabled!");
         });
-    </script> -->
+    </script>
 
 </body>
 
