@@ -314,14 +314,6 @@
         const additionalElements = document.getElementById('additional-elements');
         const blogPreview = document.getElementById('blog-preview');
 
-        document.getElementById('heading').addEventListener('click', () => {
-            const headingElement = document.createElement('div');
-            headingElement.innerHTML = `
-            <label for="content">Heading</label>
-            <input type="text" placeholder="Add heading here" id="heading">`;
-            additionalElements.appendChild(headingElement);
-        });
-
         document.getElementById('image').addEventListener('click', () => {
             const imageElement = document.createElement('div');
             imageElement.innerHTML = `<input type="file" id="fileUpload" onchange="uploadimage()">
@@ -391,6 +383,14 @@
             }
         }
 
+        document.getElementById('heading').addEventListener('click', () => {
+            const headingElement = document.createElement('div');
+            headingElement.innerHTML = `
+        <label for="heading-content">Heading</label>
+        <input type="text" placeholder="Add heading here" id="heading-content">`;
+            additionalElements.appendChild(headingElement);
+        });
+
         document.getElementById('blog-form').addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -413,6 +413,9 @@
                 } else if (block.querySelector('textarea')) {
                     const content = block.querySelector('textarea').value;
                     formData.blocks.push({ type: 'paragraph', content });
+                } else if (block.querySelector('input[type="text"]')) {
+                    const content = block.querySelector('input[type="text"]').value;
+                    formData.blocks.push({ type: 'heading', content });
                 }
             });
 
@@ -432,10 +435,12 @@
                     return `<ol type="${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ol>`;
                 } else if (block.type === 'unordered-list') {
                     return `<ul style="list-style-type: ${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                } else if (block.type === 'heading') {
+                    return `<div class="sub-heading">${block.content}</div>`;
                 }
             }).join('')}
             </div>
-            </div>`
+            </div>`;
 
             blogPreview.style.display = 'block';
             blogPreview.innerHTML = htmlContent;
@@ -453,6 +458,7 @@
                 .then(data => console.log(data))
                 .catch(error => console.error('Error:', error));
         }
+
     </script>
 
     <script>
