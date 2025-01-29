@@ -14,15 +14,21 @@ router.put('/update/blog/:blogId', blogController.updateBlog);
 router.post('/caseStudy', caseStudyController.createCaseStudy);
 router.get('/get/caseStudy', caseStudyController.getCaseStudy);
 router.put('/update/caseStudy/:caseStudyId', caseStudyController.updateCaseStudy);
+
+function formatImageName(filename) {
+	return filename
+		.toLowerCase()
+		.replace(/\s+/g, '-')
+		.replace(/[^a-z0-9.-]/g, '');
+}
+
 router.post('/upload', (req, res) => {
 	let files = req.files;
 	if (!(files && files.length > 0)) {
 		return res.status(400).send({ status: false, message: 'Please provide an image' });
 	}
-
 	const { buffer, originalname } = files[0];
-	const timestamp = Date.now();
-	const uniqueFileName = `${timestamp}-${originalname}`;
+	const uniqueFileName = formatImageName(originalname);
 	const uploadDir = path.join(__dirname, '../../public/uploads');
 	const filePath = path.join(uploadDir, uniqueFileName);
 

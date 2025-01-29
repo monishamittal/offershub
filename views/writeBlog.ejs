@@ -217,19 +217,24 @@
         }
 
         .custom-file-label {
-            display: inline-block;
+            align-items: center;
+            display: flex;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             text-align: center;
+            background-color: #eeeeee;
+            /* width: 100%; */
+            justify-content: center;
+            padding: 5px;
         }
 
-        .custom-file-label:hover {
+        /* .custom-file-label:hover {
             color: red;
-        }
+        } */
 
         .file-name {
-            margin-top: 10px;
+            /* margin-top: 10px; */
             color: #f70000;
         }
     </style>
@@ -240,15 +245,12 @@
         <label for="main-title">Title</label>
         <input type="text" id="main-title" name="main_title" placeholder="Enter a Title" required>
 
-        <input type="file" id="uploadedImage"
-            onchange="uploadimage('uploadedImage', 'uploadedImageName','uploadedImageOriginalName')">
-        <label for="uploadedImage" class="custom-file-label">Cover Image &nbsp;&nbsp;
-            <span class="file-name" id="uploadedImageName"></span>
-            <span id="uploadedImageOriginalName" style="visibility: hidden;"></span>
+        <input type="file" id="upload-image"
+            onchange="uploadimage('upload-image', 'upload-preText', 'upload-image-name')">
+        <label for="upload-image" class="custom-file-label">
+            <span id="upload-preText"><i class="fa fa-upload"></i> Cover Image </span>
+            <span class="file-name" id="upload-image-name"></span>
         </label>
-
-        <!-- <label for="header-image">Cover Image</label>
-        <input type="url" id="header-image" name="header_image" placeholder="Upload Cover Image" required> -->
 
         <label for="small-title">Category</label>
         <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
@@ -268,8 +270,7 @@
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
     <script>
-
-        async function uploadimage(image, name, originalPath) {
+        async function uploadimage(image, preText, name) {
             const fileInput = document.getElementById(image);
             const file = fileInput.files[0];
 
@@ -280,7 +281,6 @@
 
             const formData = new FormData();
             formData.append('file', file);
-
             try {
                 const response = await fetch('/upload', {
                     method: 'POST',
@@ -296,10 +296,10 @@
                 console.log(result);
 
                 const fileNameDisplay = document.getElementById(name);
-                const uploadedPath = document.getElementById(originalPath)
+                const prefixText = document.getElementById(preText)
                 if (fileInput.files.length > 0) {
-                    fileNameDisplay.innerHTML = `Selected file: <a href="${result.filePath}" target="_blank">${fileInput.files[0].name}</a>`;
-                    uploadedPath.innerHTML = result.filePath
+                    fileNameDisplay.innerHTML = `${result.filePath}`;
+                    prefixText.innerHTML = 'Selected File : '
                 } else {
                     fileNameDisplay.innerHTML = '';
                 }
@@ -387,7 +387,7 @@
 
             const formData = {
                 main_title: document.getElementById('main-title').value,
-                cover_image: document.getElementById('uploadedImageOriginalName').innerHTML,
+                cover_image: document.getElementById('upload-image-name').innerHTML,
                 small_title: document.getElementById('small-title').value,
                 blocks: []
             };
