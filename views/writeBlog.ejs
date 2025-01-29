@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Blog Form</title>
+    <title>write a blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
@@ -21,7 +21,6 @@
         }
 
         form {
-            /* max-width: 600px; */
             margin: auto;
             padding: 20px;
             background: #fff;
@@ -31,7 +30,6 @@
         }
 
         label {
-            /* font-weight: bold; */
             display: block;
             margin-bottom: 8px;
             color: #555;
@@ -270,10 +268,8 @@
             <li id="image"><i class="fa fa-picture-o"></i> Image</li>
             <li id="break-page"><i class="fa fa-minus"></i> Break Page</li>
         </div>
-
-        <button type="submit"><i class="fa fa-eye"></i> Preview Blog</button>
-
-        <button id="publish-btn"><i class="fa fa-upload"></i> Publish Blog</button>
+        <button type="submit"><i class="fa fa-eye"></i> Preview</button>
+        <button id="publish-btn"><i class="fa fa-upload"></i> Publish</button>
     </form>
 
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
@@ -343,7 +339,6 @@
             breakPage.innerHTML = `<hr>`;
             additionalElements.appendChild(breakPage);
         });
-
 
         document.getElementById('paragraph').addEventListener('click', () => {
             const paragraphElement = document.createElement('div');
@@ -488,13 +483,24 @@
         }
 
         document.getElementById('publish-btn').addEventListener('click', () => {
+            const title = document.getElementById('main-title').value;
+            const cover_image = document.getElementById('upload-image-name').innerHTML;
+            const category = document.getElementById('small-title').value;
+            if (htmlContent === '') {
+                return alert('Please fill the empty fields')
+            }
+
             fetch('/blog/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    title,
+                    cover_image,
+                    category,
                     content: htmlContent,
+                    isPublished: true
                 }),
             })
                 .then(response => response.json())
@@ -505,7 +511,7 @@
         })
     </script>
 
-    <!-- <script>
+    <script>
         document.addEventListener("keydown", function (event) {
             if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
                 event.preventDefault();
@@ -528,7 +534,7 @@
             history.pushState(null, "", location.href);
             alert("Back/Forward navigation is disabled!");
         });
-    </script> -->
+    </script>
 
 </body>
 
