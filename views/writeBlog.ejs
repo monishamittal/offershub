@@ -179,6 +179,11 @@
             font-size: 2.0em;
         }
 
+        .sub-image {
+            width: 100%;
+            height: auto;
+        }
+
         .content {
             font-size: 1em;
             line-height: 1.6;
@@ -316,7 +321,7 @@
 
         document.getElementById('image').addEventListener('click', () => {
             const uniqueId = 'upload-image-' + Date.now();
-            const preText = 'upload-preText' + Date.now();
+            const preText = 'upload-preText-' + Date.now();
             const fileNameId = 'upload-image-name-' + Date.now();
             const imageElement = document.createElement('div');
             imageElement.className = 'image-upload-section';
@@ -428,6 +433,10 @@
                 } else if (block.querySelector('input[type="text"]')) {
                     const content = block.querySelector('input[type="text"]').value;
                     formData.blocks.push({ type: 'heading', content });
+                } else if (block.querySelector('input[type="file"]')) {
+                    const sub_id = block.querySelector('input[type="file"]').id.split('-').pop()
+                    const content = document.getElementById(`upload-image-name-${sub_id}`).innerHTML;
+                    formData.blocks.push({ type: 'image', content });
                 }
             });
 
@@ -449,6 +458,8 @@
                     return `<ul style="list-style-type: ${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ul>`;
                 } else if (block.type === 'heading') {
                     return `<div class="sub-heading">${block.content}</div>`;
+                } else if (block.type === 'image') {
+                    return `<img src="${block.content}" alt="Image" class="sub-image">`;
                 }
             }).join('')}
             </div>
@@ -473,7 +484,7 @@
 
     </script>
 
-    <!-- <script>
+    <script>
         document.addEventListener("keydown", function (event) {
             if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
                 event.preventDefault();
@@ -496,7 +507,7 @@
             history.pushState(null, "", location.href);
             alert("Back/Forward navigation is disabled!");
         });
-    </script> -->
+    </script>
 
 </body>
 
