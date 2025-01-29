@@ -115,10 +115,9 @@ router.get('/contactUs', async (req, res) => {
 	});
 });
 
-router.get('/write-blog/:blog_id', async (req, res) => {
+router.get('/write-blog', async (req, res) => {
 	res.render('writeBlog', {
 		title: 'write a blog',
-		blog_id: req.params.blog_id,
 	});
 });
 

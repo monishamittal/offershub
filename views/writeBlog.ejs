@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Blog Form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
 
@@ -55,7 +55,6 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%;
             font-size: 16px;
         }
 
@@ -110,7 +109,7 @@
 
         .tag-selector {
             list-style-type: none;
-            background-color: rgba(0, 0, 0, 0.167);
+            background-color: rgba(152, 152, 152, 0.167);
             padding: 10px;
             display: flex;
             flex-direction: row;
@@ -124,7 +123,7 @@
         }
 
         .tag-selector li {
-            background-color: rgb(230, 230, 230);
+            background-color: rgb(249 249 249);
             border: 1px solid black;
             border-style: dashed;
             width: fit-content;
@@ -158,6 +157,80 @@
             padding: 3px;
             cursor: pointer;
         }
+
+        .header-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .small-title {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .main-title {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .sub-heading {
+            font-size: 2.0em;
+        }
+
+        .content {
+            font-size: 1em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .content ul,
+        .content ol {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        .content ul li,
+        .content ol li {
+            margin: 10px 0;
+        }
+
+        .content img {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+
+            .small-title {
+                font-size: 1em;
+            }
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .custom-file-label:hover {
+            color: red;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            color: #f70000;
+        }
     </style>
 </head>
 
@@ -172,13 +245,14 @@
         <label for="small-title">Category</label>
         <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
 
-        <div class="tag-selector">
-            <li id="paragraph">Paragraph</li>
-            <li id="ordered-list">Ordered-List</li>
-            <li id="unordered-list">Unordered-List</li>
-        </div>
-
         <div id="additional-elements"></div>
+        <div class="tag-selector">
+            <li id="heading"><i class="fa fa-header"></i> Heading</li>
+            <li id="paragraph"><i class="fa fa-paragraph"></i> Paragraph</li>
+            <li id="ordered-list"><i class="fa fa-list-ol"></i> Ordered-List</li>
+            <li id="unordered-list"><i class="fa fa-list-ul"></i> Unordered-List</li>
+            <li id="image"><i class="fa fa-picture-o"></i> Image</li>
+        </div>
 
         <button type="submit">Submit Blog</button>
     </form>
@@ -186,10 +260,64 @@
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
     <script>
+
+        async function uploadimage() {
+            const fileInput = document.getElementById('fileUpload');
+            const fileNameDisplay = document.getElementById('fileName');
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = `Selected file: ${fileInput.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file to upload.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to upload: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log(result);
+                alert('Image uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                alert('Failed to upload the file.');
+            }
+        };
+
         const additionalElements = document.getElementById('additional-elements');
         const blogPreview = document.getElementById('blog-preview');
 
         // Generate a new content block dynamically
+        document.getElementById('heading').addEventListener('click', () => {
+            const headingElement = document.createElement('div');
+            headingElement.innerHTML = `
+            <label for="content">Heading</label>
+            <input type="text" placeholder="Add heading here" id="heading">`;
+            additionalElements.appendChild(headingElement);
+        });
+
+        document.getElementById('image').addEventListener('click', () => {
+            const imageElement = document.createElement('div');
+            imageElement.innerHTML = `<input type="file" id="fileUpload" onchange="uploadimage()">
+        <label for="fileUpload" class="custom-file-label">Choose Image &nbsp;&nbsp;<span class="file-name" id="fileName"></span></label>`;
+            additionalElements.appendChild(imageElement);
+        });
+
         document.getElementById('paragraph').addEventListener('click', () => {
             const paragraphElement = document.createElement('div');
             paragraphElement.innerHTML = `
@@ -307,6 +435,32 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
+
+    <!-- <script>
+        document.addEventListener("keydown", function (event) {
+            if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
+                event.preventDefault();
+                alert("Page refresh is disabled!");
+            }
+        });
+
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = "";
+        });
+
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            alert("Right-click is disabled!");
+        });
+
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, "", location.href);
+            alert("Back/Forward navigation is disabled!");
+        });
+    </script> -->
+
 </body>
 
 </html>
