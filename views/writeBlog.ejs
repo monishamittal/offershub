@@ -315,10 +315,18 @@
         const blogPreview = document.getElementById('blog-preview');
 
         document.getElementById('image').addEventListener('click', () => {
+            const uniqueId = 'upload-image-' + Date.now();
+            const preText = 'upload-preText' + Date.now();
+            const fileNameId = 'upload-image-name-' + Date.now();
             const imageElement = document.createElement('div');
-            imageElement.innerHTML = `<input type="file" id="fileUpload" onchange="uploadimage()">
-        <label for="fileUpload" class="custom-file-label">Choose Image &nbsp;&nbsp;<span class="file-name" id="fileName"></span></label>`;
-            additionalElements.appendChild(imageElement);
+            imageElement.className = 'image-upload-section';
+            imageElement.innerHTML = `<input type="file" id="${uniqueId}" onchange="uploadimage('${uniqueId}', '${preText}', '${fileNameId}')">
+            <label for="${uniqueId}" class="custom-file-label">
+                <span id="${preText}">Choose Image</span>
+                <span class="file-name" id="${fileNameId}"></span>
+            </label>`;
+            console.log(imageElement)
+            document.getElementById('additional-elements').appendChild(imageElement);
         });
 
         document.getElementById('paragraph').addEventListener('click', () => {
@@ -401,13 +409,17 @@
                 blocks: []
             };
 
+            if (formData.main_title === '' || formData.cover_image === '' || formData.small_title === '') {
+                return alert('Please fill the empty fields')
+            }
+
             additionalElements.querySelectorAll('div').forEach((block) => {
                 if (block.classList.contains('ordered-list')) {
-                    const listType = getListType(block, 'ol');  // For ordered list
+                    const listType = getListType(block, 'ol');
                     const items = [...block.querySelectorAll('.container input')].map(input => input.value);
                     formData.blocks.push({ type: 'ordered-list', listType, items });
                 } else if (block.classList.contains('unordered-list')) {
-                    const listType = getListType(block, 'ul');  // For unordered list
+                    const listType = getListType(block, 'ul');
                     const items = [...block.querySelectorAll('.container input')].map(input => input.value);
                     formData.blocks.push({ type: 'unordered-list', listType, items });
                 } else if (block.querySelector('textarea')) {
@@ -461,7 +473,7 @@
 
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener("keydown", function (event) {
             if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
                 event.preventDefault();
@@ -484,7 +496,7 @@
             history.pushState(null, "", location.href);
             alert("Back/Forward navigation is disabled!");
         });
-    </script>
+    </script> -->
 
 </body>
 
