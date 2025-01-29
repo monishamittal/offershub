@@ -28,7 +28,8 @@ router.post('/upload', (req, res) => {
 		return res.status(400).send({ status: false, message: 'Please provide an image' });
 	}
 	const { buffer, originalname } = files[0];
-	const uniqueFileName = formatImageName(originalname);
+	const timestamp = Date.now();
+	const uniqueFileName = timestamp + '_' + formatImageName(originalname);
 	const uploadDir = path.join(__dirname, '../../public/uploads');
 	const filePath = path.join(uploadDir, uniqueFileName);
 
