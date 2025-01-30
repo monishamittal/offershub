@@ -1,8 +1,8 @@
 <html>
 
 <head>
-    <title>
-        Responsive Blog Layout
+    <title id="title">
+        loading...
     </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <style>
@@ -95,6 +95,7 @@
             blog = await blog.json()
             console.log(blog)
             document.getElementById('data').innerHTML = blog.data.content
+            document.getElementById('title').innerHTML = blog.data.title
         }
     </script>
 </body>

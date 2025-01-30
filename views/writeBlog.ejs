@@ -371,24 +371,76 @@
             <h2>Your Uploads</h2>
             <p>These are all your uploaded images</p>
             <div class="upload-section">
-            <% if(Object.keys(uploaded_images).length !== 0){ %>
+                <% if(Object.keys(uploaded_images).length !==0){ %>
                 <% for(let img of uploaded_images) { %>
-                    <span onclick="selectImage('/uploads/<%= img %>')">
-                        <img src="/uploads/<%= img %>" alt="Uploaded Image" class="upload-images"
-                            id="/uploads/<%= img %>">
-                        <p class="upload-images-name">
-                            <%= img %>
-                        </p>
-                    </span>
+                <span onclick="selectImage('/uploads/<%= img %>')">
+                  <img src="/uploads/<%= img %>" alt="Uploaded Image" class="upload-images" id="/uploads/<%= img %>">
+                  <p class="upload-images-name">
+                    <%= img %>
+                  </p>
+                </span>
                 <% } %>
-            <% }else{ %>
+                <% }else{ %>
                 <span>No uploads</span>
-            <% } %>
+                <% } %>
             </div>
         </div>
     </div>
 
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
+
+    <script>
+        const modal = document.getElementById("myModal");
+
+        let selectedImageTag = '';
+        function openUploadsSection(idToDisplayImage) {
+            selectedImageTag = idToDisplayImage;
+            modal.style.display = "flex";
+        }
+
+        function selectImage(selectedImageName) {
+            if (selectedImageTag !== '') {
+                const fileNameDisplay = document.getElementById(selectedImageTag)
+                fileNameDisplay.innerHTML = selectedImageName;
+                modal.style.display = "none";
+            }
+        }
+
+        const closeModalBtn = document.querySelector(".close-btn");
+
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
+                event.preventDefault();
+                alert("Page refresh is disabled!");
+            }
+        });
+
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = "";
+        });
+
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            alert("Right-click is disabled!");
+        });
+
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, "", location.href);
+            alert("Back/Forward navigation is disabled!");
+        });
+    </script>
 
     <script>
         async function uploadimage(image, preText, name) {
@@ -432,6 +484,95 @@
             }
         };
 
+        function generatePreview(formData) {
+            htmlContent = `<div class="container">
+        <img src="${formData.cover_image}" alt="Header Image" class="header-image" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+        <div class="small-title">${formData.small_title}</div>
+        <div class="main-title">${formData.main_title}</div>
+        <div class="content">
+            ${formData.blocks.map(block => {
+                if (block.type === 'paragraph') {
+                    return `<p>${block.content}</p>`;
+                } else if (block.type === 'ordered-list') {
+                    return `<ol type="${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ol>`;
+                } else if (block.type === 'unordered-list') {
+                    return `<ul style="list-style-type: ${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+                } else if (block.type === 'heading') {
+                    return `<div class="sub-heading">${block.content}</div>`;
+                } else if (block.type === 'image') {
+                    return `<img src="${block.content}" alt="Image" class="sub-image" onerror="if (this.src != 'https://placehold.co/1200x300') this.src = 'https://placehold.co/1200x300';">`;
+                } else if (block.type === 'break-page') {
+                    return `${block.content}`;
+                }
+            }).join('')}
+        </div>
+        </div>`;
+
+            blogPreview.style.display = 'block';
+            blogPreview.innerHTML = htmlContent;
+        }
+
+        function getListType(block, listType) {
+            const radioButton = block.querySelector(`input[name^="${listType}_type"]:checked`);
+            if (radioButton) {
+                return radioButton.value;
+            } else {
+                console.error(`No selected radio button for ${listType}`);
+                return null;
+            }
+        }
+
+        function addPoint(listType, triggerElement) {
+            const container = triggerElement.parentElement.nextElementSibling;
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.placeholder = `Enter ${listType === 'ol' ? 'ordered' : 'unordered'} list item`;
+            container.appendChild(inputField);
+        }
+
+        function previewBlog() {
+            const formData = {
+                main_title: document.getElementById('main-title').value,
+                cover_image: document.getElementById('upload-image-name').innerHTML,
+                small_title: document.getElementById('small-title').value,
+                blocks: []
+            };
+
+            if (formData.main_title === '' || !formData.cover_image.includes('/uploads') || formData.small_title === '') {
+                return alert('Please fill the empty fields')
+            }
+
+            additionalElements.querySelectorAll('div').forEach((block) => {
+                if (block.classList.contains('ordered-list')) {
+                    const listType = getListType(block, 'ol');
+                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
+                    formData.blocks.push({ type: 'ordered-list', listType, items });
+                } else if (block.classList.contains('unordered-list')) {
+                    const listType = getListType(block, 'ul');
+                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
+                    formData.blocks.push({ type: 'unordered-list', listType, items });
+                } else if (block.querySelector('textarea')) {
+                    const content = block.querySelector('textarea').value;
+                    formData.blocks.push({ type: 'paragraph', content });
+                } else if (block.querySelector('input[type="text"]') && block.querySelector('label') && block.querySelector('label').innerText.toLowerCase().includes('heading')) {
+                    const content = block.querySelector('input[type="text"]').value;
+                    formData.blocks.push({ type: 'heading', content });
+                } else if (block.classList.contains('file-upload')) {
+                    const content = document.getElementById(block.id).innerHTML;
+                    formData.blocks.push({ type: 'image', content });
+                } else if (block.querySelector('hr')) {
+                    const content = '<hr>';
+                    formData.blocks.push({ type: 'break-page', content });
+                }
+            });
+
+            generatePreview(formData);
+        }
+
+    </script>
+
+    <script>
+        let htmlContent = '';
         const additionalElements = document.getElementById('additional-elements');
         const blogPreview = document.getElementById('blog-preview');
 
@@ -507,24 +648,6 @@
             additionalElements.appendChild(unorderedListElement);
         });
 
-        function addPoint(listType, triggerElement) {
-            const container = triggerElement.parentElement.nextElementSibling;
-            const inputField = document.createElement('input');
-            inputField.type = 'text';
-            inputField.placeholder = `Enter ${listType === 'ol' ? 'ordered' : 'unordered'} list item`;
-            container.appendChild(inputField);
-        }
-
-        function getListType(block, listType) {
-            const radioButton = block.querySelector(`input[name^="${listType}_type"]:checked`);
-            if (radioButton) {
-                return radioButton.value;
-            } else {
-                console.error(`No selected radio button for ${listType}`);
-                return null;
-            }
-        }
-
         document.getElementById('heading').addEventListener('click', () => {
             const headingElement = document.createElement('div');
             headingElement.innerHTML = `
@@ -532,76 +655,6 @@
         <input type="text" placeholder="Add heading here" id="heading-content">`;
             additionalElements.appendChild(headingElement);
         });
-
-        function previewBlog() {
-
-            const formData = {
-                main_title: document.getElementById('main-title').value,
-                cover_image: document.getElementById('upload-image-name').innerHTML,
-                small_title: document.getElementById('small-title').value,
-                blocks: []
-            };
-
-            if (formData.main_title === '' || !formData.cover_image.includes('/uploads') || formData.small_title === '') {
-                return alert('Please fill the empty fields')
-            }
-
-            additionalElements.querySelectorAll('div').forEach((block) => {
-                if (block.classList.contains('ordered-list')) {
-                    const listType = getListType(block, 'ol');
-                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
-                    formData.blocks.push({ type: 'ordered-list', listType, items });
-                } else if (block.classList.contains('unordered-list')) {
-                    const listType = getListType(block, 'ul');
-                    const items = [...block.querySelectorAll('.container input')].map(input => input.value);
-                    formData.blocks.push({ type: 'unordered-list', listType, items });
-                } else if (block.querySelector('textarea')) {
-                    const content = block.querySelector('textarea').value;
-                    formData.blocks.push({ type: 'paragraph', content });
-                } else if (block.querySelector('input[type="text"]') && block.querySelector('label') && block.querySelector('label').innerText.toLowerCase().includes('heading')) {
-                    const content = block.querySelector('input[type="text"]').value;
-                    formData.blocks.push({ type: 'heading', content });
-                } else if (block.classList.contains('file-upload')) {
-                    const content = document.getElementById(block.id).innerHTML;
-                    formData.blocks.push({ type: 'image', content });
-                } else if (block.querySelector('hr')) {
-                    const content = '<hr>';
-                    formData.blocks.push({ type: 'break-page', content });
-                }
-            });
-
-            generatePreview(formData);
-        }
-
-        let htmlContent = '';
-
-        function generatePreview(formData) {
-            htmlContent = `<div class="container">
-            <img src="${formData.cover_image}" alt="Header Image" class="header-image" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
-            <div class="small-title">${formData.small_title}</div>
-            <div class="main-title">${formData.main_title}</div>
-            <div class="content">
-                ${formData.blocks.map(block => {
-                if (block.type === 'paragraph') {
-                    return `<p>${block.content}</p>`;
-                } else if (block.type === 'ordered-list') {
-                    return `<ol type="${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ol>`;
-                } else if (block.type === 'unordered-list') {
-                    return `<ul style="list-style-type: ${block.listType}">${block.items.map(item => `<li>${item}</li>`).join('')}</ul>`;
-                } else if (block.type === 'heading') {
-                    return `<div class="sub-heading">${block.content}</div>`;
-                } else if (block.type === 'image') {
-                    return `<img src="${block.content}" alt="Image" class="sub-image" onerror="if (this.src != 'https://placehold.co/1200x300') this.src = 'https://placehold.co/1200x300';">`;
-                } else if (block.type === 'break-page') {
-                    return `${block.content}`;
-                }
-            }).join('')}
-            </div>
-            </div>`;
-
-            blogPreview.style.display = 'block';
-            blogPreview.innerHTML = htmlContent;
-        }
 
         document.getElementById('publish-btn').addEventListener('click', () => {
             previewBlog();
@@ -633,62 +686,6 @@
             alert('Published');
         })
     </script>
-
-    <script>
-        const modal = document.getElementById("myModal");
-
-        let selectedImageTag = '';
-        function openUploadsSection(idToDisplayImage) {
-            selectedImageTag = idToDisplayImage;
-            modal.style.display = "flex";
-        }
-
-        function selectImage(selectedImageName) {
-            if (selectedImageTag !== '') {
-                const fileNameDisplay = document.getElementById(selectedImageTag)
-                fileNameDisplay.innerHTML = selectedImageName;
-                modal.style.display = "none";
-            }
-        }
-
-        const closeModalBtn = document.querySelector(".close-btn");
-
-        closeModalBtn.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-
-        window.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener("keydown", function (event) {
-            if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
-                event.preventDefault();
-                alert("Page refresh is disabled!");
-            }
-        });
-
-        window.addEventListener("beforeunload", function (event) {
-            event.preventDefault();
-            event.returnValue = "";
-        });
-
-        document.addEventListener("contextmenu", function (event) {
-            event.preventDefault();
-            alert("Right-click is disabled!");
-        });
-
-        history.pushState(null, "", location.href);
-        window.addEventListener("popstate", function () {
-            history.pushState(null, "", location.href);
-            alert("Back/Forward navigation is disabled!");
-        });
-    </script>
-
 </body>
 
 </html>
