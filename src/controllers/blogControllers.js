@@ -14,7 +14,7 @@ const createBlog = async function (req, res) {
 //   Get blogs  //
 const getBlogs = async function (req, res) {
 	try {
-		const blogs = await blogModel.find();
+		const blogs = await blogModel.find().sort({ createdAt: -1 });
 		if (blogs.length === 0) {
 			return res.status(404).send({ status: false, msg: 'No blogs found' });
 		}

@@ -348,9 +348,10 @@
             </label>
         </div>
 
-
         <label for="small-title">Category</label>
-        <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
+        <!-- <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required> -->
+        <select id="small-title" required>
+        </select>
 
         <div id="additional-elements"></div>
         <div class="tag-selector">
@@ -390,6 +391,20 @@
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
     <script>
+        const category = ['Article', 'Event', 'Product Update'];
+
+        const selectElement = document.getElementById("small-title");
+        document.addEventListener("DOMContentLoaded", () => {
+            selectElement.innerHTML = "<option selected value=''>Choose Category</option>";
+            category.forEach(cat => {
+                const option = document.createElement("option");
+                option.value = cat;
+                option.textContent = cat;
+                selectElement.appendChild(option);
+            });
+        })
+
+        document.getElementById('small-title')
         const modal = document.getElementById("myModal");
 
         let selectedImageTag = '';

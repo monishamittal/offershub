@@ -82,12 +82,190 @@
                 font-size: 1em;
             }
         }
+
+
+        .container2 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header2 {
+            text-align: center;
+            font-size: 24px;
+            /* font-weight: 700; */
+            margin-bottom: 20px;
+            color: #1A1A1A;
+        }
+
+        .stories {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            /* flex-direction: column-reverse; */
+            flex-wrap: wrap;
+        }
+
+        .story {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            background-color: #ffffff;
+            max-width: 276px;
+        }
+
+        .story h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin: 10px 0;
+        }
+
+        .story p {
+            font-size: 14px;
+            color: #666666;
+            margin: 10px 0;
+        }
+
+        .story .date {
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 276px;
+            height: 180px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .title {
+            color: black;
+            text-decoration: none;
+            font-size: 20px;
+            letter-spacing: -1px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .stories {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .story h3 {
+                font-size: 16px;
+            }
+
+            .story p {
+                font-size: 12px;
+            }
+
+            .story .date {
+                font-size: 10px;
+            }
+        }
+
+
+        /* card */
+
+        .container3 {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-blue {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .card-gray {
+            background-color: #e5e7eb;
+            color: black;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 10px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .button-blue {
+            background-color: white;
+            color: #2563eb;
+        }
+
+        .button-gray {
+            background-color: white;
+            color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .container3 {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 
-<body onload="getBlogById()" id="data">
+<body>
+    <div id="data"></div>
+
+    <div class="container3">
+        <div class="card card-blue">
+            <h2>Start Your Affiliate Network Today</h2>
+            <p>Launch your affiliate network with OffersHub—track, boost conversions, and grow revenue effortlessly.</p>
+            <a href="https://offershub.com/signup/?source=newsletter21" class="button button-blue">Try it for free
+                now!</a>
+        </div>
+        <div class="card card-gray">
+            <h2>Schedule Demo with Our Experts</h2>
+            <p>Book a demo with our experts to explore powerful features and maximize your affiliate growth.</p>
+            <a href="https://calendly.com/palak-5acl/30min" class="button button-gray">Book a demo</a>
+        </div>
+    </div>
+
+    <div class="container2">
+        <div class="header2">Recent Blogs</div>
+        <div class="stories" id="recent_blogs"></div>
+    </div>
+
     <script>
-        async function getBlogById() {
+        document.addEventListener("DOMContentLoaded", async (event) => {
             let blog_id = location.pathname;
             blog_id = blog_id.split('/')
             blog_id = blog_id[blog_id.length - 1]
@@ -96,7 +274,26 @@
             console.log(blog)
             document.getElementById('data').innerHTML = blog.data.content
             document.getElementById('title').innerHTML = blog.data.title
-        }
+
+            let blogs = await fetch('/blog/get/all')
+            blogs = await blogs.json()
+            console.log(blogs)
+            if (blogs.status) {
+                blogs = blogs.data.slice(0, 3)
+                for (let blog of blogs) {
+                    if (blog.isPublished === true) {
+                        document.getElementById('recent_blogs').innerHTML += `<div class="story">
+                <div class="date">${blog.createdAt}</div>
+                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
+                <p>${blog.category}</p></div>`
+                    }
+                }
+            } else {
+                document.getElementById('blogs').innerHTML = 'No Blog'
+            }
+
+        })
     </script>
 </body>
 

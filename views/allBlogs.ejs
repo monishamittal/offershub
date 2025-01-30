@@ -2,6 +2,7 @@
 
 <head>
     <title>Product Updates,News and Articles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -75,6 +76,11 @@
             text-decoration: none;
             font-size: 20px;
             letter-spacing: -1px;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         @media (max-width: 768px) {
@@ -129,8 +135,6 @@
             } else {
                 document.getElementById('blogs').innerHTML = 'No Blog'
             }
-
-
         }
     </script>
 </body>
