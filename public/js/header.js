@@ -1,15 +1,15 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.querySelector(".header-ul");
+  const barIcon = document.getElementById("bar");
+  const closeIcon = document.getElementById("closeSidebar");
 
-document.addEventListener('DOMContentLoaded', function () {
-    const bar=document.getElementById('#bar')
-    // const moreLink = document.getElementById('moreLink')
-    // const sidebar = document.getElementById('sidebar')
-    const closeSidebar = document.getElementById('closeSidebar')
-  
-    bar.addEventListener('click', function () {
-      sidebar.classList.toggle('open')
-    })
-  
-    closeSidebar.addEventListener('click', function () {
-      sidebar.classList.remove('open')
-    })
-  })
+  barIcon.addEventListener("click", function () {
+    sidebar.classList.add("active");
+    closeIcon.style.display = "block";
+  });
+
+  closeIcon.addEventListener("click", function () {
+    sidebar.classList.remove("active");
+    closeIcon.style.display = "none";
+  });
+});
