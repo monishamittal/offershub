@@ -1,5 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+
+function getImagesFromDirectory(dirPath) {
+	if (!fs.existsSync(dirPath)) {
+		console.error('Directory does not exist:', dirPath);
+		return [];
+	}
+
+	const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.webp'];
+
+	try {
+		const files = fs.readdirSync(dirPath);
+		return files.filter((file) => imageExtensions.includes(path.extname(file).toLowerCase()));
+	} catch (err) {
+		console.error('Error reading directory:', err);
+		return [];
+	}
+}
 
 router.get('/', async (req, res) => {
 	res.render('index', {
@@ -116,8 +135,11 @@ router.get('/contactUs', async (req, res) => {
 });
 
 router.get('/write-blog', async (req, res) => {
+	const imageDir = path.join(__dirname, '../../public/uploads');
+	const images = getImagesFromDirectory(imageDir);
 	res.render('writeBlog', {
 		title: 'write a blog',
+		uploaded_images: images,
 	});
 });
 

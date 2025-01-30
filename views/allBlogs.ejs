@@ -32,6 +32,7 @@
             /* justify-content: space-between; */
             gap: 20px;
             /* flex-direction: column-reverse; */
+            flex-wrap: wrap;
         }
 
         .story {
@@ -114,16 +115,22 @@
             blogs = await blogs.json()
             console.log(blogs)
 
-            for (let blog of blogs.data) {
-                if (blog.isPublished === true) {
-                    document.getElementById('blogs').innerHTML += `<div class="story">
+
+            if (blogs.status) {
+                for (let blog of blogs.data) {
+                    if (blog.isPublished === true) {
+                        document.getElementById('blogs').innerHTML += `<div class="story">
                 <div class="date">${blog.createdAt}</div>
-                <img src="${blog.cover_image}" alt="blog-${blog._id}">
+                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
                 <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
-                <p>${blog.category}</p>
-            </div>`
+                <p>${blog.category}</p></div>`
+                    }
                 }
+            } else {
+                document.getElementById('blogs').innerHTML = 'No Blog'
             }
+
+
         }
     </script>
 </body>

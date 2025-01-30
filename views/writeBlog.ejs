@@ -31,8 +31,8 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
+            /* margin-bottom: 8px; */
+            color: black;
         }
 
         input,
@@ -46,7 +46,8 @@
             box-sizing: border-box;
         }
 
-        button {
+        #submit,
+        #publish-btn {
             background-color: #007BFF;
             color: white;
             padding: 10px 15px;
@@ -56,7 +57,8 @@
             font-size: 16px;
         }
 
-        button:hover {
+        #submit,
+        #publish-btn:hover {
             background-color: #0056b3;
         }
 
@@ -100,7 +102,8 @@
                 padding: 15px;
             }
 
-            button {
+            #submit,
+            #publish-btn {
                 font-size: 14px;
             }
         }
@@ -113,7 +116,7 @@
             flex-direction: row;
             gap: 10px;
             width: fit-content;
-            margin-bottom: 10px;
+            margin: 10px;
             justify-content: center;
             align-items: center;
             max-width: fit-content;
@@ -229,9 +232,9 @@
             cursor: pointer;
             font-size: 16px;
             text-align: center;
-            background-color: #eeeeee;
+            background-color: #ffffff;
             justify-content: center;
-            padding: 5px;
+            padding: 7px;
         }
 
         .file-name {
@@ -241,6 +244,91 @@
         #publish-btn {
             background-color: green;
         }
+
+        .openModalBtn {
+            text-align: center;
+            background-color: rgb(255 255 255);
+            color: black;
+            padding: 7px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+            height: 50%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        .upload-section {
+            height: 58%;
+            overflow: auto;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 19px;
+        }
+
+        .upload-images {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            transition: 2s;
+        }
+
+        .upload-section a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .upload-images-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 150px;
+            font-size: 10px;
+        }
+
+        .file-upload {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: #eeeeee;
+            border-radius: 5px;
+            padding: 4px;
+            color: #f70000;
+        }
     </style>
 </head>
 
@@ -249,12 +337,17 @@
         <label for="main-title">Title</label>
         <input type="text" id="main-title" name="main_title" placeholder="Enter a Title" required>
 
-        <input type="file" id="upload-image"
-            onchange="uploadimage('upload-image', 'upload-preText', 'upload-image-name')">
-        <label for="upload-image" class="custom-file-label">
-            <span id="upload-preText"><i class="fa fa-upload"></i> Cover Image </span>
-            <span class="file-name" id="upload-image-name"></span>
-        </label>
+        <div class="file-upload" id="upload-image-name">
+            <span class="openModalBtn" onclick="openUploadsSection('upload-image-name')"><i
+                    class="fa fa-mouse-pointer"></i>
+                Select cover from your uploads</span>
+            <input type="file" id="upload-image"
+                onchange="uploadimage('upload-image', 'upload-preText', 'upload-image-name')">
+            <label for="upload-image" class="custom-file-label">
+                <span id="upload-preText"><i class="fa fa-upload"></i> Upload cover from Device </span>
+            </label>
+        </div>
+
 
         <label for="small-title">Category</label>
         <input type="text" id="small-title" name="small_title" placeholder="Enter Category" required>
@@ -268,9 +361,32 @@
             <li id="image"><i class="fa fa-picture-o"></i> Image</li>
             <li id="break-page"><i class="fa fa-minus"></i> Break Page</li>
         </div>
-        <button type="submit"><i class="fa fa-eye"></i> Preview</button>
-        <button id="publish-btn"><i class="fa fa-upload"></i> Publish</button>
+        <span id="submit" onclick="previewBlog()"><i class="fa fa-eye"></i> Preview</span>
+        <span id="publish-btn"><i class="fa fa-upload"></i> Publish</span>
     </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Your Uploads</h2>
+            <p>These are all your uploaded images</p>
+            <div class="upload-section">
+            <% if(Object.keys(uploaded_images).length !== 0){ %>
+                <% for(let img of uploaded_images) { %>
+                    <span onclick="selectImage('/uploads/<%= img %>')">
+                        <img src="/uploads/<%= img %>" alt="Uploaded Image" class="upload-images"
+                            id="/uploads/<%= img %>">
+                        <p class="upload-images-name">
+                            <%= img %>
+                        </p>
+                    </span>
+                <% } %>
+            <% }else{ %>
+                <span>No uploads</span>
+            <% } %>
+            </div>
+        </div>
+    </div>
 
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
@@ -297,14 +413,14 @@
                 }
 
                 const result = await response.json();
-                // alert('Image uploaded successfully!');
                 console.log(result);
 
                 const fileNameDisplay = document.getElementById(name);
-                const prefixText = document.getElementById(preText);
+                // console.log('preText', preText)
+                // const prefixText = document.getElementById(preText);
                 if (fileInput.files.length > 0) {
                     fileNameDisplay.innerHTML = `${result.filePath}`;
-                    prefixText.innerHTML = 'Selected File : ';
+                    // prefixText.innerHTML = 'Selected File : ';
                 } else {
                     fileNameDisplay.innerHTML = '';
                 }
@@ -324,12 +440,19 @@
             const preText = 'upload-preText-' + Date.now();
             const fileNameId = 'upload-image-name-' + Date.now();
             const imageElement = document.createElement('div');
-            imageElement.className = 'image-upload-section';
-            imageElement.innerHTML = `<input type="file" id="${uniqueId}" onchange="uploadimage('${uniqueId}', '${preText}', '${fileNameId}')">
+            imageElement.className = 'file-upload';
+            imageElement.id = fileNameId
+
+            imageElement.innerHTML = `
+            <span class="openModalBtn" onclick="openUploadsSection('${fileNameId}')"><i
+                    class="fa fa-mouse-pointer"></i>
+                Select cover from your uploads</span>
+            <input type="file" id="${uniqueId}"
+                onchange="uploadimage('${uniqueId}', '${preText}', '${fileNameId}')">
             <label for="${uniqueId}" class="custom-file-label">
-                <span id="${preText}">Choose Image</span>
-                <span class="file-name" id="${fileNameId}"></span>
-            </label>`;
+                <span id="${preText}"><i class="fa fa-upload"></i> Upload cover from Device </span>
+            </label>`
+
             console.log(imageElement)
             document.getElementById('additional-elements').appendChild(imageElement);
         });
@@ -410,8 +533,7 @@
             additionalElements.appendChild(headingElement);
         });
 
-        document.getElementById('blog-form').addEventListener('submit', function (event) {
-            event.preventDefault();
+        function previewBlog() {
 
             const formData = {
                 main_title: document.getElementById('main-title').value,
@@ -420,7 +542,7 @@
                 blocks: []
             };
 
-            if (formData.main_title === '' || formData.cover_image === '' || formData.small_title === '') {
+            if (formData.main_title === '' || !formData.cover_image.includes('/uploads') || formData.small_title === '') {
                 return alert('Please fill the empty fields')
             }
 
@@ -439,9 +561,8 @@
                 } else if (block.querySelector('input[type="text"]') && block.querySelector('label') && block.querySelector('label').innerText.toLowerCase().includes('heading')) {
                     const content = block.querySelector('input[type="text"]').value;
                     formData.blocks.push({ type: 'heading', content });
-                } else if (block.querySelector('input[type="file"]')) {
-                    const sub_id = block.querySelector('input[type="file"]').id.split('-').pop()
-                    const content = document.getElementById(`upload-image-name-${sub_id}`).innerHTML;
+                } else if (block.classList.contains('file-upload')) {
+                    const content = document.getElementById(block.id).innerHTML;
                     formData.blocks.push({ type: 'image', content });
                 } else if (block.querySelector('hr')) {
                     const content = '<hr>';
@@ -450,7 +571,7 @@
             });
 
             generatePreview(formData);
-        });
+        }
 
         let htmlContent = '';
 
@@ -483,10 +604,12 @@
         }
 
         document.getElementById('publish-btn').addEventListener('click', () => {
+            previewBlog();
             const title = document.getElementById('main-title').value;
             const cover_image = document.getElementById('upload-image-name').innerHTML;
             const category = document.getElementById('small-title').value;
-            if (htmlContent === '') {
+
+            if (title === '' || category === '' || htmlContent === '' || !cover_image.includes('/uploads')) {
                 return alert('Please fill the empty fields')
             }
 
@@ -509,6 +632,36 @@
 
             alert('Published');
         })
+    </script>
+
+    <script>
+        const modal = document.getElementById("myModal");
+
+        let selectedImageTag = '';
+        function openUploadsSection(idToDisplayImage) {
+            selectedImageTag = idToDisplayImage;
+            modal.style.display = "flex";
+        }
+
+        function selectImage(selectedImageName) {
+            if (selectedImageTag !== '') {
+                const fileNameDisplay = document.getElementById(selectedImageTag)
+                fileNameDisplay.innerHTML = selectedImageName;
+                modal.style.display = "none";
+            }
+        }
+
+        const closeModalBtn = document.querySelector(".close-btn");
+
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
     </script>
 
     <script>
