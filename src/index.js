@@ -3,11 +3,23 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const basicAuth = require('express-basic-auth');
 const app = express();
 const Backend_Route = require('./routes/backend_route');
 const Frontend_Route = require('./routes/frontend_route');
 const PORT = process.env.PORT || '7867';
 
+const users = {
+	'manager@offershub.com': 'go2oh@admin',
+};
+
+const basicAuthMiddleware = basicAuth({
+	users,
+	challenge: true,
+	unauthorizedResponse: 'Unauthorized Access!',
+});
+
+app.use('/create-content', basicAuthMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
