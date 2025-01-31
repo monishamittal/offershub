@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Product Updates,News and Articles</title>
+    <title>Success Stories</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -112,28 +112,27 @@
 
 <body onload="getAllBlogs()">
     <div class="container">
-        <div class="header">Product Updates,News and Articles</div>
-        <div class="stories" id="blogs"></div>
+        <div class="header">Success Stories</div>
+        <div class="stories" id="caseStudy"></div>
     </div>
     <script>
         async function getAllBlogs() {
-            let blogs = await fetch('/content/get/all?type=blog')
-            blogs = await blogs.json()
-            console.log(blogs)
+            let caseStudy = await fetch('/content/get/all?type=case-study')
+            caseStudy = await caseStudy.json()
+            console.log(caseStudy)
 
-
-            if (blogs.status) {
-                for (let blog of blogs.data) {
-                    if (blog.isPublished === true) {
-                        document.getElementById('blogs').innerHTML += `<div class="story">
-                <div class="date">Blog - ${convertTime(blog.createdAt)}</div>
-                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
-                <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
-                <p>${blog.category}</p></div>`
+            if (caseStudy.status) {
+                for (let caseS of caseStudy.data) {
+                    if (caseS.isPublished === true) {
+                        document.getElementById('caseStudy').innerHTML += `<div class="story">
+                <div class="date">Story - ${convertTime(caseS.createdAt)}</div>
+                <img src="${caseS.cover_image}" alt="caseStudy-${caseS._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <p><a href="/case-study/${caseS._id}" class="title">${caseS.title}</a></p>
+                <p>${caseS.category}</p></div>`
                     }
                 }
             } else {
-                document.getElementById('blogs').innerHTML = 'No Blog'
+                document.getElementById('caseStudy').innerHTML = 'No Story'
             }
         }
     </script>

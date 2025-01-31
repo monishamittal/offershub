@@ -134,11 +134,11 @@ router.get('/contactUs', async (req, res) => {
 	});
 });
 
-router.get('/write-blog', async (req, res) => {
+router.get('/create-content', async (req, res) => {
 	const imageDir = path.join(__dirname, '../../public/uploads');
 	const images = getImagesFromDirectory(imageDir);
-	res.render('writeBlog', {
-		title: 'write a blog',
+	res.render('createContent', {
+		title: 'Draft a Story',
 		uploaded_images: images,
 	});
 });
@@ -146,6 +146,18 @@ router.get('/write-blog', async (req, res) => {
 router.get('/blogs', async (req, res) => {
 	res.render('allBlogs', {
 		title: 'Blogs',
+	});
+});
+
+router.get('/case-studies', async (req, res) => {
+	res.render('caseStudies', {
+		title: 'Success Stories',
+	});
+});
+
+router.get('/case-study/:caseStoryId', async (req, res) => {
+	res.render('caseStudy', {
+		title: 'Success Story',
 	});
 });
 

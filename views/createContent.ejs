@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>write a blog</title>
+    <title>Draft a Story</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Allerta&family=Dosis:wght@200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Share:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
@@ -326,7 +326,7 @@
             gap: 10px;
             background-color: #eeeeee;
             border-radius: 5px;
-            padding: 4px;
+            padding: 8px;
             color: #f70000;
         }
     </style>
@@ -334,17 +334,25 @@
 
 <body>
     <form id="blog-form" action="/submit-blog" method="POST">
+
+        <label for="content-type">Content Type</label>
+        <select id="content-type" required>
+            <option value="" selected>Choose Content Type</option>
+            <option value="blog">Blog</option>
+            <option value="case-study">Case-Study</option>
+        </select>
+
         <label for="main-title">Title</label>
         <input type="text" id="main-title" name="main_title" placeholder="Enter a Title" required>
 
         <div class="file-upload" id="upload-image-name">
             <span class="openModalBtn" onclick="openUploadsSection('upload-image-name')"><i
                     class="fa fa-mouse-pointer"></i>
-                Select cover from your uploads</span>
+                Select cover from uploads</span>
             <input type="file" id="upload-image"
                 onchange="uploadimage('upload-image', 'upload-preText', 'upload-image-name')">
             <label for="upload-image" class="custom-file-label">
-                <span id="upload-preText"><i class="fa fa-upload"></i> Upload cover from Device </span>
+                <span id="upload-preText"><i class="fa fa-upload"></i> Upload Cover</span>
             </label>
         </div>
 
@@ -373,17 +381,18 @@
             <p>These are all your uploaded images</p>
             <div class="upload-section">
                 <% if(Object.keys(uploaded_images).length !==0){ %>
-                <% for(let img of uploaded_images) { %>
-                <span onclick="selectImage('/uploads/<%= img %>')">
-                  <img src="/uploads/<%= img %>" alt="Uploaded Image" class="upload-images" id="/uploads/<%= img %>">
-                  <p class="upload-images-name">
-                    <%= img %>
-                  </p>
-                </span>
-                <% } %>
-                <% }else{ %>
-                <span>No uploads</span>
-                <% } %>
+                    <% for(let img of uploaded_images) { %>
+                        <span onclick="selectImage('/uploads/<%= img %>')">
+                            <img src="/uploads/<%= img %>" alt="Uploaded Image" class="upload-images"
+                                id="/uploads/<%= img %>">
+                            <p class="upload-images-name">
+                                <%= img %>
+                            </p>
+                        </span>
+                        <% } %>
+                            <% }else{ %>
+                                <span>No uploads</span>
+                                <% } %>
             </div>
         </div>
     </div>
@@ -391,7 +400,7 @@
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
     <script>
-        const category = ['Article', 'Event', 'Product Update'];
+        const category = ['Article', 'Event', 'Product Update',];
 
         const selectElement = document.getElementById("small-title");
         document.addEventListener("DOMContentLoaded", () => {
@@ -404,7 +413,12 @@
             });
         })
 
-        document.getElementById('small-title')
+        const contentType = document.getElementById('content-type')
+        contentType.addEventListener('change', () => {
+            if (contentType.value === 'case-study') {
+                document.getElementById("small-title").innerHTML = `<option selected value='Success Story'>Success Story</option>`;
+            }
+        })
         const modal = document.getElementById("myModal");
 
         let selectedImageTag = '';
@@ -433,28 +447,28 @@
             }
         });
 
-        document.addEventListener("keydown", function (event) {
-            if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
-                event.preventDefault();
-                alert("Page refresh is disabled!");
-            }
-        });
+        // document.addEventListener("keydown", function (event) {
+        //     if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
+        //         event.preventDefault();
+        //         alert("Page refresh is disabled!");
+        //     }
+        // });
 
-        window.addEventListener("beforeunload", function (event) {
-            event.preventDefault();
-            event.returnValue = "";
-        });
+        // window.addEventListener("beforeunload", function (event) {
+        //     event.preventDefault();
+        //     event.returnValue = "";
+        // });
 
-        document.addEventListener("contextmenu", function (event) {
-            event.preventDefault();
-            alert("Right-click is disabled!");
-        });
+        // document.addEventListener("contextmenu", function (event) {
+        //     event.preventDefault();
+        //     alert("Right-click is disabled!");
+        // });
 
-        history.pushState(null, "", location.href);
-        window.addEventListener("popstate", function () {
-            history.pushState(null, "", location.href);
-            alert("Back/Forward navigation is disabled!");
-        });
+        // history.pushState(null, "", location.href);
+        // window.addEventListener("popstate", function () {
+        //     history.pushState(null, "", location.href);
+        //     alert("Back/Forward navigation is disabled!");
+        // });
     </script>
 
     <script>
@@ -470,7 +484,7 @@
             const formData = new FormData();
             formData.append('file', file);
             try {
-                const response = await fetch('/upload', {
+                const response = await fetch('/upload-image', {
                     method: 'POST',
                     body: formData,
                 });
@@ -483,11 +497,8 @@
                 console.log(result);
 
                 const fileNameDisplay = document.getElementById(name);
-                // console.log('preText', preText)
-                // const prefixText = document.getElementById(preText);
                 if (fileInput.files.length > 0) {
                     fileNameDisplay.innerHTML = `${result.filePath}`;
-                    // prefixText.innerHTML = 'Selected File : ';
                 } else {
                     fileNameDisplay.innerHTML = '';
                 }
@@ -546,6 +557,12 @@
         }
 
         function previewBlog() {
+            const contentType = document.getElementById('content-type').value;
+            console.log(contentType)
+            if (contentType === '') {
+                return alert('Content Type Required')
+            }
+
             const formData = {
                 main_title: document.getElementById('main-title').value,
                 cover_image: document.getElementById('upload-image-name').innerHTML,
@@ -553,7 +570,7 @@
                 blocks: []
             };
 
-            if (formData.main_title === '' || !formData.cover_image.includes('/uploads') || formData.small_title === '') {
+            if (contentType === '' || formData.main_title === '' || !formData.cover_image.includes('/uploads') || formData.small_title === '') {
                 return alert('Please fill the empty fields')
             }
 
@@ -602,11 +619,11 @@
             imageElement.innerHTML = `
             <span class="openModalBtn" onclick="openUploadsSection('${fileNameId}')"><i
                     class="fa fa-mouse-pointer"></i>
-                Select cover from your uploads</span>
+                Select image from uploads</span>
             <input type="file" id="${uniqueId}"
                 onchange="uploadimage('${uniqueId}', '${preText}', '${fileNameId}')">
             <label for="${uniqueId}" class="custom-file-label">
-                <span id="${preText}"><i class="fa fa-upload"></i> Upload cover from Device </span>
+                <span id="${preText}"><i class="fa fa-upload"></i> Upload image</span>
             </label>`
 
             console.log(imageElement)
@@ -673,20 +690,22 @@
 
         document.getElementById('publish-btn').addEventListener('click', () => {
             previewBlog();
+            const contentType = document.getElementById('content-type').value;
             const title = document.getElementById('main-title').value;
             const cover_image = document.getElementById('upload-image-name').innerHTML;
             const category = document.getElementById('small-title').value;
 
-            if (title === '' || category === '' || htmlContent === '' || !cover_image.includes('/uploads')) {
+            if (contentType === '' || title === '' || category === '' || htmlContent === '' || !cover_image.includes('/uploads')) {
                 return alert('Please fill the empty fields')
             }
 
-            fetch('/blog/create', {
+            fetch('/content/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    type: contentType,
                     title,
                     cover_image,
                     category,

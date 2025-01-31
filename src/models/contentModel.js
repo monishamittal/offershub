@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const blogSchema = new mongoose.Schema(
+const contentSchema = new mongoose.Schema(
 	{
+		type: { type: String, required: true, enum: ['blog', 'case-study'] },
 		title: { type: String, required: true },
 		cover_image: { type: String, required: true },
 		category: { type: String, required: true },
@@ -11,4 +12,4 @@ const blogSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model('Blog', blogSchema);
+module.exports = mongoose.model('content', contentSchema);
