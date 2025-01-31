@@ -446,7 +446,6 @@ header {
 }
 
 .image-container {
-    /* background-image: url(https://payproglobal.com/wp-content/uploads/2024/10/What-are-Cloud-Enabled-SaaS-Operations.png); */
     background-color: #E9FAFF;
     width: 70%;
     border-radius: 50px;
@@ -488,24 +487,16 @@ header {
 }
 
 .image-content {
-    display: flex;
-    /* justify-content: space-evenly; */
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    justify-content: center;
     color: var(--dark-color);
     margin: 40px auto;
     width: 75%;
-}
-
-.image-content>* {
-    flex-grow: 1;
-    max-width: calc(33.33% - 50px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .half {
-    height: 380px;
-    max-width: 300px;
     gap: 10px;
     padding: 15px;
     display: flex;
@@ -695,7 +686,7 @@ header {
     align-items: center;
 }
 
-.video-container img {
+.indeximg {
     width: 600px;
 }
 
@@ -735,17 +726,11 @@ header {
 }
 
 .performance {
-    /* width: 65%;
-    margin: auto; */
     background-color: #d4e8ff;
-    /* color: white; */
     padding: 70px 60px;
     border-radius: 8px;
     opacity: 1;
-    /* Set to 1 to ensure it is always visible */
     transform: scale(1);
-    /* Ensure the element is at normal scale */
-    /* Removed transition rules for opacity, transform, and width */
 }
 
 .performance h1 {
@@ -792,11 +777,12 @@ header {
 }
 
 .container {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0px 50px;
-    margin: 50px 0px;
+    gap: 50px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    width: 80%;
 }
 
 #pricing-plans ul,
@@ -812,7 +798,6 @@ li {
     border-radius: 5px;
     margin-bottom: 30px;
     margin-top: 20px;
-    min-width: 350px;
 }
 
 .pricing-item.active .pricing-header {
@@ -1611,21 +1596,23 @@ li {
 
 .map {
     color: black;
-    margin: 20px 0px 50px 0px;
+    margin: 20px auto 50px auto;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    width: 90%;
 }
 
 .imap {
-    width: 400px;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .imap img {
-    width: 400px;
+    width: 100%;
     height: 400px;
     border-radius: 20px 20px 0px 0px;
 }
@@ -1641,8 +1628,21 @@ li {
 
 .form-wrapper {
     color: black;
-    width: 65%;
+    width: 90%;
     margin: 80px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-wrapper form {
+    width: 60%;
+    border-left: 1px solid rgb(212, 212, 212);
+    padding-left: 40px;
+}
+
+.form-wrapper img {
+    width: 30%;
 }
 
 .form-wrapper label {
@@ -1748,7 +1748,7 @@ li {
         height: 320px;
     }
 
-    .video-container img {
+    .indeximg {
         width: 565px;
     }
 }
@@ -1758,7 +1758,7 @@ li {
         width: 90%;
     }
 
-    .video-container img {
+    .indeximg {
         width: 500px;
     }
 }
@@ -1786,6 +1786,20 @@ li {
     }
 
     .badge-container {
+        gap: 20px;
+    }
+}
+
+@media(max-width:1170px) {
+    .imap img {
+        height: 350px;
+    }
+
+    .sub-map p {
+        font-size: 14px;
+    }
+
+    .map {
         gap: 20px;
     }
 }
@@ -1826,7 +1840,7 @@ li {
         flex-direction: column;
     }
 
-    .video-container img {
+    .indeximg {
         width: 80%;
     }
 
@@ -1836,6 +1850,14 @@ li {
 
     .buttons {
         justify-content: center;
+    }
+
+    .imap img {
+        height: 300px;
+    }
+
+    .sub-map {
+        height: 85px;
     }
 }
 
@@ -2094,6 +2116,18 @@ li {
 
     .performance h1 {
         font-size: 30px;
+    }
+}
+
+@media(max-width:620px) {
+    .form-wrapper img {
+        display: none;
+    }
+
+    .form-wrapper form {
+        width: 100%;
+        border: none;
+        padding-left: 0;
     }
 }
 
