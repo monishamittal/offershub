@@ -167,4 +167,10 @@ router.get('/blog/:blog_id', async (req, res) => {
 	});
 });
 
+router.get('/demo', async (req, res) => {
+	res.render('demo', {
+		title: 'Demo - OffersHub',
+	});
+});
+
 module.exports = router;

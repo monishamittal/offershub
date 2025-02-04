@@ -1659,13 +1659,14 @@ li {
 }
 
 .submit {
-    color: black;
+    color: white;
     font-weight: 500;
     font-size: 20px;
     padding: 7px 20px;
     border-radius: 10px;
     border: none;
-    background-color: #FAE12E;
+    background-color: #0078FF;
+    margin-top: 20px;
 }
 
 .form-wrapper h1 {
