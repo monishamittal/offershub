@@ -46,7 +46,7 @@
       document.getElementById('data').innerHTML = blog.data.content
       document.getElementById('title').innerHTML = blog.data.title
 
-      let blogs = await fetch('/content/get/all?type=blog')
+      let blogs = await fetch('/content/get/all?type=case-study')
       blogs = await blogs.json()
       console.log(blogs)
 
