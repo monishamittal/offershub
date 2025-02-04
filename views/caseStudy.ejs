@@ -29,7 +29,7 @@
 
     <div class="container2">
       <div class="header2">Recent Stories</div>
-      <div class="stories" id="recent_blogs"></div>
+      <div class="stories" id="recent_stories"></div>
     </div>
   </main>
 
@@ -40,30 +40,30 @@
       let pathName = location.pathname;
       pathName = pathName.split('/')
       const contentId = pathName[pathName.length - 1]
-      let blog = await fetch(`/content/get/${contentId}`)
-      blog = await blog.json()
-      console.log(blog)
-      document.getElementById('data').innerHTML = blog.data.content
-      document.getElementById('title').innerHTML = blog.data.title
+      let caseStudy = await fetch(`/content/get/${contentId}`)
+      caseStudy = await caseStudy.json()
+      console.log(caseStudy)
+      document.getElementById('data').innerHTML = caseStudy.data.content
+      document.getElementById('title').innerHTML = caseStudy.data.title
 
-      let blogs = await fetch('/content/get/all?type=case-study')
-      blogs = await blogs.json()
-      console.log(blogs)
+      let recentSuccessStories = await fetch('/content/get/all?type=case-study')
+      recentSuccessStories = await recentSuccessStories.json()
+      console.log(recentSuccessStories)
 
-      if (blogs.status) {
-        blogs = blogs.data.slice(0, 3)
-        for (let blog of blogs) {
-          if (blog.isPublished === true) {
-            document.getElementById('recent_blogs').innerHTML += `<div class="story">
-                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
-                <p class="date">${convertTime(blog.createdAt)}</p>
-                <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
-                <p>${blog.category}</p>
-                <div class="read"><a href="/blog/${blog._id}" class="title">Read more &#8594;</a></div></div>`
+      if (recentSuccessStories.status) {
+        recentSuccessStories = recentSuccessStories.data.slice(0, 3)
+        for (let story of recentSuccessStories) {
+          if (story.isPublished === true) {
+            document.getElementById('recent_stories').innerHTML += `<div class="story">
+                <img src="${story.cover_image}" alt="blog-${story._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <p class="date">${convertTime(story.createdAt)}</p>
+                <p><a href="/case-study/${story._id}" class="title">${story.title}</a></p>
+                <p>${story.category}</p>
+                <div class="read"><a href="/case-study/${story._id}" class="title">Read more &#8594;</a></div></div>`
           }
         }
       } else {
-        document.getElementById('blogs').innerHTML = 'No Blog'
+        document.getElementById('recent_stories').innerHTML = '<div class="story"><p>No Story<p></div>'
       }
     })
   </script>

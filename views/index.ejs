@@ -15,9 +15,9 @@
         <div class="main-contain">
           <h1 class="block">Advanced Tracking Solution To Drive Your Marketing Performance With Offershub!</h1>
           <p>Revolutionize Your Online Ad Campaigns With Ultimate Solution for <b>Affiliate
-            Networks, Advertisers, Agencies, E-commerce, and Media Buyers</b></p>
+              Networks, Advertisers, Agencies, E-commerce, and Media Buyers</b></p>
           <div class="buttons">
-            <a href="/demo"><button class="button1 extra" ><span>Request Demo</span></button></a>
+            <a href="/demo"><button class="button1 extra"><span>Request Demo</span></button></a>
             <a href="/contactUs"><button class="button1 extra"><span>Contact Us</span></button></a>
           </div>
         </div>
@@ -43,7 +43,8 @@
     <!-- success stories card container -->
     <div class="performance">
       <h1 class="center block">Real Success Stories: Join OffersHub and Unlock Your Affiliate Potential!</h1>
-      <p class="center block">Discover how affiliates are thriving with our powerful tracking platform. It's your turn to succeed!</p>
+      <p class="center block">Discover how affiliates are thriving with our powerful tracking platform. It's your
+        turn to succeed!</p>
       <div class="wrapper">
         <div class="center-slider">
           <div>Slide 1</div>
@@ -59,7 +60,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- awards -->
     <div class="award-container">
       <h2 class="center block">Award winning platform endorsed by affiliate marketing experts</h2>
@@ -199,22 +200,26 @@
         <div class="card block">
           <img src="/img/hand.png" alt="">
           <h4 class="center">Smooth and step-by-step Onboarding</h4>
-          <p class="center">Demo sessions with Onboarding managers, day-to-day emails, an up-to-date knowledge base, and a weekly newsletter.</p>
+          <p class="center">Demo sessions with Onboarding managers, day-to-day emails, an up-to-date knowledge
+            base, and a weekly newsletter.</p>
         </div>
         <div class="card block">
           <img src="/img/call.png" alt="">
           <h4 class="center">24X7 support through Phone, Whatsapp, Skype and Email</h4>
-          <p class="center">Support through email, phone, WhatsApp, or Skype, with a team of customer support managers to assist you.</p>
+          <p class="center">Support through email, phone, WhatsApp, or Skype, with a team of customer support
+            managers to assist you.</p>
         </div>
         <div class="card block">
           <img src="/img/message.png" alt="">
           <h4 class="center">Continuous Interaction with Customers</h4>
-          <p class="center">Regular meetings with customers build relationships, ensuring understanding and platform comfort.</p>
+          <p class="center">Regular meetings with customers build relationships, ensuring understanding and
+            platform comfort.</p>
         </div>
         <div class="card block">
           <img src="/img/help.png" alt="">
           <h4 class="center">Committed Customer Success Manager</h4>
-          <p class="center">A dedicated customer success manager assists with panel familiarization, postback testing, and other activities.</p>
+          <p class="center">A dedicated customer success manager assists with panel familiarization, postback
+            testing, and other activities.</p>
         </div>
       </div>
     </div>
@@ -256,54 +261,112 @@
     </div>
 
     <!-- blog container -->
-    <div class="blog-container">
-      <h1 class="center">Read Latest Blog</h1>
-      <div class="blogs">
-        <div class="blog">
-          <img src="/img/google1.png" alt="" height="202"  style="background-color: #0078FF;">
-          <h2>abc</h2>
-          <p>def</p>
-          <span>READ MORE</span>
-        </div>
-        <div class="blog">
-          <img src="/img/google1.png" alt="" height="202"  style="background-color: #0078FF;">
-          <h2>abc</h2>
-          <p>def</p>
-          <span>READ MORE</span>
-        </div>
-        <div class="blog">
-          <img src="/img/google1.png" alt="" height="202"  style="background-color: #0078FF;">
-          <h2>abc</h2>
-          <p>def</p>
-          <span>READ MORE</span>
-        </div>
-      </div>
+
+    <div class="container2">
+      <div class="header2">Recent Blogs</div>
+      <div class="stories" id="recent_blogs"></div>
     </div>
+
+    <!-- success story -->
+
+    <div class="container2">
+      <div class="header2">Recent Stories</div>
+      <div class="stories" id="recent_stories"></div>
+    </div>
+
+    <!-- <div class="blog-container">
+            <h1 class="center">Read Latest Blog</h1>
+            <div class="blogs">
+              <div class="blog">
+                <img src="/img/google1.png" alt="" height="202" style="background-color: #0078FF;">
+                <h2>abc</h2>
+                <p>def</p>
+                <span>READ MORE</span>
+              </div>
+              <div class="blog">
+                <img src="/img/google1.png" alt="" height="202" style="background-color: #0078FF;">
+                <h2>abc</h2>
+                <p>def</p>
+                <span>READ MORE</span>
+              </div>
+              <div class="blog">
+                <img src="/img/google1.png" alt="" height="202" style="background-color: #0078FF;">
+                <h2>abc</h2>
+                <p>def</p>
+                <span>READ MORE</span>
+              </div>
+            </div>
+          </div> -->
 
   </main>
   <%- include('partials/footer') -%>
 
-   <!-- jQuery and Slick Carousel Scripts -->
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
- 
-   <script>
-     $(document).ready(function(){
-       $('.center-slider').slick({
-         slidesToShow: 3,
-         slidesToScroll: 1,
-         centerMode: true,
-         arrows: true,
-         dots: false,
-         speed: 300,
-         centerPadding: '20px',
-         infinite: true,
-         autoplaySpeed: 5000,
-         autoplay: true
-       });
-     });
-   </script>
+  <!-- jQuery and Slick Carousel Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.center-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        centerMode: true,
+        arrows: true,
+        dots: false,
+        speed: 300,
+        centerPadding: '20px',
+        infinite: true,
+        autoplaySpeed: 5000,
+        autoplay: true
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async (event) => {
+
+      let blogs = await fetch('/content/get/all?type=blog')
+      blogs = await blogs.json()
+      console.log(blogs)
+
+      if (blogs.status) {
+        blogs = blogs.data.slice(0, 3)
+        for (let blog of blogs) {
+          if (blog.isPublished === true) {
+            document.getElementById('recent_blogs').innerHTML += `<div class="story">
+                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <p class="date">${convertTime(blog.createdAt)}</p>
+                <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
+                <p>${blog.category}</p>
+                <div class="read"><a href="/blog/${blog._id}" class="title">Read more &#8594;</a></div></div>`
+          }
+        }
+      } else {
+        document.getElementById('recent_blogs').innerHTML = `'<div class="story"><p>No blog<p></div>'`
+      }
+
+      let recentSuccessStories = await fetch('/content/get/all?type=case-study')
+      recentSuccessStories = await recentSuccessStories.json()
+      console.log(recentSuccessStories)
+
+      if (recentSuccessStories.status) {
+        recentSuccessStories = recentSuccessStories.data.slice(0, 3)
+        for (let story of recentSuccessStories) {
+          if (story.isPublished === true) {
+            document.getElementById('recent_stories').innerHTML += `<div class="story">
+                <img src="${story.cover_image}" alt="blog-${story._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <p class="date">${convertTime(story.createdAt)}</p>
+                <p><a href="/case-study/${story._id}" class="title">${story.title}</a></p>
+                <p>${story.category}</p>
+                <div class="read"><a href="/case-study/${story._id}" class="title">Read more &#8594;</a></div></div>`
+          }
+        }
+      } else {
+        document.getElementById('recent_stories').innerHTML = '<div class="story"><p>No Story<p></div>'
+      }
+    })
+  </script>
   <script src="/js/counter.js"></script>
+  <script src="/js/timeConvert.js"></script>
 </body>
 
 </html>
