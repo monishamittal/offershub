@@ -1733,6 +1733,7 @@ li {
 .content1 ul li,
 .content1 ol li {
     margin: 10px 0;
+    list-style-type: block;
 }
 
 .content1 img {
@@ -1745,7 +1746,8 @@ li {
 .header-image {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .sub-image {
@@ -1813,7 +1815,7 @@ li {
 
 .story:hover img {
     transform: scale(1.1);
-  }
+}
 
 .title {
     color: black;
@@ -1826,7 +1828,7 @@ li {
     overflow: hidden;
 }
 
-.read a{
+.read a {
     text-decoration: none;
     color: #0078FF;
     font-size: 14px;
