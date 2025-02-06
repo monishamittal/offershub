@@ -24,13 +24,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
 
-mongoose
-	.connect(
-		'mongodb+srv://functionup-radon:radon123@cluster0.q0p7q73.mongodb.net/offershub-website?retryWrites=true&w=majority',
-		{}
-	)
-	.then(() => console.log('MongoDb is connected'))
-	.catch((err) => console.log(err));
+mongoose.connect("mongodb://offershub_mplc:711Sob8tAOopqyF2yR@51.44.12.191:27017/OffersHub_Website", {
+	authSource: "admin",
+	authMechanism: "SCRAM-SHA-256",
+  })
+	.then(() => {
+	  console.log("MongoDb is connected")
+	})
+	.catch(err => console.log(err))
+
+// mongoose
+// 	.connect(
+// 		'mongodb+srv://functionup-radon:radon123@cluster0.q0p7q73.mongodb.net/offershub-website?retryWrites=true&w=majority',
+// 		{}
+// 	)
+// 	.then(() => console.log('MongoDb is connected'))
+// 	.catch((err) => console.log(err));
 
 // View Engine Setup
 app.set('views', path.join(__dirname, '../views'));

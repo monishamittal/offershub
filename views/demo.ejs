@@ -127,7 +127,7 @@
           const response = await fetch("https://domain.freshsales.io/api/leads", {
             method: "POST",
             headers: {
-              "Authorization": "Token token=sfg999666t673t7t82",
+              "Authorization": "Token token=Y3Y5uva2cNzWUAAfBv6udQ",
               "Content-Type": "application/json"
             },
             body: JSON.stringify(leadData)
@@ -144,6 +144,41 @@
           console.error("Error submitting form:", error);
           alert("An error occurred. Please try again later.");
         }
+
+
+        try {
+          const leadData = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            // country: '',
+            mobile_number: contactNumber,
+            company: {
+              name: companyName
+            },
+            website_url: websiteUrl,
+            im_type: imType,
+            im_id: imId,
+          }
+          const response = await fetch('/leads/create', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leadData),
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            console.log('Lead created successfully:', result);
+          } else {
+            const error = await response.json();
+            console.error('Error creating lead:', error.message);
+          }
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+
       });
     });
   </script>
