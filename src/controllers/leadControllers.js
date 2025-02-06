@@ -28,7 +28,7 @@ const createLead = async (req, res) => {
 // Controller to get all leads
 const getAllLeads = async (req, res) => {
 	try {
-		const leads = await Lead.find();
+		const leads = await Lead.find().sort({ createdAt: -1 });
 		return res.status(200).json({ message: 'Leads fetched successfully', leads });
 	} catch (error) {
 		return res.status(500).json({ message: 'Error fetching leads', error: error.message });
