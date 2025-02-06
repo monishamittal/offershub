@@ -19,19 +19,20 @@ const basicAuthMiddleware = basicAuth({
 	unauthorizedResponse: 'Unauthorized Access!',
 });
 
-app.use('/create-content', basicAuthMiddleware);
+app.use(['/create-content', '/leads/get'], basicAuthMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
 
-mongoose.connect("mongodb://offershub_mplc:711Sob8tAOopqyF2yR@51.44.12.191:27017/OffersHub_Website", {
-	authSource: "admin",
-	authMechanism: "SCRAM-SHA-256",
-  })
-	.then(() => {
-	  console.log("MongoDb is connected")
+mongoose
+	.connect('mongodb://offershub_mplc:711Sob8tAOopqyF2yR@51.44.12.191:27017/OffersHub_Website', {
+		authSource: 'admin',
+		authMechanism: 'SCRAM-SHA-256',
 	})
-	.catch(err => console.log(err))
+	.then(() => {
+		console.log('MongoDb is connected');
+	})
+	.catch((err) => console.log(err));
 
 // mongoose
 // 	.connect(
