@@ -4,44 +4,44 @@
 <body>
   <%- include('partials/header') -%>
   <%- include('partials/chatbot') -%>
-  <!-- <%- include('partials/totop') -%> -->
-  <!-- <%- include('partials/loader') -%> -->
 
   <main>
     <h1 class="center" style="color: #004DA5;font-size: 32px;">Sign Up and Get 15-days Free Trial</h1><br>
-    <h3 class="center" style="color: black;font-size: 24px;">Try OffersHub for 15 days! No credit card required.</h3>
+    <h3 class="center" style="color: black;font-size: 24px;">Try OffersHub for 15 days! No credit card required.
+    </h3>
     <div class="form-wrapper">
       <div style="width: 25%;" class="img">
-        <!-- <img src="/img/offershublogo.png" alt=""> -->
         <h4>Offershub Shines in G2 Winter 2025 Awards!</h4>
-        <p style="font-size: 14px;margin-bottom: 20px;">"OffersHub helped businesses boost their revenue by 300% through advanced affiliate tracking. With a focus on performance-driven partnerships, real-time insights, and seamless automation, OffersHub ensures maximum ROI and sustainable growth for its clients."</p>
+        <p style="font-size: 14px;margin-bottom: 20px;">
+          "OffersHub helped businesses boost their revenue by 300% through advanced affiliate tracking."
+        </p>
         <img src="/img/badge1.png" alt="" height="100">
         <img src="/img/badge3.png" alt="" height="100">
         <img src="/img/badge5.png" alt="" height="100">
       </div>
-      <form action="">
+      <form id="signup-form">
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="">First Name<i class="fa fa-asterisk"></i></label>
-            <input type="text">
+            <label for="first-name">First Name<i class="fa fa-asterisk"></i></label>
+            <input type="text" id="first-name">
           </div>
           <div class="label-text" style="width: 47%;">
-            <label for="">Last Name<i class="fa fa-asterisk"></i></label>
-            <input type="text">
+            <label for="last-name">Last Name<i class="fa fa-asterisk"></i></label>
+            <input type="text" id="last-name">
           </div>
         </div>
         <div class="label-text">
-          <label for="">Email<i class="fa fa-asterisk"></i></label>
-          <input type="text" placeholder="Business emails only">
+          <label for="email">Email<i class="fa fa-asterisk"></i></label>
+          <input type="text" id="email" placeholder="Business emails only">
         </div>
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="">Contact Number<i class="fa fa-asterisk"></i></label>
-            <input type="text">
+            <label for="contact-number">Contact Number<i class="fa fa-asterisk"></i></label>
+            <input type="text" id="contact-number">
           </div>
           <div class="label-text" style="width: 47%;">
-            <label for="">Country<i class="fa fa-asterisk"></i></label>
-            <select>
+            <label for="country">Country<i class="fa fa-asterisk"></i></label>
+            <select id="country">
               <option value="Skype">Skype</option>
               <option value="Whatsapp">Whatsapp</option>
               <option value="Telegram">Telegram</option>
@@ -49,39 +49,104 @@
           </div>
         </div>
         <div class="label-text">
-          <label for="">Company Name<i class="fa fa-asterisk"></i></label>
-          <input type="text">
+          <label for="company-name">Company Name<i class="fa fa-asterisk"></i></label>
+          <input type="text" id="company-name">
         </div>
         <div class="label-text">
-          <label for="">Website Url</label>
-          <input type="text">
+          <label for="website-url">Website Url</label>
+          <input type="text" id="website-url">
         </div>
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="">IM type</label>
-            <select>
+            <label for="im-type">IM type</label>
+            <select id="im-type">
               <option value="Skype">Skype</option>
               <option value="Whatsapp">Whatsapp</option>
               <option value="Telegram">Telegram</option>
             </select>
           </div>
           <div class="label-text" style="width: 47%;">
-            <label for="">IM ID<i class="fa fa-asterisk"></i></label>
-            <input type="text" placeholder="Eg: Skype ID">
+            <label for="im-id">IM ID<i class="fa fa-asterisk"></i></label>
+            <input type="text" id="im-id" placeholder="Eg: Skype ID">
           </div>
         </div>
         <div class="label-text">
-            <label for="">Terms & Conditions<i class="fa fa-asterisk"></i></label>
-            <p><input type="radio"> I agree to the Privacy Policy and Master Services Agreement</p>
-            <p><input type="radio"> Subscribe to newsletters and Whatsapp?</p>
-          </div>
-        <button class="submit">Request Demo</button>
+          <label>Terms & Conditions<i class="fa fa-asterisk"></i></label>
+          <p><input type="radio" id="terms-accepted"> I agree to the Privacy Policy and Master Services Agreement
+          </p>
+          <p><input type="radio"> Subscribe to newsletters and Whatsapp?</p>
+        </div>
+        <button type="submit" class="submit">Request Demo</button>
       </form>
     </div>
   </main>
 
   <%- include('partials/footer') -%>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("signup-form");
+
+      form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const firstName = document.getElementById("first-name").value.trim();
+        const lastName = document.getElementById("last-name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const contactNumber = document.getElementById("contact-number").value.trim();
+        const companyName = document.getElementById("company-name").value.trim();
+        const websiteUrl = document.getElementById("website-url").value.trim();
+        const imType = document.getElementById("im-type").value;
+        const imId = document.getElementById("im-id").value.trim();
+        const termsAccepted = document.getElementById("terms-accepted").checked;
+
+        if (!firstName || !lastName || !email || !contactNumber || !companyName || !imId || !termsAccepted) {
+          alert("Please fill in all required fields and accept the terms.");
+          return;
+        }
+
+        const leadData = {
+          lead: {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            mobile_number: contactNumber,
+            company: {
+              name: companyName
+            },
+            website_url: websiteUrl,
+            im_type: imType,
+            im_id: imId,
+            custom_field: {
+              cf_primary: true
+            }
+          }
+        };
+
+        try {
+          const response = await fetch("https://domain.freshsales.io/api/leads", {
+            method: "POST",
+            headers: {
+              "Authorization": "Token token=sfg999666t673t7t82",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(leadData)
+          });
+          const data = await response.json();
+          if (response.ok) {
+            alert("Lead added successfully!");
+            form.reset();
+            window.location.href = '/thank-you'
+          } else {
+            alert("Error: " + data.message);
+          }
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          alert("An error occurred. Please try again later.");
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

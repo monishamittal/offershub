@@ -179,4 +179,10 @@ router.get('/demo', async (req, res) => {
 	});
 });
 
+router.get('/thank-you', async (req, res) => {
+	res.render('thankYou', {
+		title: 'Thank you - OffersHub',
+	});
+});
+
 module.exports = router;
