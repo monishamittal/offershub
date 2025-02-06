@@ -171,7 +171,7 @@
           if (response.ok) {
             const result = await response.json();
             console.log('Lead created successfully:', result);
-            return window.location.href = '/leads/get';
+            return window.location.href = '/thank-you';
           } else {
             const error = await response.json();
             console.error('Error creating lead:', error.message);
