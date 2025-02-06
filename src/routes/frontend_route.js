@@ -134,6 +134,12 @@ router.get('/contactUs', async (req, res) => {
 	});
 });
 
+router.get('/aboutUs', async (req, res) => {
+	res.render('aboutUs', {
+		title: 'About - Offershub',
+	});
+});
+
 router.get('/create-content', async (req, res) => {
 	const imageDir = path.join(__dirname, '../../public/uploads');
 	const images = getImagesFromDirectory(imageDir);
