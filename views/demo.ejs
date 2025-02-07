@@ -10,56 +10,57 @@
     <h3 class="center" style="color: black;font-size: 24px;">Try OffersHub for 15 days! No credit card required.
     </h3>
     <div class="form-wrapper">
-      <div style="width: 25%;" class="img">
+      <div style="width: 18%;" class="img">
+        <!-- <img src="/img/50_off.png" alt="50 percentage off" height="150"> -->
         <h4>Offershub Shines in G2 Winter 2025 Awards!</h4>
-        <p style="font-size: 14px;margin-bottom: 20px;">
-          "OffersHub helped businesses boost their revenue by 300% through advanced affiliate tracking."
-        </p>
-        <img src="/img/badge1.png" alt="" height="100">
-        <img src="/img/badge3.png" alt="" height="100">
-        <img src="/img/badge5.png" alt="" height="100">
+        <p style="font-size: 14px;margin-bottom: 20px;">"OffersHub helped businesses boost their revenue by 300% through advanced affiliate tracking."</p>
+        <img src="/img/badge1.png" alt="" height="150">
+        <img src="/img/badge3.png" alt="" height="150">
+        <img src="/img/badge5.png" alt="" height="150">
       </div>
       <form id="signup-form">
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
             <label for="first-name">First Name<i class="fa fa-asterisk"></i></label>
-            <input type="text" id="first-name">
+            <input type="text" id="first-name" placeholder="Enter your first name" required>
           </div>
           <div class="label-text" style="width: 47%;">
             <label for="last-name">Last Name<i class="fa fa-asterisk"></i></label>
-            <input type="text" id="last-name">
+            <input type="text" id="last-name" placeholder="Enter your last name"required>
           </div>
         </div>
         <div class="label-text">
-          <label for="email">Email<i class="fa fa-asterisk"></i></label>
-          <input type="text" id="email" placeholder="Business emails only">
+          <label for="email">Email <i class="fa fa-asterisk"></i></label>
+          <input type="text" id="email" placeholder="Enter your email" required>
+          <small id="email-error" style="color: red; display: none;"></small>
         </div>
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="contact-number">Contact Number<i class="fa fa-asterisk"></i></label>
-            <input type="text" id="contact-number">
+            <label for="country">Country<i class="fa fa-asterisk"></i></label>
+            <select id="country" required>
+              <% for(let country of countries){ %>
+              <option value="<%- country.name.common %>"><%- country.name.common %>&nbsp;<%- country.flag %>&nbsp;(<%- country.cca2 %>)</option>
+              <% } %>
+            </select>
           </div>
           <div class="label-text" style="width: 47%;">
-            <label for="country">Country<i class="fa fa-asterisk"></i></label>
-            <select id="country">
-              <option value="Skype">Skype</option>
-              <option value="Whatsapp">Whatsapp</option>
-              <option value="Telegram">Telegram</option>
-            </select>
+            <label for="contact-number">Contact Number<i class="fa fa-asterisk"></i></label>
+            <input type="text" id="contact-number" placeholder="Enter your phone number" required>
+            <small id="contact-error" style="color: red; display: none;">Please enter a valid number.</small>
           </div>
         </div>
         <div class="label-text">
           <label for="company-name">Company Name<i class="fa fa-asterisk"></i></label>
-          <input type="text" id="company-name">
+          <input type="text" id="company-name" placeholder="Enter company name" required>
         </div>
         <div class="label-text">
           <label for="website-url">Website Url</label>
-          <input type="text" id="website-url">
+          <input type="text" id="website-url" placeholder="Enter your website url">
         </div>
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="im-type">IM type</label>
-            <select id="im-type">
+            <label for="im-type">IM type <i class="fa fa-asterisk"></i></label>
+            <select id="im-type" required>
               <option value="Skype">Skype</option>
               <option value="Whatsapp">Whatsapp</option>
               <option value="Telegram">Telegram</option>
@@ -67,14 +68,21 @@
           </div>
           <div class="label-text" style="width: 47%;">
             <label for="im-id">IM ID<i class="fa fa-asterisk"></i></label>
-            <input type="text" id="im-id" placeholder="Eg: Skype ID">
+            <input type="text" id="im-id" placeholder="Eg: Skype ID / Whatsapp No. / Telegram" required>
           </div>
         </div>
         <div class="label-text">
           <label>Terms & Conditions<i class="fa fa-asterisk"></i></label>
-          <p><input type="radio" id="terms-accepted"> I agree to the Privacy Policy and Master Services Agreement
+          <p><input type="radio" id="terms-accepted" style="cursor: pointer;">
+            <label for="terms-accepted">
+              I agree to the Privacy Policy and Master Services Agreement
+            </label>
           </p>
-          <p><input type="radio"> Subscribe to newsletters and Whatsapp?</p>
+          <p><input type="radio" id="subscribe-newsletter" style="cursor: pointer;">
+            <label for="subscribe-newsletter">
+              Subscribe to newsletters and Whatsapp?
+            </label>
+          </p>
         </div>
         <button type="submit" class="submit">Request Demo</button>
       </form>
@@ -82,6 +90,39 @@
   </main>
 
   <%- include('partials/footer') -%>
+
+  <script>
+    const contactInput = document.getElementById('contact-number');
+    const contactError = document.getElementById('contact-error');
+
+    contactInput.addEventListener('input', function() {
+      const value = contactInput.value;
+
+      // Check if the input contains only digits
+      if (/[^0-9]/.test(value)) {
+        contactError.style.display = 'block'; // Show error message
+        contactInput.style.border = '1px solid red'; // Show error border
+      } else {
+        contactError.style.display = 'none'; // Hide error message
+        contactInput.style.border = '1px solid green'; // Show success border
+      }
+    });
+
+    document.getElementById("email").addEventListener("input", function() {
+      const emailInput = this;
+      const emailError = document.getElementById("email-error");
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (!emailPattern.test(emailInput.value.trim())) {
+        emailError.textContent = "Invalid email format";
+        emailError.style.display = "block";
+        emailInput.style.border = "1px solid red";
+      } else {
+        emailError.style.display = "none";
+        emailInput.style.border = "1px solid green";
+      }
+    });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -142,7 +183,7 @@
           }
         } catch (error) {
           console.error("Error submitting form:", error);
-          alert("An error occurred. Please try again later.");
+          // alert("An error occurred. Please try again later.");
         }
 
         try {

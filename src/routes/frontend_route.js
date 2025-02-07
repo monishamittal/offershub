@@ -174,8 +174,10 @@ router.get('/blog/:blog_id', async (req, res) => {
 });
 
 router.get('/demo', async (req, res) => {
+	const countries = require('../constants/countries.json');
 	res.render('demo', {
 		title: 'Demo - OffersHub',
+		countries,
 	});
 });
 

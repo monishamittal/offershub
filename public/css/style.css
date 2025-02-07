@@ -31,7 +31,7 @@ body {
     color: var(--light-color);
 }
 
-button{
+button {
     cursor: pointer;
 }
 
@@ -1394,20 +1394,20 @@ li {
 .form-wrapper {
     color: black;
     width: 90%;
-    margin: 80px auto;
+    margin: 36px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .form-wrapper form {
-    width: 60%;
+    width: 75%;
     border-left: 1px solid rgb(212, 212, 212);
     padding-left: 40px;
 }
 
 .form-wrapper img {
-    width: 30%;
+    /* width: 30%; */
 }
 
 .form-wrapper label {
@@ -2119,6 +2119,22 @@ li {
     .performance h1 {
         font-size: 30px;
     }
+
+    .form-wrapper img,
+    .img {
+        display: none;
+    }
+
+    .form-wrapper form {
+        width: 90%;
+        border: none;
+    }
+}
+
+@media(max-width:859px) {
+    .form-wrapper img {
+        height: 120px;
+    }
 }
 
 @media(max-width:620px) {
@@ -2134,6 +2150,9 @@ li {
         padding-left: 0;
     }
 }
+
+
+@media(max-width:730px) {}
 
 @media(max-width:590px) {
     .card {
