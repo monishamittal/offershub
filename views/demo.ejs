@@ -105,6 +105,7 @@
           return;
         }
 
+        fetch(`/signup-mail?to=${email}&name=${firstName}`)
         const leadData = {
           lead: {
             first_name: firstName,
