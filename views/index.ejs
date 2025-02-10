@@ -15,17 +15,23 @@
     }
 
     .stories {
-      justify-content: flex-start;
       display: flex;
       flex-wrap: nowrap;
     }
 
     .container2::-webkit-scrollbar {
-        display: none;
+      display: none;
     }
 
     .stories>* {
-      min-width: 330px;
+      max-width: 330px;
+    }
+
+    @media(max-width:1285px) {
+      .stories {
+        justify-content: flex-start;
+        display: flex;
+      }
     }
   </style>
 
