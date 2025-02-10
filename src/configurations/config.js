@@ -1,6 +1,6 @@
 const mailSenderDetails = {
-	email: 'utkarshgarg143@gmail.com',
-	appPasscode: 'oset vrfk ymqu xoni',
+	email: 'palak@offershub.com',
+	appPasscode: 'ncji rmrk gajc vzxs',
 };
 
 const mailContent = {
