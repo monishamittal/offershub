@@ -1,14 +1,20 @@
-const mailSenderDetails = {
-	email: 'palak@offershub.com',
-	appPasscode: 'ncji rmrk gajc vzxs',
-};
+const isProduction = process.env.NODE_ENV === 'production';
+const mailSenderDetails = isProduction
+	? {
+			email: 'palak@offershub.com',
+			appPasscode: 'ncji rmrk gajc vzxs',
+	  }
+	: {
+			email: 'utkarshgarg143@gmail.com',
+			appPasscode: 'oset vrfk ymqu xoni',
+	  };
 
 const mailContent = {
 	subject: 'Signup Confirmation - Offershub',
 };
 
-function getMailContent(name){
-    return `<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="m_8322143655510895421bodyTable" style="border-collapse:collapse;height:100%;margin:0;padding:0;width:100%;background-color:#f5f5f5">
+function getMailContent(name) {
+	return `<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="m_8322143655510895421bodyTable" style="border-collapse:collapse;height:100%;margin:0;padding:0;width:100%;background-color:#f5f5f5">
    <tbody>
       <tr>
          <td align="center" valign="top" id="m_8322143655510895421bodyCell" style="height:100%;margin:0;padding:50px 50px;width:100%">
@@ -78,11 +84,11 @@ function getMailContent(name){
          </td>
       </tr>
    </tbody>
-</table>`
+</table>`;
 }
 
 module.exports = {
 	mailSenderDetails,
 	mailContent,
-    getMailContent
+	getMailContent,
 };

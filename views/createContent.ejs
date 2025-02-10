@@ -400,6 +400,7 @@
     <div class="blog-preview" id="blog-preview" style="display: none;"></div>
 
     <a href="/leads/get" style="display: flex; justify-content: flex-end;">Leads</a>
+    <a href="/newsletter-mail/get" style="display: flex; justify-content: flex-end;">Subscribed-emails</a>
     <script>
         const category = ['Article', 'Event', 'Product Update',];
 
@@ -448,28 +449,28 @@
             }
         });
 
-        // document.addEventListener("keydown", function (event) {
-        //     if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
-        //         event.preventDefault();
-        //         alert("Page refresh is disabled!");
-        //     }
-        // });
+        document.addEventListener("keydown", function (event) {
+            if ((event.key === "F5") || (event.ctrlKey && event.key === "r")) {
+                event.preventDefault();
+                alert("Page refresh is disabled!");
+            }
+        });
 
-        // window.addEventListener("beforeunload", function (event) {
-        //     event.preventDefault();
-        //     event.returnValue = "";
-        // });
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = "";
+        });
 
-        // document.addEventListener("contextmenu", function (event) {
-        //     event.preventDefault();
-        //     alert("Right-click is disabled!");
-        // });
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            alert("Right-click is disabled!");
+        });
 
-        // history.pushState(null, "", location.href);
-        // window.addEventListener("popstate", function () {
-        //     history.pushState(null, "", location.href);
-        //     alert("Back/Forward navigation is disabled!");
-        // });
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, "", location.href);
+            alert("Back/Forward navigation is disabled!");
+        });
     </script>
 
     <script>
