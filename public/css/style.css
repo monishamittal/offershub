@@ -857,7 +857,7 @@ li {
 }
 
 .testimonial {
-    height: 360px;
+    height: 420px;
     background-color: #e9f4ff;
     margin: 10px auto;
     border-radius: 7px;
@@ -1643,7 +1643,7 @@ li {
 .sub-heading {
     font-size: 1.5em;
     font-weight: 700;
-    text-align: center;
+    /* text-align: center; */
     margin: 15px 0px;
     /* color: #004DA5; */
 }
@@ -1713,7 +1713,7 @@ li {
 
     .home-contain h1 {
         font-size: 40px;
-    }
+    } 
 }
 
 @media(max-width:1340px) {
@@ -1733,7 +1733,7 @@ li {
 @media(max-width:1255px) {
     .card {
         width: 200px;
-        height: 320px;
+        height: 340px;
     }
 
     .indeximg {
@@ -1817,7 +1817,7 @@ li {
 
     .badge {
         min-width: 120px;
-        height: 200px;
+        height: 220px;
     }
 
     .cards {
@@ -2053,6 +2053,10 @@ li {
         margin: auto;
         overflow-x: auto;
         justify-content: start;
+    }
+
+    .testimonial-container::-webkit-scrollbar {
+        display: none;
     }
 
     .images img {

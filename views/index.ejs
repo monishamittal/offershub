@@ -8,6 +8,27 @@
   <!-- <%- include('partials/totop') -%> -->
   <!-- <%- include('partials/loader') -%> -->
 
+  <style>
+    .container2 {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .stories {
+      justify-content: flex-start;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .container2::-webkit-scrollbar {
+        display: none;
+    }
+
+    .stories>* {
+      min-width: 330px;
+    }
+  </style>
+
   <main class="home">
 
     <!-- top container -->
@@ -19,7 +40,7 @@
               Networks, Advertisers, Agencies, E-commerce, and Media Buyers</b></p>
           <div class="buttons">
             <a href="/demo"><button class="button1 extra"><span>Request Demo</span></button></a>
-            <a href="/contactUs"><button class="button1 extra"><span>Contact Us</span></button></a>
+            <a href="/https://calendly.com/palak-5acl/30min"><button class="button1 extra"><span>Talk to our Experts</span></button></a>
           </div>
         </div>
         <div class="video-container block">
@@ -240,8 +261,8 @@
 
     <!-- blog container -->
 
+    <div class="header2">Read Latest Blog</div>
     <div class="container2">
-      <div class="header2">Read Latest Blog</div>
       <div class="stories" id="recent_blogs"></div>
     </div>
 
