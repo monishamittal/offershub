@@ -8,8 +8,7 @@ const basicAuth = require('express-basic-auth');
 const app = express();
 const Backend_Route = require('./routes/backend_route');
 const Frontend_Route = require('./routes/frontend_route');
-const isProduction = process.env.NODE_ENV === 'production';
-const PORT = isProduction ? 7867 : 7867;
+const PORT = 7867;
 
 const users = {
 	'manager@offershub.com': 'go2oh@admin',
@@ -26,20 +25,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any());
 
-const cluster = isProduction
-	? process.env.MONGODB_PROD_CONNECTION_URL
-	: process.env.MONGODB_DEV_CONNECTION_URL;
-
-const authentication_mechanism = isProduction
-	? {
-			authSource: 'admin',
-			authMechanism: 'SCRAM-SHA-256',
-	  }
-	: {};
-
 mongoose
-	.connect(cluster, authentication_mechanism)
-	.then(() => console.log('Connected to MongoDb => ' + `${isProduction ? 'Production' : 'Development'}`))
+	.connect('mongodb://offershub_mplc:711Sob8tAOopqyF2yR@51.44.12.191:27017/OffersHub_Website', {
+		authSource: 'admin',
+		authMechanism: 'SCRAM-SHA-256',
+	})
+	.then(() => console.log('Connected to MongoDb'))
 	.catch((err) => console.log(err));
 
 // View Engine Setup
