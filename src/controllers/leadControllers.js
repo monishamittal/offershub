@@ -3,7 +3,6 @@ const newsletter = require('../models/newsletterModel');
 const isProduction = process.env.NODE_ENV === 'production';
 const host = isProduction ? process.env.PROD_DOMAIN : process.env.DEV_DOMAIN;
 
-// Controller to create a lead
 const createLead = async (req, res) => {
 	try {
 		const {
@@ -19,44 +18,69 @@ const createLead = async (req, res) => {
 			isSubscribed,
 		} = req.body;
 
-		const isEmailExists = await Lead.find({ email });
-
-		if (Object.keys(isEmailExists).length !== 0) {
-			return res.send({ status: 'false', message: 'Email already Exists' });
-		}
-
-		// Create a new lead
-		const newLead = new Lead({
+		const lead = {
 			first_name,
 			last_name,
 			email,
 			country,
 			mobile_number,
-			company,
+			company: {
+				name: company,
+			},
 			website_url,
 			im_type,
 			im_id,
-			isSubscribed,
+		};
+
+		const response = await fetch('https://offershub.myfreshworks.com/crm/sales/api/contacts', {
+			method: 'POST',
+			headers: {
+				Authorization: `Token token=${process.env.FRESHWORKS_API_TOKEN}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ contact: lead }),
 		});
-		// Save the lead
-		await newLead.save();
 
-		await fetch(`${host}/signup-mail?to=${email}&name=${first_name}`);
+		const data = await response.json();
 
-		if (isSubscribed) {
-			const subscribedMail = new newsletter({ email });
-			await subscribedMail.save();
+		if (response.ok) {
+			const isEmailExists = await Lead.find({ email });
+
+			if (Object.keys(isEmailExists).length !== 0) {
+				return res.send({ status: true, message: 'Email already Exists' });
+			}
+
+			const newLead = new Lead(lead);
+			await newLead.save();
+			await fetch(`${host}/signup-mail?to=${email}&name=${first_name}`);
+
+			if (isSubscribed) {
+				const subscribedMail = new newsletter({ email });
+				await subscribedMail.save();
+			}
+			return res.status(201).json({ status: true, message: 'Lead added successfully!', lead: newLead });
+		} else {
+			const rubyErrorString = data.errors.message[1].replace(/^Mcr error /, '');
+
+			const jsonString = rubyErrorString
+				.replace(/"=>/g, '":')
+				.replace(/"(\d+)",/g, '$1,')
+				.replace(/nil/g, 'null');
+
+			const parsedError = JSON.parse(jsonString);
+
+			data.errors.message[1] = parsedError;
+
+			return res.status(data.errors.code).json({
+				status: false,
+				message: data.errors.message[1].message || ['Error adding lead'],
+			});
 		}
-
-		return res.status(201).json({ status: 'true', message: 'Lead created successfully', lead: newLead });
 	} catch (error) {
-		return res
-			.status(500)
-			.json({ status: 'false', message: 'Error creating lead', error: error.message });
+		return res.status(500).json({ status: false, message: 'Error creating lead', error: error.message });
 	}
 };
 
-// Controller to get all leads
 const getAllLeads = async (req, res) => {
 	try {
 		const leads = await Lead.find().sort({ createdAt: -1 });
