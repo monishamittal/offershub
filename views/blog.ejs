@@ -41,11 +41,11 @@
         for (let blog of blogs) {
           if (blog.isPublished === true) {
             document.getElementById('recent_blogs').innerHTML += `<div class="story">
-                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <a href="/blog/${blog._id}"><img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';"></a>
                 <p class="date">${convertTime(blog.createdAt)}</p>
                 <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
                 <p>${blog.category}</p>
-                <div class="read"><a href="/blog/${blog._id}" class="title">Read more</a></div></div>`
+                </div>`
           }
         }
       } else {

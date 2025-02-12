@@ -475,7 +475,7 @@ header {
 }
 
 .home-contain p {
-    font-size: 15px;
+    font-size: 18px;
     color: #000;
     padding: 4px 0px;
 }
@@ -858,7 +858,7 @@ li {
 }
 
 .testimonial {
-    height: 420px;
+    height: 360px;
     background-color: #e9f4ff;
     margin: 10px auto;
     border-radius: 7px;

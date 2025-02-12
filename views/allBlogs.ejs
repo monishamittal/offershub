@@ -8,18 +8,10 @@
   <!-- <%- include('partials/loader') -%> -->
 
   <main>
-    <div class="home-container" style="background-color: #d9eeff;width: 90%;margin: auto;border-radius: 50px;">
-        <div class="home-contain">
-          <div class="main-contain">
-            <button class="button1" style="margin: 40px 0px ; padding: 0.3rem 2rem;"><span>Tips & Guides</span></button>
-            <h1 class="block" style="font-size: 32px;">Smart Spending, Better Tracking</h1>
-            <p>Easily take control of your mobile subscriptions with these <b>effortless</b> tracking steps to save money, avoid surprises, and stay organized.</p>
-          </div>
-          <div class="video-container block">
-            <img src="/img/blog.png" alt="" height="200" >
-          </div>
-        </div>
-      </div>
+
+    <a href="" id="latest" style="display: flex;justify-content: center;align-items: center;">
+      <img src="" alt="" id="latest_blog" style="width: 80%;box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);border-radius: 12px;">
+    </a>
 
     <div class="container1">
       <div class="header1">Product Updates,News and Articles</div>
@@ -32,16 +24,29 @@
     document.addEventListener("DOMContentLoaded", async (event) => {
       let blogs = await fetch('/content/get/all?type=blog')
       blogs = await blogs.json()
+      document.getElementById('latest_blog').src = blogs.data[0].cover_image;
+      document.getElementById('latest').href = '/blog/' + blogs.data[0]._id;
+
+      document.getElementById('latest_blog').addEventListener('error', function() {
+        document.getElementById('latest_blog').src = 'https://web25.offershub.com' + blogs.data[0].cover_image;
+      });
+      document.getElementById('latest').addEventListener('error', function() {
+        document.getElementById('latest').href = 'https://web25.offershub.com/blog/' + blogs.data[0]._id;
+      });
+
+
+      console.log(blogs.data[0]._id);
+
 
       if (blogs.status) {
         for (let blog of blogs.data) {
           if (blog.isPublished === true) {
             document.getElementById('blogs').innerHTML += `<div class="story">
-                <img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://placehold.co/1200x400') this.src = 'https://placehold.co/1200x400';">
+                <a href="/blog/${blog._id}"><img src="${blog.cover_image}" alt="blog-${blog._id}" onerror="if (this.src != 'https://web25.offershub.com${blog.cover_image}') this.src = 'https://web25.offershub.com${blog.cover_image}';"></a>
                  <p class="date">Tips & Guides - ${convertTime(blog.createdAt)}</p>
                 <p><a href="/blog/${blog._id}" class="title">${blog.title}</a></p>
                 <p>${blog.category}</p>
-                <div class="read"><a href="/blog/${blog._id}" class="title">Read more </a></div></div>`
+                </div>`
           }
         }
       } else {
