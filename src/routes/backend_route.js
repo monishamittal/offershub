@@ -12,7 +12,7 @@ router.put('/content/update/:contentId', contentControllers.updateContentById);
 router.post('/upload-image', contentControllers.uploadImage);
 router.post('/leads/create', leadControllers.createLead);
 router.get('/leads/get', leadControllers.getAllLeads);
-router.get('/signup-mail', mailControllers.mail);
+router.post('/signup-mail', mailControllers.mail);
 router.get('/newsletter-mail/get', newsletterController.getAllSubscribedMail);
 
 module.exports = router;

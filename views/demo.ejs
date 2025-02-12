@@ -34,13 +34,25 @@
           <input type="text" id="email" placeholder="Enter your email" required>
           <small id="email-error" style="color: red; display: none;"></small>
         </div>
+        <div class="label-text">
+          <label for="country">Country<i class="fa fa-asterisk"></i></label>
+          <select id="country" required>
+            <option value="" selected>Select a Country</option>
+            <% for(let country of countries){ %>
+            <option value="<%- country.country_name %>"><%- country.country_name %>&nbsp;<%- country.flag %>&nbsp;(<%- country.country_code %>)</option>
+            <% } %>
+            <option value="">Other</option>
+          </select>
+        </div>
         <div style="display: flex;align-items: center;justify-content: space-between;">
           <div class="label-text" style="width: 47%;">
-            <label for="country">Country<i class="fa fa-asterisk"></i></label>
-            <select id="country" required>
+            <label for="country_code">Country Code<i class="fa fa-asterisk"></i></label>
+            <select id="country_code" required>
+              <option value="" selected>Select ISD Code</option>
               <% for(let country of countries){ %>
-              <option value="<%- country.name.common %>"><%- country.name.common %>&nbsp;<%- country.flag %>&nbsp;(<%- country.cca2 %>)</option>
+              <option value="<%- country.isd_code %>"><%- country.country_name %>&nbsp; <%- country.isd_code %></option>
               <% } %>
+              <option value="">Other</option>
             </select>
           </div>
           <div class="label-text" style="width: 47%;">
@@ -132,6 +144,7 @@
         const email = document.getElementById("email").value.trim();
         const country = document.getElementById("country").value.trim();
         const contactNumber = document.getElementById("contact-number").value.trim();
+        const countryCode = document.getElementById("country_code").value.trim();
         const companyName = document.getElementById("company-name").value.trim();
         const websiteUrl = document.getElementById("website-url").value.trim();
         const imType = document.getElementById("im-type").value;
@@ -139,7 +152,7 @@
         const termsAccepted = document.getElementById("terms-accepted").checked;
         const isSubscribed = document.getElementById("subscribe-newsletter").checked;
 
-        if (!firstName || !lastName || !email || !contactNumber || !companyName || !imId) {
+        if (!firstName || !lastName || !email || !country || !countryCode || !contactNumber || !companyName || !imId) {
           alert("Please fill in all required fields");
           return;
         }
@@ -160,7 +173,7 @@
               last_name: lastName,
               email: email,
               country: country,
-              mobile_number: contactNumber,
+              mobile_number: countryCode + contactNumber,
               company: companyName,
               website_url: websiteUrl,
               im_type: imType,

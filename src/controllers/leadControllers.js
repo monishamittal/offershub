@@ -43,16 +43,25 @@ const createLead = async (req, res) => {
 
 		const data = await response.json();
 
-		if (response.ok) {
-			const isEmailExists = await Lead.find({ email });
+		console.log(data);
 
-			if (Object.keys(isEmailExists).length !== 0) {
-				return res.send({ status: true, message: 'Email already Exists' });
-			}
+		if (response.ok) {
+			// const isEmailExists = await Lead.find({ email });
+
+			// if (Object.keys(isEmailExists).length !== 0) {
+			// 	return res.send({ status: true, message: 'Email already Exists' });
+			// }
 
 			const newLead = new Lead(lead);
 			await newLead.save();
-			await fetch(`${host}/signup-mail?to=${email}&name=${first_name}`);
+
+			await fetch(`${host}/signup-mail`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(lead),
+			});
 
 			if (isSubscribed) {
 				const subscribedMail = new newsletter({ email });
@@ -77,7 +86,7 @@ const createLead = async (req, res) => {
 			});
 		}
 	} catch (error) {
-		return res.status(500).json({ status: false, message: 'Error creating lead', error: error.message });
+		return res.status(500).json({ status: false, message: error.message });
 	}
 };
 
