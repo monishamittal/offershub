@@ -1720,6 +1720,7 @@ li {
     background-image: url('/img/line-min.png'), linear-gradient(to left, transparent 50%, #FFEB3B 50%);
     background-size: 100% 100%, 200% 100%;
     background-position: -100% bottom, right bottom;
+    transition: background-position 0.5s ease-in-out;
 }
   
 @media(max-width:1375px) {
