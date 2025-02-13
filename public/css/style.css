@@ -169,7 +169,7 @@ footer {
 /* header */
 header {
     border-bottom: 1px solid #294e7633;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
 }
 
 .header {
@@ -1717,20 +1717,10 @@ li {
 }
 
 .highlight {
-    padding: 3px;
-    border-radius: 50px;
-    position: relative;
-    display: inline-block;
-    background: linear-gradient(to left, transparent 30%, #FFEB3B 50%, #FF7043 80%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    transition: background-position 0.5s ease;
-  }
-  
-  .highlight.visible {
-    background-position: left bottom;
-  }
-  
+    background-image: url('/img/line.png'), linear-gradient(to left, transparent 50%, #FFEB3B 50%);
+    background-size: 100% 100%, 200% 100%;
+    background-position: -100% bottom, right bottom;
+}
   
 @media(max-width:1375px) {
     .extra {
