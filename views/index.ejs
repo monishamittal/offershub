@@ -11,6 +11,7 @@
   <style>
     .container2 {
       overflow-x: auto;
+      width: 90%;
     }
 
     .stories {
@@ -23,7 +24,11 @@
     }
 
     .stories>* {
-      width: 330px;
+      width: 370px;
+    }
+
+    .story img {
+      object-fit: fill;
     }
 
     @media(max-width:1285px) {
@@ -32,15 +37,42 @@
         display: flex;
       }
     }
+
+    @media(max-width:1092px) {
+      .story img {
+        height: 150px;
+      }
+    }
+
+    @media(max-width: 882px) {
+      .container2 {
+        overflow: visible;
+        width: 80%;
+      }
+
+      .stories {
+        display: block;
+        flex-wrap: wrap;
+      }
+
+      .stories>* {
+        width: auto;
+      }
+
+      .story img {
+        object-fit: cover;
+        height: auto;
+      }
+    }
   </style>
 
   <main class="home">
 
     <!-- top container -->
     <div class="home-container">
-      <div class="home-contain">
+      <div class="home-contain" style="width: 90%;">
         <div class="main-contain">
-          <h1 class="block"><span class="highlight">Advanced Tracking Solution </span> To Drive Your Marketing Performance With Offershub!</h1>
+          <h1 class="block"><span class="highlight">Boost Marketing</span> <br>Performance with<br> Offershub Tracking!</h1>
           <p>Revolutionize Your Online Ad Campaigns With Ultimate Solution for <b>Affiliate
               Networks, Advertisers, Agencies, E-commerce, and Media Buyers</b></p>
           <div class="buttons">
