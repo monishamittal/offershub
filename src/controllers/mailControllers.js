@@ -178,56 +178,6 @@ function getNotificationContent(data) {
                                                       </tr>
                                                    </tbody>
                                                 </table>
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #dddddd;display:block;min-width:100%;border-collapse:collapse;width:100%">
-                                                   <tbody>
-                                                      <tr>
-                                                         <td style="color:#333333;padding-top:20px;padding-bottom:3px"><strong>User IP</strong></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <td style="color:#555555;padding-top:3px;padding-bottom:20px">-</td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #dddddd;display:block;min-width:100%;border-collapse:collapse;width:100%">
-                                                   <tbody>
-                                                      <tr>
-                                                         <td style="color:#333333;padding-top:20px;padding-bottom:3px"><strong>Source</strong></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <td style="color:#555555;padding-top:3px;padding-bottom:20px">-</td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #dddddd;display:block;min-width:100%;border-collapse:collapse;width:100%">
-                                                   <tbody>
-                                                      <tr>
-                                                         <td style="color:#333333;padding-top:20px;padding-bottom:3px"><strong>Campaign</strong></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <td style="color:#555555;padding-top:3px;padding-bottom:20px">-</td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #dddddd;display:block;min-width:100%;border-collapse:collapse;width:100%">
-                                                   <tbody>
-                                                      <tr>
-                                                         <td style="color:#333333;padding-top:20px;padding-bottom:3px"><strong>Click ID</strong></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <td style="color:#555555;padding-top:3px;padding-bottom:20px">N/A</td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #dddddd;display:block;min-width:100%;border-collapse:collapse;width:100%">
-                                                   <tbody>
-                                                      <tr>
-                                                         <td style="color:#333333;padding-top:20px;padding-bottom:3px"><strong>UTMs</strong></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <td style="color:#555555;padding-top:3px;padding-bottom:20px">N/A</td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
                                              </td>
                                           </tr>
                                        </tbody>
@@ -294,17 +244,16 @@ function send_mail(to, subject, html_content) {
 
 const mail = async (req, res) => {
 	try {
-		console.log(req.body);
-		if (!req.body.email || !req.body.first_name) {
+      const body = req.body;
+
+		if (!body.email || !body.first_name) {
 			return res.send('provide email and name');
 		}
 
-		// sending mail to leads
-		send_mail(req.body.email, signup_subject, getMailContent(req.body.first_name));
-
-		// sending notification to employee
+		send_mail(body.email, signup_subject, getMailContent(body.first_name));
+      
 		for (let mail of notificationMails) {
-			send_mail(mail, noti_subject + req.body.first_name, getNotificationContent(req.body));
+			send_mail(mail, noti_subject + body.first_name, getNotificationContent(body));
 		}
 
 		return res.status(201).json('mail sent');

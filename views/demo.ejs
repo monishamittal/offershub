@@ -93,7 +93,7 @@
               I agree to the Privacy Policy and Master Services Agreement
             </label>
           </p>
-          <p ><input type="checkbox" id="subscribe-newsletter" style="cursor: pointer;">
+          <p><input type="checkbox" id="subscribe-newsletter" style="cursor: pointer;">
             <label for="subscribe-newsletter">
               Subscribe to newsletters and Whatsapp?
             </label>
@@ -107,6 +107,10 @@
   <%- include('partials/footer') -%>
 
   <script>
+    const getQueryParams = () => {
+      return Object.fromEntries(new URLSearchParams(window.location.search));
+    };
+
     const contactInput = document.getElementById('contact-number');
     const contactError = document.getElementById('contact-error');
 
@@ -166,33 +170,41 @@
         }
 
         try {
+
+          const data = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            company: {
+              company: companyName
+            },
+            country,
+            mobile_number: countryCode + contactNumber,
+            company: companyName,
+            website_url: websiteUrl,
+            im_type: imType,
+            im_id: imId,
+            whatsapp_subscription_status: 1,
+            custom_field: {
+              cf_utms: Object.entries(getQueryParams())
+                .map(([key, value]) => `${key}=${value}`)
+                .join(","),
+            },
+          }
+
           const response = await fetch('/leads/create', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              first_name: firstName,
-              last_name: lastName,
-              email: email,
-              country: country,
-              mobile_number: countryCode + contactNumber,
-              company: companyName,
-              website_url: websiteUrl,
-              im_type: imType,
-              im_id: imId,
-              isSubscribed
-            }),
+            body: JSON.stringify(data),
           });
 
           if (response.ok) {
             const result = await response.json();
-            console.log('Lead created successfully:', result);
             return window.location.href = '/thank-you';
           } else {
             const error = await response.json();
-            console.log(error)
-            console.log(error.message)
             alert(error.message)
           }
         } catch (error) {
